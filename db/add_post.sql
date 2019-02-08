@@ -1,0 +1,1 @@
+insert into posts(image, caption, user_id, time) values($1, $2, $3, $4);
