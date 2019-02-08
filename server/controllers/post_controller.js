@@ -18,32 +18,40 @@ module.exports = {
     create: async (req, res) => {
         console.log(req.file)
 
-        const params = {
-            Bucket: process.env.BUCKET,
-            Key: req.file.originalname,
-            Body: req.file.buffer,
-        }
-
         try {
             const db = req.app.get('db')
-
-            // confirm that a user is logged in
             if (req.session.user) {
+                // setup S3 params
+                const params = {
+                    Bucket: process.env.BUCKET,
+                    Key: req.file.originalname,
+                    Body: req.file.buffer,
+                }
+
                 // upload to S3 Bucket
                 s3Bucket.upload(params, (err, data) => {
                     if (err) {
-                        console.log('error in callback')
+                        console.log('Error in callback')
                         res.status(500).json({ err: err })
                     }
 
-                    console.log('success')
-                    res.status(200).json(data.Location)
+                    // add the post to our posts table
+                    db.add_post([
+                        data.Location,
+                        req.body.caption,
+                        req.session.user.id,
+                        Date.now().toString(),
+                    ])
+                        .then((results) => res.status(200).json(results))
+                        .catch((err) => console.log(err))
+
+                    console.log('Image has been uploaded successfully.')
                 })
             } else {
-                res.status(409).json('you must be logged in to do this')
+                res.status(401).json('You must be logged in to do this')
             }
         } catch (e) {
-            res.status(500).json('internal server error')
+            res.status(500).json('Internal server error')
         }
     },
 
@@ -55,7 +63,19 @@ module.exports = {
         // edit a post caption or comment
     },
 
-    delete: async (req, res) => {
-        // delete a post
+    // fix the db key system to get this working
+    // the way the foreign keys are setup prevents me from deleting a post as it's still referenced
+    // as a foreign key in the users table
+
+    // ...sounds like a next week thing to me
+    delete: (req, res) => {
+        const db = req.app.get('db')
+        // if (req.session.user) {
+        db.delete_post(req.params.id)
+            .then((data) => res.status(200).json(data))
+            .catch((err) => res.status(500).json({ err: err }))
+        // } else {
+        //     res.status(500).json('You must be logged in to delete a post.')
+        // }
     },
 }

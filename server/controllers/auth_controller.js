@@ -1,3 +1,34 @@
+// email to confirm account
+// try {
+//     let account = await mail.createTestAccount()
+
+//     let transporter = mail.createTransport({
+//         host: 'smtp.ethereal.email',
+//         port: 587,
+//         secure: false,
+//         auth: {
+//             user: account.user,
+//             pass: account.pass,
+//         },
+//     })
+
+//     let mailOptions = {
+//         from: "'Admin' <admin@itaic.com>",
+//         to: "'jml' <jonathanlattanzi@gmail.com>",
+//         subject: 'Account creation',
+//         text: 'Account created',
+//         html: '<h1>haha yes</h1>',
+//     }
+
+//     let info = await transporter.sendMail(mailOptions)
+
+//     console.log('Message sent: ' + info.messageId)
+//     console.log('preview: ' + mail.getTestMessageUrl(info))
+//     res.status(200).json('message sent')
+// } catch (e) {
+//     res.status(500).json(e)
+// }
+
 const bc = require('bcryptjs')
 const mail = require('nodemailer')
 
@@ -23,37 +54,6 @@ module.exports = {
         } catch (err) {
             res.status(500).json({ err: 'internal server error' })
         }
-
-        // email to confirm account
-        // try {
-        //     let account = await mail.createTestAccount()
-
-        //     let transporter = mail.createTransport({
-        //         host: 'smtp.ethereal.email',
-        //         port: 587,
-        //         secure: false,
-        //         auth: {
-        //             user: account.user,
-        //             pass: account.pass,
-        //         },
-        //     })
-
-        //     let mailOptions = {
-        //         from: "'Admin' <admin@itaic.com>",
-        //         to: "'jml' <jonathanlattanzi@gmail.com>",
-        //         subject: 'Account creation',
-        //         text: 'Account created',
-        //         html: '<h1>haha yes</h1>',
-        //     }
-
-        //     let info = await transporter.sendMail(mailOptions)
-
-        //     console.log('Message sent: ' + info.messageId)
-        //     console.log('preview: ' + mail.getTestMessageUrl(info))
-        //     res.status(200).json('message sent')
-        // } catch (e) {
-        //     res.status(500).json(e)
-        // }
     },
 
     login: async (req, res) => {
@@ -72,6 +72,7 @@ module.exports = {
                 let authorized = await bc.compare(req.body.password, user.hash)
                 if (authorized) {
                     req.session.user = {
+                        id: user.id,
                         username: user.username,
                         email: user.email,
                     }
