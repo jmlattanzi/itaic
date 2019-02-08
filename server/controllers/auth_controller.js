@@ -33,6 +33,7 @@ const bc = require('bcryptjs')
 const mail = require('nodemailer')
 
 module.exports = {
+    // register a user and place them in the db
     register: async (req, res) => {
         try {
             const db = req.app.get('db')
@@ -40,7 +41,7 @@ module.exports = {
             let user = results[0]
 
             if (user) {
-                res.status(409).json({ err: 'user already exists' })
+                res.status(409).json({ err: 'User already exists' })
             } else {
                 let hashpassword = await bc.hash(req.body.password, 12)
                 db.register_user([
@@ -56,8 +57,8 @@ module.exports = {
         }
     },
 
+    // login to account
     login: async (req, res) => {
-        // login to account
         try {
             const db = req.app.get('db')
 
@@ -83,15 +84,16 @@ module.exports = {
                 }
             }
         } catch (err) {
-            res.status(500).json({ err: 'internal server error' })
+            res.status(500).json({ err: 'Internal server error' })
         }
     },
 
+    // logout
     logout: async (req, res) => {
-        // logout
         req.session.destroy()
     },
 
+    // maybe this function should be in the user controller
     delete: async (req, res) => {
         // delete account
         try {
@@ -99,19 +101,20 @@ module.exports = {
 
             // check password and run delete_user
         } catch (e) {
-            res.status(500).json({ err: 'internal server error' })
+            res.status(500).json({ err: 'Internal server error' })
         }
     },
 
+    // get current user on the session
     getCurrent: async (req, res) => {
         try {
             if (req.session.user) {
                 res.json(req.session.user)
             } else {
-                res.json('no user in the session')
+                res.json('No user in the session')
             }
         } catch (e) {
-            res.status(500).json({ err: 'internal server error' })
+            res.status(500).json({ err: 'Internal server error' })
         }
     },
 }

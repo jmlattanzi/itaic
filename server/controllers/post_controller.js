@@ -15,7 +15,7 @@ const s3Bucket = new aws.S3({
 })
 
 module.exports = {
-    create: async (req, res) => {
+    create: (req, res) => {
         console.log(req.file)
 
         try {
