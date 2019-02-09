@@ -37,9 +37,9 @@ module.exports = {
 
                     // add the post to our posts table
                     db.add_post([
+                        req.session.user.id,
                         data.Location,
                         req.body.caption,
-                        req.session.user.id,
                         Date.now().toString(),
                     ])
                         .then((results) => res.status(200).json(results))
