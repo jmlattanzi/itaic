@@ -1,0 +1,15 @@
+.commentsContainer {
+    width: 50%;
+    
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+
+    &__caption {
+        text-align: center;
+    }
+
+    &__list {
+        overflow: auto;
+    }
+}

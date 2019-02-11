@@ -1,5 +1,9 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import Comments from '../../Comments/Comments'
+import './Post.scss'
 
 class Post extends Component {
     constructor(props) {
@@ -7,10 +11,12 @@ class Post extends Component {
 
         this.state = {
             post: [],
+            comments: [],
         }
     }
 
     componentDidMount() {
+        // get post info
         axios
             .get(`/posts/${this.props.match.params.id}`)
             .then((res) =>
@@ -22,16 +28,28 @@ class Post extends Component {
     }
 
     render() {
-        console.log(this.state.post)
         return (
             <div>
                 {this.state.post.length ? (
                     <div>
-                        <h1>you are on post {this.state.post[0].id}</h1>
-                        <img src={this.state.post[0].image_url} alt='' />
+                        <div className='postContainer'>
+                            <div className='postContainer__info'>
+                                <img
+                                    src={this.state.post[0].image_url}
+                                    alt=''
+                                />
+                            </div>
+                            <Comments
+                                id={this.state.post[0].id}
+                                user_id={this.state.post[0].user_id}
+                                caption={this.state.post[0].caption}
+                            />
+                        </div>
                     </div>
                 ) : (
-                    <h1>loading</h1>
+                    <div className='container__loading'>
+                        <FontAwesomeIcon icon={faSpinner} spin size='8x' />
+                    </div>
                 )}
             </div>
         )

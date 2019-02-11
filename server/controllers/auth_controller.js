@@ -89,8 +89,9 @@ module.exports = {
     },
 
     // logout
-    logout: async (req, res) => {
+    logout: (req, res) => {
         req.session.destroy()
+        res.status(200).json('Logged out')
     },
 
     // maybe this function should be in the user controller

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import InfiniteScroll from 'react-infinite-scroller'
+
 import axios from 'axios'
 import Posts from '../Posts/Posts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -12,35 +12,19 @@ class Home extends Component {
 
         this.state = {
             posts: [],
-            numberOfPosts: 4,
         }
-
-        // this.loadMore = this.loadMore.bind(this)
     }
 
     componentDidMount() {
         axios
-            .get(`/posts/all?n=${this.state.numberOfPosts}`)
+            .get(`/posts/all`)
             .then((res) =>
                 this.setState({
                     posts: res.data,
-                    numberOfPosts: (this.state.numberOfPosts += 4),
                 })
             )
             .catch((err) => console.log(err))
     }
-
-    // loadMore() {
-    //     axios
-    //         .get(`/posts/all?n=${this.state.numberOfPosts}`)
-    //         .then((res) =>
-    //             this.setState({
-    //                 posts: res.data,
-    //                 numberOfPosts: (this.state.numberOfPosts += 4),
-    //             })
-    //         )
-    //         .catch((err) => console.log(err))
-    // }
 
     render() {
         console.log(this.state.posts)
@@ -52,7 +36,7 @@ class Home extends Component {
                 <div className='grid-container'>
                     {this.state.posts.length > 0 ? (
                         this.state.posts
-                            .reverse()
+                            .sort((x, y) => x.id < y.id)
                             .map((post) => (
                                 <Posts
                                     key={post.id}

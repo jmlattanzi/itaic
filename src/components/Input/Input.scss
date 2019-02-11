@@ -1,0 +1,45 @@
+.searchInput {
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 5px 10px;
+    margin: 0 10px;
+    transition: all 0.2;
+
+    &:hover {
+        border: 1px solid salmon;
+    }
+}
+
+.primaryInput {
+    margin: 10px;
+    border-style: none;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 5px 10px;
+    width: 90%;
+    background-color: white;
+    animation: fallIn 0.3s ease-out;
+}
+
+.submitInput {
+    border-style: none;
+    border: 1px solid #ccc;
+    border-radius: 15px;
+    padding: 5px 10px;
+    background-color: #fff;
+    width: 100px;
+    margin: 0 auto;
+    cursor: pointer;
+
+    &:hover {
+        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+        background: linear-gradient(50deg, #fa8072, #bbf497);
+        background-size: 400% 400%;
+        border: 1px solid transparent;
+        color: white;
+        -webkit-animation: gradient 3s ease infinite;
+        -moz-animation: gradient 3s ease infinite;
+        animation: gradient 3s ease infinite;
+    }
+}

@@ -5,20 +5,6 @@ import { isMobile } from 'react-device-detect'
 import { link } from 'react-router-dom'
 import './Posts.scss'
 
-const customStyles = {
-    content: {
-        top: '50%',
-        left: '50%',
-        right: 'auto',
-        bottom: 'auto',
-        marginRight: '-50%',
-        transform: 'translate(-50%, -50%)',
-        height: 'auto',
-        width: '70vw',
-        textAlign: 'center',
-    },
-}
-
 class Posts extends Component {
     constructor(props) {
         super(props)
@@ -40,7 +26,6 @@ class Posts extends Component {
     }
 
     render() {
-        console.log(`On mobile? ${isMobile}`)
         return (
             <div>
                 <Modal
@@ -62,7 +47,6 @@ class Posts extends Component {
                             </div>
                         </div>
                     </div>
-                    {/* <button onClick={this.closeModal}>close</button> */}
                 </Modal>
                 {!isMobile ? (
                     <div className='grid-item' onClick={this.openModal}>

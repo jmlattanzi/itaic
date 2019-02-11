@@ -11,10 +11,19 @@ $color-black: #000;
     align-items: center;
     letter-spacing: 1px;
 
+    &__account_name {
+        text-decoration: none;
+        color: black;
+
+        &:hover {
+            color: salmon;
+        }
+    }
+
     &__logo {
         text-decoration: none;
         color: $color-black;
-        margin: 10px;
+        margin: auto 10px;
         background: -webkit-linear-gradient(#fa8072, #ff6666);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
@@ -25,44 +34,46 @@ $color-black: #000;
     }
 
     &__links {
+        width: 300px;
         padding: 10px;
         display: flex;
+        flex-direction: row;
         justify-content: space-between;
         align-items: center;
     }
 
-    &__login {
-        border-style: none;
-        border: 1px solid #ccc;
-        background-color: #fff;
-        padding: 5px 15px;
-        border-radius: 15px;
-        transition: all 0.2;
-        cursor: pointer;
+    // &__login {
+    //     border-style: none;
+    //     border: 1px solid #ccc;
+    //     background-color: #fff;
+    //     padding: 5px 15px;
+    //     border-radius: 15px;
+    //     transition: all 0.2;
+    //     cursor: pointer;
 
-        &:hover {
-            background: linear-gradient(50deg, #fa8072, #bbf497);
-            background-size: 400% 400%;
-            border: 1px solid transparent;
-            color: white;
-            -webkit-animation: gradient 3s ease infinite;
-            -moz-animation: gradient 3s ease infinite;
-            animation: gradient 3s ease infinite;
-        }
-    }
+    //     &:hover {
+    //         background: linear-gradient(50deg, #fa8072, #bbf497);
+    //         background-size: 400% 400%;
+    //         border: 1px solid transparent;
+    //         color: white;
+    //         -webkit-animation: gradient 3s ease infinite;
+    //         -moz-animation: gradient 3s ease infinite;
+    //         animation: gradient 3s ease infinite;
+    //     }
+    // }
 
-    &__search {
-        width: 200px;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        padding: 5px 10px;
-        margin: 0 10px;
-        transition: all 0.2;
+    // &__search {
+    //     width: 200px;
+    //     border: 1px solid #ccc;
+    //     border-radius: 15px;
+    //     padding: 5px 10px;
+    //     margin: 0 10px;
+    //     transition: all 0.2;
 
-        &:hover {
-            border: 1px solid salmon;
-        }
-    }
+    //     &:hover {
+    //         border: 1px solid salmon;
+    //     }
+    // }
 }
 
 .modal {
@@ -83,6 +94,10 @@ $color-black: #000;
     outline: none;
     padding: 80px 10px;
 
+    &__header {
+        margin: 20px;
+    }
+
     &__login {
         display: flex;
         flex-direction: column;
@@ -90,16 +105,16 @@ $color-black: #000;
         margin: 0 auto;
     }
 
-    &__input {
-        margin: 10px;
-        border-style: none;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        padding: 5px 10px;
-        width: 90%;
-        background-color: white;
-        animation: fallIn 0.3s ease-out;
-    }
+    // &__input {
+    //     margin: 10px;
+    //     border-style: none;
+    //     border: 1px solid #ccc;
+    //     border-radius: 15px;
+    //     padding: 5px 10px;
+    //     width: 90%;
+    //     background-color: white;
+    //     animation: fallIn 0.3s ease-out;
+    // }
 
     &__input-field {
         display: flex;
@@ -107,71 +122,24 @@ $color-black: #000;
         align-items: center;
     }
 
-    &__submit {
-        border-style: none;
-        border: 1px solid #ccc;
-        border-radius: 15px;
-        padding: 5px 10px;
-        background-color: #fff;
-        width: 100px;
-        margin: 0 auto;
-        cursor: pointer;
+    // &__submit {
+    //     border-style: none;
+    //     border: 1px solid #ccc;
+    //     border-radius: 15px;
+    //     padding: 5px 10px;
+    //     background-color: #fff;
+    //     width: 100px;
+    //     margin: 0 auto;
+    //     cursor: pointer;
 
-        &:hover {
-            background: linear-gradient(50deg, #fa8072, #bbf497);
-            background-size: 400% 400%;
-            border: 1px solid transparent;
-            color: white;
-            -webkit-animation: gradient 3s ease infinite;
-            -moz-animation: gradient 3s ease infinite;
-            animation: gradient 3s ease infinite;
-        }
-    }
-}
-
-@keyframes fallIn {
-    from {
-        margin-top: 1000px;
-        margin-left: 1000px;
-        opacity: 0;
-    }
-    to {
-        margin-top: 0;
-        margin-left: 0;
-        opacity: 1;
-    }
-}
-
-@-webkit-keyframes gradient {
-    0% {
-        background-position: 76% 0%;
-    }
-    50% {
-        background-position: 25% 100%;
-    }
-    100% {
-        background-position: 76% 0%;
-    }
-}
-@-moz-keyframes gradient {
-    0% {
-        background-position: 76% 0%;
-    }
-    50% {
-        background-position: 25% 100%;
-    }
-    100% {
-        background-position: 76% 0%;
-    }
-}
-@keyframes gradient {
-    0% {
-        background-position: 76% 0%;
-    }
-    50% {
-        background-position: 25% 100%;
-    }
-    100% {
-        background-position: 76% 0%;
-    }
+    //     &:hover {
+    //         background: linear-gradient(50deg, #fa8072, #bbf497);
+    //         background-size: 400% 400%;
+    //         border: 1px solid transparent;
+    //         color: white;
+    //         -webkit-animation: gradient 3s ease infinite;
+    //         -moz-animation: gradient 3s ease infinite;
+    //         animation: gradient 3s ease infinite;
+    //     }
+    // }
 }

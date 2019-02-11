@@ -68,15 +68,43 @@ module.exports = {
         }
     },
 
+    // getPost and getComments shouldnt have to be separate
     getPost: (req, res) => {
         const db = req.app.get('db')
-
         try {
             db.get_post(req.params.id)
                 .then((data) => res.status(200).json(data))
                 .catch((err) => console.log(err))
         } catch (e) {
             res.staus(500).json('Internal server error')
+        }
+    },
+
+    getComments: (req, res) => {
+        const db = req.app.get('db')
+
+        try {
+            db.get_comments(req.params.id)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
+        } catch (e) {
+            res.status(500).json('Internal server error')
+        }
+    },
+
+    addComment: (req, res) => {
+        const db = req.app.get('db')
+
+        try {
+            db.add_comment([
+                req.body.post_id,
+                req.body.user_id,
+                req.body.comment,
+            ])
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
+        } catch (e) {
+            res.status(500).json('Internal server error')
         }
     },
 

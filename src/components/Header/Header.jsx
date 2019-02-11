@@ -4,7 +4,17 @@ import Modal from 'react-modal'
 import axios from 'axios'
 import { isMobile } from 'react-device-detect'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faUser, faKey, faSpinner } from '@fortawesome/free-solid-svg-icons'
+import {
+    faSearch,
+    faUser,
+    faKey,
+    faAddressCard,
+} from '@fortawesome/free-solid-svg-icons'
+import { connect } from 'react-redux'
+import { getCurrentUser } from '../../redux/reducer'
+import Button from '../Button/Button'
+import Input from '../Input/Input'
+import Form from '../Form/Form'
 import './Header.scss'
 
 Modal.setAppElement('#root')
@@ -26,6 +36,39 @@ class Header extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.openModal = this.openModal.bind(this)
         this.closeModal = this.closeModal.bind(this)
+        this.logout = this.logout.bind(this)
+    }
+
+    componentDidMount() {
+        axios
+            .get('/auth/current')
+            .then((res) => {
+                if (res.data.username) {
+                    console.log(res.data.username)
+                    this.setState({
+                        ...this.state,
+                        loggedIn: true,
+                        user: {
+                            ...this.state.user,
+                            username: res.data.username,
+                        },
+                    })
+                }
+            })
+            .catch((err) => console.log('Not logged in', err))
+    }
+
+    logout() {
+        axios.post('/auth/logout', {}).then((res) =>
+            this.setState({
+                loggedIn: false,
+                user: {
+                    ...this.state.user,
+                    username: '',
+                    password: '',
+                },
+            })
+        )
     }
 
     openModal() {
@@ -55,6 +98,10 @@ class Header extends Component {
                 this.closeModal()
                 this.setState({
                     loggedIn: true,
+                    user: {
+                        ...this.state.user,
+                        password: '',
+                    },
                 })
             })
             .catch((err) => console.log('error caught: ', err))
@@ -68,63 +115,67 @@ class Header extends Component {
                         <em>ITAIC</em>
                     </h1>
                 </Link>
-                <div className='header__links'>
-                    {this.state.loggedIn ? (
-                        <h1>{this.state.user.username}</h1>
-                    ) : (
-                        <div>
-                            <FontAwesomeIcon icon={faSearch} size='lg' />
-                            <input
-                                className='header__search'
-                                type='text'
-                                placeholder='search'
-                            />
-                            {!isMobile ? (
-                                <button
-                                    className='header__login'
-                                    onClick={this.openModal}>
-                                    <h3>login</h3>
-                                </button>
-                            ) : (
-                                <Link className='header__login' to='/login'>
-                                    login
-                                </Link>
-                            )}
-                        </div>
-                    )}
-                </div>
+                {this.state.loggedIn ? (
+                    <div>
+                        <Link className='header__account_name' to='/account'>
+                            <h1>{this.state.user.username}</h1>
+                        </Link>
+                        <Button class='login' click={this.logout}>
+                            logout
+                        </Button>
+                    </div>
+                ) : (
+                    <div className='header__links'>
+                        <FontAwesomeIcon icon={faSearch} size='lg' />
+                        <Input
+                            class='searchInput'
+                            type='text'
+                            placeholder='search'
+                        />
+                        {!isMobile ? (
+                            <Button class='primary' click={this.openModal}>
+                                login
+                            </Button>
+                        ) : (
+                            <Link className='header__login' to='/login'>
+                                login
+                            </Link>
+                        )}
+                    </div>
+                )}
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     className='modal'>
-                    <h1>Login</h1>
+                    <FontAwesomeIcon icon={faAddressCard} size='4x' />
+                    <h1 className='modal__header'>Login</h1>
                     <form
                         className='modal__login'
                         onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='modal__input-field'>
                             <FontAwesomeIcon icon={faUser} size='lg' />
-                            <input
-                                required
-                                className='modal__input'
+                            <Input
+                                required='required'
+                                class='primaryInput'
                                 type='text'
+                                placeholder='username'
                                 name='username'
-                                placeholder='username or email'
-                                onChange={(e) => this.handleChange(e)}
+                                change={this.handleChange}
                             />
                         </div>
                         <div className='modal__input-field'>
                             <FontAwesomeIcon icon={faKey} size='lg' />
-                            <input
-                                required
-                                className='modal__input'
+                            <Input
+                                required='required'
+                                class='primaryInput'
                                 type='password'
-                                name='password'
                                 placeholder='password'
-                                onChange={(e) => this.handleChange(e)}
+                                name='password'
+                                change={this.handleChange}
                             />
                         </div>
-                        <input
-                            className='modal__submit'
+                        <Input
+                            class='submitInput'
                             type='submit'
                             value='login'
                         />
