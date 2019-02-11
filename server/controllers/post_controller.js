@@ -20,43 +20,64 @@ module.exports = {
 
         try {
             const db = req.app.get('db')
-            if (req.session.user) {
-                // setup S3 params
-                const params = {
-                    Bucket: process.env.BUCKET,
-                    Key: req.file.originalname,
-                    Body: req.file.buffer,
+            // if (req.session.user) {
+            // setup S3 params
+            const params = {
+                Bucket: process.env.BUCKET,
+                Key: req.file.originalname,
+                Body: req.file.buffer,
+            }
+
+            // upload to S3 Bucket
+            s3Bucket.upload(params, (err, data) => {
+                if (err) {
+                    console.log('Error in callback')
+                    res.status(500).json({ err: err })
                 }
 
-                // upload to S3 Bucket
-                s3Bucket.upload(params, (err, data) => {
-                    if (err) {
-                        console.log('Error in callback')
-                        res.status(500).json({ err: err })
-                    }
+                // add the post to our posts table
+                db.add_post([
+                    req.session.user.id,
+                    data.Location,
+                    req.body.caption,
+                    Date.now().toString(),
+                ])
+                    .then((results) => res.status(200).json(results))
+                    .catch((err) => console.log(err))
 
-                    // add the post to our posts table
-                    db.add_post([
-                        req.session.user.id,
-                        data.Location,
-                        req.body.caption,
-                        Date.now().toString(),
-                    ])
-                        .then((results) => res.status(200).json(results))
-                        .catch((err) => console.log(err))
-
-                    console.log('Image has been uploaded successfully.')
-                })
-            } else {
-                res.status(401).json('You must be logged in to do this')
-            }
+                console.log('Image has been uploaded successfully.')
+            })
+            // } else {
+            //     res.status(401).json('You must be logged in to do this')
+            // }
         } catch (e) {
             res.status(500).json('Internal server error')
         }
     },
 
-    read: async (req, res) => {
-        // get a post, like when a user clicks on one
+    // get all posts
+    read: (req, res) => {
+        const db = req.app.get('db')
+
+        try {
+            db.get_posts(req.query.n)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
+        } catch (e) {
+            res.status(500).json('Internal server error')
+        }
+    },
+
+    getPost: (req, res) => {
+        const db = req.app.get('db')
+
+        try {
+            db.get_post(req.params.id)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
+        } catch (e) {
+            res.staus(500).json('Internal server error')
+        }
     },
 
     update: async (req, res) => {
@@ -70,12 +91,12 @@ module.exports = {
     // ...sounds like a next week thing to me
     delete: (req, res) => {
         const db = req.app.get('db')
-        // if (req.session.user) {
-        db.delete_post(req.params.id)
-            .then((data) => res.status(200).json(data))
-            .catch((err) => res.status(500).json({ err: err }))
-        // } else {
-        //     res.status(500).json('You must be logged in to delete a post.')
-        // }
+        if (req.session.user) {
+            db.delete_post(req.params.id)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => res.status(500).json({ err: err }))
+        } else {
+            res.status(500).json('You must be logged in to delete a post.')
+        }
     },
 }

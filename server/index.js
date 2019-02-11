@@ -37,7 +37,9 @@ app.post('/auth/login', auth.login) // log a user in
 app.post('/auth/logout', auth.logout) // log a user out and destroy the session
 
 app.post('/posts/upload', upload.single('image'), pc.create)
+app.get('/posts/all', pc.read)
 app.delete('/posts/delete/:id', pc.delete)
+app.get('/posts/:id', pc.getPost)
 
 // start er up
 const port = process.env.PORT

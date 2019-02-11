@@ -36,7 +36,15 @@ module.exports = {
         contentBase: './dist',
         hot: true,
         proxy: {
-            port: 3001,
+            '/auth': {
+                target: 'http://localhost:3001',
+                // changeOrigin: true,
+            },
+
+            '/posts': {
+                target: 'http://localhost:3001',
+                // changeOrigin: true,
+            },
         },
     },
 }
