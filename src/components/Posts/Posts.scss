@@ -8,6 +8,7 @@ html {
     background-color: #eee;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
     box-sizing: border-box;
+    border-radius: 5px;
     cursor: pointer;
 
     &:hover {
@@ -18,10 +19,11 @@ html {
         height: 100%;
         width: 100%;
         object-fit: cover;
+        border-radius: 5px;
     }
 }
 
-.modal {
+.postModal {
     position: absolute;
     top: 50%;
     left: 50%;

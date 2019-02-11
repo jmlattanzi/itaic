@@ -46,8 +46,7 @@ class Posts extends Component {
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
-                    className='modal'
-                    contentLabel='Example Modal'>
+                    className='postModal'>
                     <div className='modalContainer'>
                         <div className='imageContainer'>
                             <Link to={`/post/${this.props.id}`}>

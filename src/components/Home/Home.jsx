@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
 import axios from 'axios'
 import Posts from '../Posts/Posts'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './Home.scss'
 
 class Home extends Component {
@@ -61,7 +63,9 @@ class Home extends Component {
                                 />
                             ))
                     ) : (
-                        <h1>loading...</h1>
+                        <div className='container__loading'>
+                            <FontAwesomeIcon icon={faSpinner} spin size='8x' />
+                        </div>
                     )}
                 </div>
             </div>

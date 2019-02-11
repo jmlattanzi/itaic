@@ -1,5 +1,14 @@
 .container {
     text-align: center;
+    position: relative;
+
+    &__loading {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: salmon;
+    }
 }
 
 .grid-container {

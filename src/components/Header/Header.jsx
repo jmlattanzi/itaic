@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import axios from 'axios'
 import { isMobile } from 'react-device-detect'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch, faUser, faKey, faSpinner } from '@fortawesome/free-solid-svg-icons'
 import './Header.scss'
 
 Modal.setAppElement('#root')
@@ -71,6 +73,7 @@ class Header extends Component {
                         <h1>{this.state.user.username}</h1>
                     ) : (
                         <div>
+                            <FontAwesomeIcon icon={faSearch} size='lg' />
                             <input
                                 className='header__search'
                                 type='text'
@@ -95,22 +98,37 @@ class Header extends Component {
                     onRequestClose={this.closeModal}
                     className='modal'>
                     <h1>Login</h1>
-                    <form onSubmit={(e) => this.handleSubmit(e)}>
+                    <form
+                        className='modal__login'
+                        onSubmit={(e) => this.handleSubmit(e)}>
+                        <div className='modal__input-field'>
+                            <FontAwesomeIcon icon={faUser} size='lg' />
+                            <input
+                                required
+                                className='modal__input'
+                                type='text'
+                                name='username'
+                                placeholder='username or email'
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </div>
+                        <div className='modal__input-field'>
+                            <FontAwesomeIcon icon={faKey} size='lg' />
+                            <input
+                                required
+                                className='modal__input'
+                                type='password'
+                                name='password'
+                                placeholder='password'
+                                onChange={(e) => this.handleChange(e)}
+                            />
+                        </div>
                         <input
-                            type='text'
-                            name='username'
-                            placeholder='username or email'
-                            onChange={(e) => this.handleChange(e)}
+                            className='modal__submit'
+                            type='submit'
+                            value='login'
                         />
-                        <input
-                            type='password'
-                            name='password'
-                            placeholder='password'
-                            onChange={(e) => this.handleChange(e)}
-                        />
-                        <input type='submit' value='login' />
                     </form>
-                    <button onClick={this.closeModal}>close</button>
                 </Modal>
             </div>
         )
