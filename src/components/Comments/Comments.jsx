@@ -16,7 +16,6 @@ class Comments extends Component {
         this.state = {
             comments: [],
             newComment: '',
-            currentUser: {},
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -30,15 +29,8 @@ class Comments extends Component {
     }
 
     componentDidUpdate(prevProps, prevState) {
-        if (prevState.comments.length !== this.state.comments.length) {
-            axios
-                .get(`/posts/comments/${this.props.id}`)
-                .then((res) =>
-                    this.setState({
-                        comments: res.data,
-                    })
-                )
-                .catch((err) => console.log(err))
+        if (prevProps.pr.comments.length !== this.props.pr.comments.length) {
+            this.props.getComments(this.props.id)
         }
     }
 
@@ -60,14 +52,10 @@ class Comments extends Component {
                     this.props.ur.user.id,
                     this.state.newComment
                 )
-                // axios
-                //     .post('/posts/comments', {
-                //         post_id: this.props.id,
-                //         user_id: this.state.currentUser.id,
-                //         comment: this.state.newComment,
-                //     })
-                //     .then((res) => console.log(res.data))
-                //     .catch((err) => console.log(err))
+                this.props.getComments(this.props.id)
+                this.setState({
+                    newComment: '',
+                })
             } else {
                 console.log('Comment cant be empty')
             }
@@ -75,6 +63,7 @@ class Comments extends Component {
     }
 
     render() {
+        console.log('props.ur.user.id', this.props.ur.user.id)
         return (
             <div className='comments'>
                 <div className='comments__caption'>
@@ -96,6 +85,7 @@ class Comments extends Component {
                         type='text'
                         placeholder='type comment here...'
                         change={this.handleChange}
+                        value={this.state.newComment}
                         class='primary'
                     />
                     <Input type='submit' value='' class='hidden' />

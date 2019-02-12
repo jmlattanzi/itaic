@@ -34,7 +34,7 @@ massive(process.env.CONNECTION_STRING)
 app.get('/auth/current', auth.getCurrent) // check for a user in the session
 app.post('/auth/register', auth.register) // register a new user
 app.post('/auth/login', auth.login) // log a user in
-app.post('/auth/logout', auth.logout) // log a user out and destroy the session
+app.get('/auth/logout', auth.logout) // log a user out and destroy the session
 
 app.post('/posts/upload', upload.single('image'), pc.create)
 app.get('/posts/all', pc.read)

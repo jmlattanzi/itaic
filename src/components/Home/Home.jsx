@@ -36,8 +36,13 @@ class Home extends Component {
                                 />
                             ))
                     ) : (
-                        <div className='home__container__loading'>
-                            <FontAwesomeIcon icon={faSpinner} spin size='8x' />
+                        <div className='home__loading'>
+                            <FontAwesomeIcon
+                                icon={faSpinner}
+                                spin
+                                size='8x'
+                                color='salmon'
+                            />
                         </div>
                     )}
                 </div>

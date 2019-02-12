@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { login, getCurrentUser } from '../../redux/userReducer'
+import { login, logout, getCurrentUser } from '../../redux/userReducer'
 import { isMobile } from 'react-device-detect'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -42,17 +42,7 @@ class Header extends Component {
     }
 
     logout() {
-        axios.post('/auth/logout', {}).then((res) =>
-            this.setState({
-                loggedIn: false,
-                user: {
-                    ...this.state.user,
-                    username: '',
-                    password: '',
-                    id: 0,
-                },
-            })
-        )
+        this.props.logout()
     }
 
     openModal() {
@@ -191,5 +181,5 @@ const mapStateToProps = (state) => state
 
 export default connect(
     mapStateToProps,
-    { login, getCurrentUser }
+    { login, logout, getCurrentUser }
 )(Header)

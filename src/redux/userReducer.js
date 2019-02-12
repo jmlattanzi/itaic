@@ -18,6 +18,13 @@ export const login = (username, password) => {
     }
 }
 
+export const logout = () => {
+    return {
+        type: LOGOUT,
+        payload: axios.get('/auth/logout'),
+    }
+}
+
 export const getCurrentUser = () => {
     return {
         type: GET_CURRENT_USER,
@@ -43,6 +50,12 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 err: true,
+            }
+        case `${LOGOUT}_FULFILLED`:
+            return {
+                ...state,
+                loggedIn: false,
+                user: {},
             }
         case `${GET_CURRENT_USER}_PENDING`:
             return {

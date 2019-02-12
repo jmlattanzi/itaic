@@ -74,7 +74,7 @@ module.exports = {
         try {
             db.get_post(req.params.id)
                 .then((data) => res.status(200).json(data))
-                .catch((err) => console.log(err))
+                .catch((err) => console.log('error in getPost', err))
         } catch (e) {
             res.staus(500).json('Internal server error')
         }
@@ -86,7 +86,7 @@ module.exports = {
         try {
             db.get_comments(req.params.id)
                 .then((data) => res.status(200).json(data))
-                .catch((err) => console.log(err))
+                .catch((err) => console.log('error in getComments', err))
         } catch (e) {
             res.status(500).json('Internal server error')
         }
