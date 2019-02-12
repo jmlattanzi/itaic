@@ -51,7 +51,19 @@ export default function reducer(state = initialState, action) {
                 loading: false,
                 err: true,
             }
+        case `${LOGOUT}_PENDING`:
+            return {
+                ...state,
+                loggedIn: false,
+                user: {},
+            }
         case `${LOGOUT}_FULFILLED`:
+            return {
+                ...state,
+                loggedIn: false,
+                user: {},
+            }
+        case `${LOGOUT}_REJECTED`:
             return {
                 ...state,
                 loggedIn: false,
@@ -66,6 +78,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                loggedIn: true,
                 user: action.payload.data,
             }
         case `${GET_CURRENT_USER}_REJECTED`:

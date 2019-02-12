@@ -20,36 +20,38 @@ module.exports = {
 
         try {
             const db = req.app.get('db')
-            // if (req.session.user) {
-            // setup S3 params
-            const params = {
-                Bucket: process.env.BUCKET,
-                Key: req.file.originalname,
-                Body: req.file.buffer,
-            }
 
-            // upload to S3 Bucket
-            s3Bucket.upload(params, (err, data) => {
-                if (err) {
-                    console.log('Error in callback')
-                    res.status(500).json({ err: err })
+            // make sure there is a user logged in
+            if (req.session.user) {
+                // setup S3 params
+                const params = {
+                    Bucket: process.env.BUCKET,
+                    Key: req.file.originalname,
+                    Body: req.file.buffer,
                 }
 
-                // add the post to our posts table
-                db.add_post([
-                    req.session.user.id,
-                    data.Location,
-                    req.body.caption,
-                    Date.now().toString(),
-                ])
-                    .then((results) => res.status(200).json(results))
-                    .catch((err) => console.log(err))
+                // upload to S3 Bucket
+                s3Bucket.upload(params, (err, data) => {
+                    if (err) {
+                        console.log('Error in callback')
+                        res.status(500).json({ err: err })
+                    }
 
-                console.log('Image has been uploaded successfully.')
-            })
-            // } else {
-            //     res.status(401).json('You must be logged in to do this')
-            // }
+                    // add the post to our posts table
+                    db.add_post([
+                        req.session.user.id,
+                        data.Location,
+                        req.body.caption,
+                        Date.now().toString(),
+                    ])
+                        .then((results) => res.status(200).json(results))
+                        .catch((err) => console.log(err))
+
+                    console.log('Image has been uploaded successfully.')
+                })
+            } else {
+                res.status(401).json('You must be logged in to do this')
+            }
         } catch (e) {
             res.status(500).json('Internal server error')
         }

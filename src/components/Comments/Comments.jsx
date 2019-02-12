@@ -28,7 +28,6 @@ class Comments extends Component {
     }
 
     componentDidUpdate(prevProps) {
-        console.log('compdidupdate prevprops', prevProps)
         if (prevProps.pr.comments.length !== this.props.pr.comments.length) {
             this.props.getComments(this.props.id)
         }

@@ -32,19 +32,21 @@ massive(process.env.CONNECTION_STRING)
 
 // auth routes
 app.get('/auth/current', auth.getCurrent) // check for a user in the session
+app.get('/auth/logout', auth.logout) // log a user out and destroy the session
 app.post('/auth/register', auth.register) // register a new user
 app.post('/auth/login', auth.login) // log a user in
-app.get('/auth/logout', auth.logout) // log a user out and destroy the session
 
-app.post('/posts/upload', upload.single('image'), pc.create)
+// post routes
 app.get('/posts/all', pc.read)
-app.delete('/posts/delete/:id', pc.delete)
 app.get('/posts/:id', pc.getPost)
 app.get('/posts/comments/:id', pc.getComments)
+app.post('/posts/upload', upload.single('image'), pc.create)
 app.post('/posts/comments', pc.addComment)
+app.delete('/posts/delete/:id', pc.delete)
 
+// user routes
 app.get('/users/:id', uc.getPosts)
 
-// start er up
+// start 'er up
 const port = process.env.PORT
 app.listen(port, () => console.log(`listening on port ${port}...`))

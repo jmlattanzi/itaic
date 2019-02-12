@@ -22,7 +22,7 @@ export const getAllPosts = () => {
 export const getUserPosts = (id) => {
     return {
         type: GET_USER_POSTS,
-        payload: axios.get(`http://localhost:3001/users/${id}`),
+        payload: axios.get(`/users/${id}`),
     }
 }
 
@@ -111,7 +111,6 @@ export default function reducer(state = initialState, action) {
         case `${ADD_COMMENT}_FULFILLED`:
             return {
                 ...state,
-                loading: false,
                 comments: action.payload.data,
             }
         case `${ADD_COMMENT}_REJECTED`:

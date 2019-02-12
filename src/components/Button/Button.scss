@@ -13,7 +13,7 @@
         cursor: pointer;
 
         &:hover {
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 3px 6px rgba($color-black, 0.4);
             background: linear-gradient(50deg, $color-primary, #bbf497);
             background-size: 400% 400%;
             border: 1px solid transparent;
@@ -35,9 +35,11 @@
         border-radius: 15px;
         transition: all 0.2;
         cursor: pointer;
+        text-decoration: none;
+        color: $color-black;
 
         &:hover {
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 3px 6px rgba($color-black, 0.4);
             background: linear-gradient(50deg, $color-primary, #bbf497);
             background-size: 400% 400%;
             border: 1px solid transparent;

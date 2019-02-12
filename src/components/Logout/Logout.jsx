@@ -1,14 +1,22 @@
-import React from 'react'
+import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { logout } from '../../redux/userReducer'
 import { Redirect } from 'react-router-dom'
 import axios from 'axios'
 
-const Logout = () => {
-    axios
-        .get('/auth/logout')
-        .then(() => console.log('logged out'))
-        .catch((err) => console.log(err))
+class Logout extends Component {
+    componentDidMount() {
+        this.props.logout()
+    }
 
-    return <Redirect path to='/' />
+    render() {
+        return <Redirect path to='/' />
+    }
 }
 
-export default Logout
+const mapStateToProps = (state) => state
+
+export default connect(
+    mapStateToProps,
+    { logout }
+)(Logout)
