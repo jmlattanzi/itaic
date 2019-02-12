@@ -43,6 +43,8 @@ app.get('/posts/:id', pc.getPost)
 app.get('/posts/comments/:id', pc.getComments)
 app.post('/posts/comments', pc.addComment)
 
+app.get('/users/:id', uc.getPosts)
+
 // start er up
 const port = process.env.PORT
 app.listen(port, () => console.log(`listening on port ${port}...`))

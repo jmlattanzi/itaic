@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import Modal from 'react-modal'
 import { isMobile } from 'react-device-detect'
-import { link } from 'react-router-dom'
+import Comments from '../Comments/Comments'
+
 import './Posts.scss'
 
 class Posts extends Component {
@@ -42,8 +43,8 @@ class Posts extends Component {
                             <div>
                                 <h1>{this.props.caption}</h1>
                             </div>
-                            <div className='commentsContainer'>
-                                {this.props.caption}
+                            <div className='modalComments'>
+                                <Comments id={this.props.id} />
                             </div>
                         </div>
                     </div>

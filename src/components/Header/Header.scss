@@ -11,9 +11,18 @@ $color-black: #000;
     align-items: center;
     letter-spacing: 1px;
 
+    &__account {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        width: 30%;
+    }
+
     &__account_name {
         text-decoration: none;
         color: black;
+        display: flex;
+        flex-direction: row;
 
         &:hover {
             color: salmon;

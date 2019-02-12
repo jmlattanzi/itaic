@@ -1,7 +1,10 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
 import Comment from './Comment/Comment'
 import Input from '../Input/Input'
+import Button from '../Button/Button'
 import './Comments.scss'
 
 class Comments extends Component {
@@ -68,14 +71,18 @@ class Comments extends Component {
         if (!this.state.loggedIn) {
             console.log('you must be logged in to do this')
         } else {
-            axios
-                .post('/posts/comments', {
-                    post_id: this.props.id,
-                    user_id: this.state.currentUser.id,
-                    comment: this.state.newComment,
-                })
-                .then((res) => console.log(res.data))
-                .catch((err) => console.log(err))
+            if (this.state.newComment !== '') {
+                axios
+                    .post('/posts/comments', {
+                        post_id: this.props.id,
+                        user_id: this.state.currentUser.id,
+                        comment: this.state.newComment,
+                    })
+                    .then((res) => console.log(res.data))
+                    .catch((err) => console.log(err))
+            } else {
+                console.log('Comment cant be empty')
+            }
         }
     }
 
@@ -94,13 +101,25 @@ class Comments extends Component {
                             </Comment>
                         ))}
                 </div>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
+                <form
+                    class='commentsContainer__form'
+                    onSubmit={(e) => this.handleSubmit(e)}>
                     <Input
                         type='text'
                         placeholder='type comment here...'
                         change={this.handleChange}
+                        class='primaryInput'
                     />
-                    <Input type='submit' value='post' />
+                    <Input type='submit' value='' class='hidden' />
+                    <button
+                        class='commentsContainer__send'
+                        onClick={(e) => this.handleSubmit(e)}>
+                        <FontAwesomeIcon
+                            icon={faPaperPlane}
+                            size='lg'
+                            color='salmon'
+                        />
+                    </button>
                 </form>
             </div>
         )

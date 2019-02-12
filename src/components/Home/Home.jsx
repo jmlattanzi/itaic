@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-
+import { connect } from 'react-redux'
+import { getAllPosts } from '../../redux/postReducer'
 import axios from 'axios'
 import Posts from '../Posts/Posts'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -9,33 +10,21 @@ import './Home.scss'
 class Home extends Component {
     constructor() {
         super()
-
-        this.state = {
-            posts: [],
-        }
     }
 
     componentDidMount() {
-        axios
-            .get(`/posts/all`)
-            .then((res) =>
-                this.setState({
-                    posts: res.data,
-                })
-            )
-            .catch((err) => console.log(err))
+        this.props.getAllPosts()
     }
 
     render() {
-        console.log(this.state.posts)
         return (
             <div className='container'>
                 <h2>
                     <em>recent posts</em>
                 </h2>
                 <div className='grid-container'>
-                    {this.state.posts.length > 0 ? (
-                        this.state.posts
+                    {this.props.pr.loading ? (
+                        this.props.pr.posts
                             .sort((x, y) => x.id < y.id)
                             .map((post) => (
                                 <Posts
@@ -57,4 +46,9 @@ class Home extends Component {
     }
 }
 
-export default Home
+const mapStateToProps = (state) => state
+
+export default connect(
+    mapStateToProps,
+    { getAllPosts }
+)(Home)

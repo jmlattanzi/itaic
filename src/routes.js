@@ -13,6 +13,6 @@ export default (
         <Route path='/login' component={Login} />
         <Route path='/register' component={Register} />
         <Route path='/post/:id' component={Post} />
-        <Route path='/account' component={Account} />
+        <Route path='/account/:id' component={Account} />
     </Switch>
 )

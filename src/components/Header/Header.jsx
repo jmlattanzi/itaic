@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-import Modal from 'react-modal'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { login, getCurrentUser } from '../../redux/userReducer'
 import { isMobile } from 'react-device-detect'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
@@ -10,11 +10,10 @@ import {
     faKey,
     faAddressCard,
 } from '@fortawesome/free-solid-svg-icons'
-import { connect } from 'react-redux'
-import { getCurrentUser } from '../../redux/reducer'
+import axios from 'axios'
+import Modal from 'react-modal'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
-import Form from '../Form/Form'
 import './Header.scss'
 
 Modal.setAppElement('#root')
@@ -25,7 +24,6 @@ class Header extends Component {
 
         this.state = {
             modalIsOpen: false,
-            loggedIn: false,
             user: {
                 username: '',
                 password: '',
@@ -40,22 +38,8 @@ class Header extends Component {
     }
 
     componentDidMount() {
-        axios
-            .get('/auth/current')
-            .then((res) => {
-                if (res.data.username) {
-                    console.log(res.data.username)
-                    this.setState({
-                        ...this.state,
-                        loggedIn: true,
-                        user: {
-                            ...this.state.user,
-                            username: res.data.username,
-                        },
-                    })
-                }
-            })
-            .catch((err) => console.log('Not logged in', err))
+        this.props.getCurrentUser()
+        console.log('header props: ', this.props)
     }
 
     logout() {
@@ -66,6 +50,7 @@ class Header extends Component {
                     ...this.state.user,
                     username: '',
                     password: '',
+                    id: 0,
                 },
             })
         )
@@ -91,20 +76,9 @@ class Header extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log(this.state.user)
-        axios
-            .post('/auth/login', this.state.user)
-            .then((res) => {
-                this.closeModal()
-                this.setState({
-                    loggedIn: true,
-                    user: {
-                        ...this.state.user,
-                        password: '',
-                    },
-                })
-            })
-            .catch((err) => console.log('error caught: ', err))
+        const { username, password } = this.state.user
+        this.props.login(username, password)
+        this.closeModal()
     }
 
     render() {
@@ -115,18 +89,38 @@ class Header extends Component {
                         <em>ITAIC</em>
                     </h1>
                 </Link>
-                {this.state.loggedIn ? (
-                    <div>
-                        <Link className='header__account_name' to='/account'>
-                            <h1>{this.state.user.username}</h1>
+                {this.props.ur.user.username ? (
+                    <div className='header__account'>
+                        <FontAwesomeIcon
+                            icon={faSearch}
+                            size='lg'
+                            color='salmon'
+                        />
+                        <Input
+                            class='searchInput'
+                            type='text'
+                            placeholder='search'
+                        />
+                        <Link
+                            className='header__account_name'
+                            to={`/account/${this.props.ur.user.id}`}>
+                            <FontAwesomeIcon
+                                icon={faUser}
+                                size='2x'
+                                color='salmon'
+                            />
                         </Link>
-                        <Button class='login' click={this.logout}>
+                        {/* <Button class='primary' click={this.logout}>
                             logout
-                        </Button>
+                        </Button> */}
                     </div>
                 ) : (
                     <div className='header__links'>
-                        <FontAwesomeIcon icon={faSearch} size='lg' />
+                        <FontAwesomeIcon
+                            icon={faSearch}
+                            size='lg'
+                            color='salmon'
+                        />
                         <Input
                             class='searchInput'
                             type='text'
@@ -147,13 +141,21 @@ class Header extends Component {
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     className='modal'>
-                    <FontAwesomeIcon icon={faAddressCard} size='4x' />
+                    <FontAwesomeIcon
+                        icon={faAddressCard}
+                        size='4x'
+                        color='salmon'
+                    />
                     <h1 className='modal__header'>Login</h1>
                     <form
                         className='modal__login'
                         onSubmit={(e) => this.handleSubmit(e)}>
                         <div className='modal__input-field'>
-                            <FontAwesomeIcon icon={faUser} size='lg' />
+                            <FontAwesomeIcon
+                                icon={faUser}
+                                size='lg'
+                                color='salmon'
+                            />
                             <Input
                                 required='required'
                                 class='primaryInput'
@@ -164,7 +166,11 @@ class Header extends Component {
                             />
                         </div>
                         <div className='modal__input-field'>
-                            <FontAwesomeIcon icon={faKey} size='lg' />
+                            <FontAwesomeIcon
+                                icon={faKey}
+                                size='lg'
+                                color='salmon'
+                            />
                             <Input
                                 required='required'
                                 class='primaryInput'
@@ -186,4 +192,9 @@ class Header extends Component {
     }
 }
 
-export default Header
+const mapStateToProps = (state) => state
+
+export default connect(
+    mapStateToProps,
+    { login, getCurrentUser }
+)(Header)
