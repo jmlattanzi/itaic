@@ -1,16 +1,9 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import { connect } from 'react-redux'
-import { login, getCurrentUser } from '../../redux/userReducer'
+import { login } from '../../redux/userReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import {
-    faSearch,
-    faUser,
-    faKey,
-    faAddressCard,
-} from '@fortawesome/free-solid-svg-icons'
+import { faUser, faKey, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import Input from '../Input/Input'
-import Button from '../Button/Button'
 import './Login.scss'
 
 class Login extends Component {

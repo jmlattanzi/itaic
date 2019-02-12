@@ -12,7 +12,6 @@ import {
     faSignOutAlt,
     faArrowCircleUp,
 } from '@fortawesome/free-solid-svg-icons'
-import axios from 'axios'
 import Modal from 'react-modal'
 import Button from '../Button/Button'
 import Input from '../Input/Input'
