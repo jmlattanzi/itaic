@@ -33,19 +33,17 @@ class Posts extends Component {
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
                     className='post__modal'>
-                    <div className='post__modal__container'>
-                        <div className='post__image'>
-                            <Link to={`/post/${this.props.id}`}>
-                                <img src={this.props.image} alt='' />
-                            </Link>
-                        </div>
-                        <div className='post__info'>
-                            <div>
-                                <h1>{this.props.caption}</h1>
-                            </div>
-                            <div className='post__modal__comments'>
-                                <Comments id={this.props.id} />
-                            </div>
+                    <div className='post__image'>
+                        <Link to={`/post/${this.props.id}`}>
+                            <img src={this.props.image} alt='' />
+                        </Link>
+                    </div>
+                    <div className='post__info'>
+                        <div className='post__modal__comments'>
+                            <Comments
+                                id={this.props.id}
+                                caption={this.props.caption}
+                            />
                         </div>
                     </div>
                 </Modal>

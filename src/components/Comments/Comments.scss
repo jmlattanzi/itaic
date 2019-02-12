@@ -2,10 +2,11 @@
 
 .comments {
     width: 100%;
-    height: 330px;
+    max-height: 330px;
     padding: 10px;
     display: flex;
     flex-direction: column;
+    // border: 1px solid black;
 
     &__caption {
         text-align: center;
@@ -14,6 +15,7 @@
     &__list {
         overflow: auto;
         border-bottom: 1px solid $color-gray;
+        // box-shadow: 0px -2px 2px rgba($color-black, 0.4) inset;
         padding: 5px;
     }
 
