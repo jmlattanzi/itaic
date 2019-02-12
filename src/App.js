@@ -9,14 +9,14 @@ import './App.scss'
 class App extends Component {
     render() {
         return (
-            <HashRouter>
-                <Provider store={store}>
+            <Provider store={store}>
+                <HashRouter>
                     <div>
                         <Header />
                         {routes}
                     </div>
-                </Provider>
-            </HashRouter>
+                </HashRouter>
+            </Provider>
         )
     }
 }

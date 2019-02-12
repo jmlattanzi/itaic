@@ -3,13 +3,19 @@ import { Link } from 'react-router-dom'
 import './Button.scss'
 
 const button = (props) => (
-    <button onClick={() => props.click()} className={`button__${props.class}`}>
-        {props.link ? (
-            <Link to={props.path}>{props.children}</Link>
+    <div>
+        {!props.link ? (
+            <button
+                onClick={() => props.click()}
+                className={`button__${props.class}`}>
+                <p>{props.children}</p>
+            </button>
         ) : (
-            <h3>{props.children}</h3>
+            <Link className={`link__${props.class}`} to={props.path}>
+                {props.children}
+            </Link>
         )}
-    </button>
+    </div>
 )
 
 export default button

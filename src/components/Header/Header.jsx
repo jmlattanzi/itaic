@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { login, logout, getCurrentUser } from '../../redux/userReducer'
 import { isMobile } from 'react-device-detect'
@@ -9,6 +9,8 @@ import {
     faUser,
     faKey,
     faAddressCard,
+    faSignOutAlt,
+    faArrowCircleUp,
 } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
 import Modal from 'react-modal'
@@ -35,6 +37,7 @@ class Header extends Component {
         this.openModal = this.openModal.bind(this)
         this.closeModal = this.closeModal.bind(this)
         this.logout = this.logout.bind(this)
+        this.register = this.register.bind(this)
     }
 
     componentDidMount() {
@@ -43,6 +46,11 @@ class Header extends Component {
 
     logout() {
         this.props.logout()
+        window.location.reload()
+    }
+
+    register() {
+        console.log(this.props)
     }
 
     openModal() {
@@ -90,6 +98,13 @@ class Header extends Component {
                             type='text'
                             placeholder='search'
                         />
+                        <Link className='header__account_name' to='/upload'>
+                            <FontAwesomeIcon
+                                icon={faArrowCircleUp}
+                                size='2x'
+                                color='salmon'
+                            />
+                        </Link>
                         <Link
                             className='header__account_name'
                             to={`/account/${this.props.ur.user.id}`}>
@@ -99,9 +114,13 @@ class Header extends Component {
                                 color='salmon'
                             />
                         </Link>
-                        {/* <Button class='primary' click={this.logout}>
-                            logout
-                        </Button> */}
+                        <Link className='header__account_name' to='/logout'>
+                            <FontAwesomeIcon
+                                icon={faSignOutAlt}
+                                size='2x'
+                                color='salmon'
+                            />
+                        </Link>
                     </div>
                 ) : (
                     <div className='header__links'>
@@ -171,6 +190,12 @@ class Header extends Component {
                         </div>
                         <Input class='submit' type='submit' value='login' />
                     </form>
+                    <p style={{ margin: '10px' }}>
+                        <em>or</em>
+                    </p>
+                    <Button class='primary' path='/register' link='true'>
+                        register
+                    </Button>
                 </Modal>
             </div>
         )

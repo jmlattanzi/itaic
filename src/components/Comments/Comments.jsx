@@ -14,7 +14,6 @@ class Comments extends Component {
         super(props)
 
         this.state = {
-            comments: [],
             newComment: '',
         }
 
@@ -25,10 +24,11 @@ class Comments extends Component {
     componentDidMount() {
         this.props.getComments(this.props.id)
         this.props.getCurrentUser()
-        console.log(this.props)
+        console.log('compdidmount', this.props)
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps) {
+        console.log('compdidupdate prevprops', prevProps)
         if (prevProps.pr.comments.length !== this.props.pr.comments.length) {
             this.props.getComments(this.props.id)
         }
@@ -63,7 +63,6 @@ class Comments extends Component {
     }
 
     render() {
-        console.log('props.ur.user.id', this.props.ur.user.id)
         return (
             <div className='comments'>
                 <div className='comments__caption'>

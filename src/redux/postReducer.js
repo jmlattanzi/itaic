@@ -8,6 +8,7 @@ const initialState = {
 }
 
 const GET_ALL_POSTS = 'GET_ALL_POSTS'
+const GET_USER_POSTS = 'GET_USER_POSTS'
 const GET_COMMENTS_FOR_POST = 'GET_COMMENTS_FOR_POST'
 const ADD_COMMENT = 'ADD_COMMENT'
 
@@ -15,6 +16,13 @@ export const getAllPosts = () => {
     return {
         type: GET_ALL_POSTS,
         payload: axios.get('/posts/all'),
+    }
+}
+
+export const getUserPosts = (id) => {
+    return {
+        type: GET_USER_POSTS,
+        payload: axios.get(`http://localhost:3001/users/${id}`),
     }
 }
 
@@ -38,6 +46,7 @@ export const addComment = (postId, userId, comment) => {
 
 export default function reducer(state = initialState, action) {
     switch (action.type) {
+        // get all posts
         case `${GET_ALL_POSTS}_PENDING`:
             return {
                 ...state,
@@ -54,6 +63,28 @@ export default function reducer(state = initialState, action) {
                 loading: false,
                 err: true,
             }
+
+        // get user posts
+        case `${GET_USER_POSTS}_PENDING`:
+            return {
+                ...state,
+                loading: true,
+            }
+
+        case `${GET_USER_POSTS}_FULFILLED`:
+            return {
+                ...state,
+                posts: action.payload.data,
+            }
+
+        case `${GET_USER_POSTS}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                err: true,
+            }
+
+        // get comments
         case `${GET_COMMENTS_FOR_POST}_PENDING`:
             return {
                 ...state,
@@ -70,6 +101,8 @@ export default function reducer(state = initialState, action) {
                 loading: false,
                 err: true,
             }
+
+        // add a new comment
         case `${ADD_COMMENT}_PENDING`:
             return {
                 ...state,
