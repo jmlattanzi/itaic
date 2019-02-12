@@ -112,10 +112,6 @@ module.exports = {
         // edit a post caption or comment
     },
 
-    // fix the db key system to get this working
-    // the way the foreign keys are setup prevents me from deleting a post as it's still referenced
-    // as a foreign key in the users table
-
     // ...sounds like a next week thing to me
     delete: (req, res) => {
         const db = req.app.get('db')

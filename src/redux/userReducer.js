@@ -8,6 +8,7 @@ const initialState = {
 }
 
 const LOGIN = 'LOGIN'
+const LOGOUT = 'LOGOUT'
 const GET_CURRENT_USER = 'GET_CURRENT_USER'
 
 export const login = (username, password) => {
@@ -34,13 +35,13 @@ export default function reducer(state = initialState, action) {
         case `${LOGIN}_FULFILLED`:
             return {
                 ...state,
+                loggedIn: true,
                 user: action.payload.data,
             }
         case `${LOGIN}_REJECTED`:
             return {
                 ...state,
                 loading: false,
-                loggedIn: true,
                 err: true,
             }
         case `${GET_CURRENT_USER}_PENDING`:
@@ -51,6 +52,7 @@ export default function reducer(state = initialState, action) {
         case `${GET_CURRENT_USER}_FULFILLED`:
             return {
                 ...state,
+                loading: false,
                 user: action.payload.data,
             }
         case `${GET_CURRENT_USER}_REJECTED`:

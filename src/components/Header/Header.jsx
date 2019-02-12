@@ -39,7 +39,6 @@ class Header extends Component {
 
     componentDidMount() {
         this.props.getCurrentUser()
-        console.log('header props: ', this.props)
     }
 
     logout() {
@@ -97,7 +96,7 @@ class Header extends Component {
                             color='salmon'
                         />
                         <Input
-                            class='searchInput'
+                            class='search'
                             type='text'
                             placeholder='search'
                         />
@@ -122,7 +121,7 @@ class Header extends Component {
                             color='salmon'
                         />
                         <Input
-                            class='searchInput'
+                            class='search'
                             type='text'
                             placeholder='search'
                         />
@@ -140,17 +139,17 @@ class Header extends Component {
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
-                    className='modal'>
+                    className='header__modal'>
                     <FontAwesomeIcon
                         icon={faAddressCard}
                         size='4x'
                         color='salmon'
                     />
-                    <h1 className='modal__header'>Login</h1>
+                    <h1 className='header__modal__header'>Login</h1>
                     <form
-                        className='modal__login'
+                        className='header__modal__login'
                         onSubmit={(e) => this.handleSubmit(e)}>
-                        <div className='modal__input-field'>
+                        <div className='header__modal__input-field'>
                             <FontAwesomeIcon
                                 icon={faUser}
                                 size='lg'
@@ -158,14 +157,14 @@ class Header extends Component {
                             />
                             <Input
                                 required='required'
-                                class='primaryInput'
+                                class='primary'
                                 type='text'
                                 placeholder='username'
                                 name='username'
                                 change={this.handleChange}
                             />
                         </div>
-                        <div className='modal__input-field'>
+                        <div className='header__modal__input-field'>
                             <FontAwesomeIcon
                                 icon={faKey}
                                 size='lg'
@@ -173,18 +172,14 @@ class Header extends Component {
                             />
                             <Input
                                 required='required'
-                                class='primaryInput'
+                                class='primary'
                                 type='password'
                                 placeholder='password'
                                 name='password'
                                 change={this.handleChange}
                             />
                         </div>
-                        <Input
-                            class='submitInput'
-                            type='submit'
-                            value='login'
-                        />
+                        <Input class='submit' type='submit' value='login' />
                     </form>
                 </Modal>
             </div>

@@ -1,49 +1,52 @@
-.searchInput {
-    width: 200px;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding: 5px 10px;
-    margin: 0 10px;
-    transition: all 0.2;
+@import '../../style_util/variables';
+@import '../../style_util/animations';
 
-    &:hover {
-        border: 1px solid salmon;
+.input {
+    &__search {
+        width: 200px;
+        border: 1px solid $color-gray;
+        border-radius: 15px;
+        padding: 5px 10px;
+        margin: 0 10px;
+        transition: all 0.2;
+
+        &:hover {
+            border: 1px solid $color-primary;
+        }
     }
-}
 
-.hidden {
-    display: none;
-}
+    &__hidden {
+        display: none;
+    }
 
-.primaryInput {
-    margin: 10px;
-    border-style: none;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding: 5px 10px;
-    width: 90%;
-    background-color: white;
-    animation: fallIn 0.3s ease-out;
-}
+    &__primary {
+        margin: 10px;
+        border-style: none;
+        border: 1px solid $color-gray;
+        border-radius: 15px;
+        padding: 5px 10px;
+        width: 90%;
+        background-color: $color-white;
+        animation: fallIn 0.3s ease-out;
+    }
 
-.submitInput {
-    border-style: none;
-    border: 1px solid #ccc;
-    border-radius: 15px;
-    padding: 5px 10px;
-    background-color: #fff;
-    width: 100px;
-    margin: 0 auto;
-    cursor: pointer;
+    &__submit {
+        border-style: none;
+        border: 1px solid $color-gray;
+        border-radius: 15px;
+        padding: 5px 10px;
+        background-color: $color-white;
+        width: 100px;
+        margin: 0 auto;
+        cursor: pointer;
 
-    &:hover {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(50deg, #fa8072, #bbf497);
-        background-size: 400% 400%;
-        border: 1px solid transparent;
-        color: white;
-        -webkit-animation: gradient 3s ease infinite;
-        -moz-animation: gradient 3s ease infinite;
-        animation: gradient 3s ease infinite;
+        &:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(50deg, $color-primary, #bbf497);
+            background-size: 400% 400%;
+            border: 1px solid transparent;
+            color: $color-white;
+            animation: gradient 3s ease infinite;
+        }
     }
 }

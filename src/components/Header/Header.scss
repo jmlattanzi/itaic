@@ -1,5 +1,4 @@
-$color-primary: #000;
-$color-black: #000;
+@import '../../style_util/variables';
 
 .header {
     width: 100%;
@@ -20,12 +19,12 @@ $color-black: #000;
 
     &__account_name {
         text-decoration: none;
-        color: black;
+        color: $color-black;
         display: flex;
         flex-direction: row;
 
         &:hover {
-            color: salmon;
+            color: $color-primary;
         }
     }
 
@@ -33,12 +32,12 @@ $color-black: #000;
         text-decoration: none;
         color: $color-black;
         margin: auto 10px;
-        background: -webkit-linear-gradient(#fa8072, #ff6666);
+        background: -webkit-linear-gradient($color-primary, #ff6666);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
 
         &:hover {
-            color: salmon;
+            color: $color-primary;
         }
     }
 
@@ -51,104 +50,39 @@ $color-black: #000;
         align-items: center;
     }
 
-    // &__login {
-    //     border-style: none;
-    //     border: 1px solid #ccc;
-    //     background-color: #fff;
-    //     padding: 5px 15px;
-    //     border-radius: 15px;
-    //     transition: all 0.2;
-    //     cursor: pointer;
+    &__modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        width: 300px;
+        text-align: center;
+        background-color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 0 3px 6px rgba($color-black, 0.4);
+        border-radius: 10px;
+        outline: none;
+        padding: 80px 10px;
 
-    //     &:hover {
-    //         background: linear-gradient(50deg, #fa8072, #bbf497);
-    //         background-size: 400% 400%;
-    //         border: 1px solid transparent;
-    //         color: white;
-    //         -webkit-animation: gradient 3s ease infinite;
-    //         -moz-animation: gradient 3s ease infinite;
-    //         animation: gradient 3s ease infinite;
-    //     }
-    // }
+        &__header {
+            margin: 20px;
+        }
 
-    // &__search {
-    //     width: 200px;
-    //     border: 1px solid #ccc;
-    //     border-radius: 15px;
-    //     padding: 5px 10px;
-    //     margin: 0 10px;
-    //     transition: all 0.2;
+        &__login {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            margin: 0 auto;
+        }
 
-    //     &:hover {
-    //         border: 1px solid salmon;
-    //     }
-    // }
-}
-
-.modal {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    height: auto;
-    width: 300px;
-    text-align: center;
-    background-color: #fff;
-    border: 1px solid #fff;
-    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    outline: none;
-    padding: 80px 10px;
-
-    &__header {
-        margin: 20px;
+        &__input-field {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
     }
-
-    &__login {
-        display: flex;
-        flex-direction: column;
-        width: 250px;
-        margin: 0 auto;
-    }
-
-    // &__input {
-    //     margin: 10px;
-    //     border-style: none;
-    //     border: 1px solid #ccc;
-    //     border-radius: 15px;
-    //     padding: 5px 10px;
-    //     width: 90%;
-    //     background-color: white;
-    //     animation: fallIn 0.3s ease-out;
-    // }
-
-    &__input-field {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    // &__submit {
-    //     border-style: none;
-    //     border: 1px solid #ccc;
-    //     border-radius: 15px;
-    //     padding: 5px 10px;
-    //     background-color: #fff;
-    //     width: 100px;
-    //     margin: 0 auto;
-    //     cursor: pointer;
-
-    //     &:hover {
-    //         background: linear-gradient(50deg, #fa8072, #bbf497);
-    //         background-size: 400% 400%;
-    //         border: 1px solid transparent;
-    //         color: white;
-    //         -webkit-animation: gradient 3s ease infinite;
-    //         -moz-animation: gradient 3s ease infinite;
-    //         animation: gradient 3s ease infinite;
-    //     }
-    // }
 }

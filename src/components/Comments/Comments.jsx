@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import axios from 'axios'
+import { connect } from 'react-redux'
+import { getComments, addComment } from '../../redux/postReducer'
+import { getCurrentUser } from '../../redux/userReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faPaperPlane } from '@fortawesome/free-solid-svg-icons'
+import axios from 'axios'
 import Comment from './Comment/Comment'
 import Input from '../Input/Input'
-import Button from '../Button/Button'
 import './Comments.scss'
 
 class Comments extends Component {
@@ -14,7 +16,6 @@ class Comments extends Component {
         this.state = {
             comments: [],
             newComment: '',
-            loggedIn: false,
             currentUser: {},
         }
 
@@ -23,27 +24,9 @@ class Comments extends Component {
     }
 
     componentDidMount() {
-        axios
-            .get(`/posts/comments/${this.props.id}`)
-            .then((res) =>
-                this.setState({
-                    comments: res.data,
-                })
-            )
-            .catch((err) => console.log(err))
-
-        axios
-            .get('/auth/current')
-            .then((res) => {
-                if (res.data.username) {
-                    this.setState({
-                        ...this.state,
-                        currentUser: res.data,
-                        loggedIn: true,
-                    })
-                }
-            })
-            .catch((err) => console.log(err))
+        this.props.getComments(this.props.id)
+        this.props.getCurrentUser()
+        console.log(this.props)
     }
 
     componentDidUpdate(prevProps, prevState) {
@@ -68,18 +51,23 @@ class Comments extends Component {
     handleSubmit(e) {
         e.preventDefault()
 
-        if (!this.state.loggedIn) {
-            console.log('you must be logged in to do this')
+        if (!this.props.ur.loggedIn) {
+            console.log('You must be logged in to do this')
         } else {
             if (this.state.newComment !== '') {
-                axios
-                    .post('/posts/comments', {
-                        post_id: this.props.id,
-                        user_id: this.state.currentUser.id,
-                        comment: this.state.newComment,
-                    })
-                    .then((res) => console.log(res.data))
-                    .catch((err) => console.log(err))
+                this.props.addComment(
+                    this.props.id,
+                    this.props.ur.user.id,
+                    this.state.newComment
+                )
+                // axios
+                //     .post('/posts/comments', {
+                //         post_id: this.props.id,
+                //         user_id: this.state.currentUser.id,
+                //         comment: this.state.newComment,
+                //     })
+                //     .then((res) => console.log(res.data))
+                //     .catch((err) => console.log(err))
             } else {
                 console.log('Comment cant be empty')
             }
@@ -88,12 +76,12 @@ class Comments extends Component {
 
     render() {
         return (
-            <div className='commentsContainer'>
-                <div className='commentsContainer__caption'>
+            <div className='comments'>
+                <div className='comments__caption'>
                     <h3>{this.props.caption}</h3>
                 </div>
-                <div className='commentsContainer__list'>
-                    {this.state.comments
+                <div className='comments__list'>
+                    {this.props.pr.comments
                         .sort((x, y) => x.id > y.id)
                         .map((comment) => (
                             <Comment key={comment.id}>
@@ -102,17 +90,17 @@ class Comments extends Component {
                         ))}
                 </div>
                 <form
-                    class='commentsContainer__form'
+                    class='comments__form'
                     onSubmit={(e) => this.handleSubmit(e)}>
                     <Input
                         type='text'
                         placeholder='type comment here...'
                         change={this.handleChange}
-                        class='primaryInput'
+                        class='primary'
                     />
                     <Input type='submit' value='' class='hidden' />
                     <button
-                        class='commentsContainer__send'
+                        class='comments__send'
                         onClick={(e) => this.handleSubmit(e)}>
                         <FontAwesomeIcon
                             icon={faPaperPlane}
@@ -126,4 +114,9 @@ class Comments extends Component {
     }
 }
 
-export default Comments
+const mapStateToProps = (state) => state
+
+export default connect(
+    mapStateToProps,
+    { getComments, getCurrentUser, addComment }
+)(Comments)

@@ -32,29 +32,29 @@ class Posts extends Component {
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
-                    className='postModal'>
-                    <div className='modalContainer'>
-                        <div className='imageContainer'>
+                    className='post__modal'>
+                    <div className='post__modal__container'>
+                        <div className='post__image'>
                             <Link to={`/post/${this.props.id}`}>
                                 <img src={this.props.image} alt='' />
                             </Link>
                         </div>
-                        <div className='infoContainer'>
+                        <div className='post__info'>
                             <div>
                                 <h1>{this.props.caption}</h1>
                             </div>
-                            <div className='modalComments'>
+                            <div className='post__modal__comments'>
                                 <Comments id={this.props.id} />
                             </div>
                         </div>
                     </div>
                 </Modal>
                 {!isMobile ? (
-                    <div className='grid-item' onClick={this.openModal}>
+                    <div className='post__grid-item' onClick={this.openModal}>
                         <img src={this.props.image} alt='' />
                     </div>
                 ) : (
-                    <div className='grid-item'>
+                    <div className='post__grid-item'>
                         <Link to={`/posts/${this.props.id}`}>
                             <img src={this.props.image} alt='' />
                         </Link>

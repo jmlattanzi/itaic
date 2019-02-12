@@ -18,11 +18,11 @@ class Home extends Component {
 
     render() {
         return (
-            <div className='container'>
+            <div className='home'>
                 <h2>
                     <em>recent posts</em>
                 </h2>
-                <div className='grid-container'>
+                <div className='home__grid'>
                     {this.props.pr.loading ? (
                         this.props.pr.posts
                             .sort((x, y) => x.id < y.id)
@@ -36,7 +36,7 @@ class Home extends Component {
                                 />
                             ))
                     ) : (
-                        <div className='container__loading'>
+                        <div className='home__container__loading'>
                             <FontAwesomeIcon icon={faSpinner} spin size='8x' />
                         </div>
                     )}

@@ -1,21 +1,26 @@
-.primary {
-    width: 100px;
-    border-style: none;
-    border: 1px solid #ccc;
-    background-color: #fff;
-    padding: 5px 15px;
-    border-radius: 15px;
-    transition: all 0.2;
-    cursor: pointer;
+@import '../../style_util/variables';
+@import '../../style_util/animations';
 
-    &:hover {
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
-        background: linear-gradient(50deg, #fa8072, #bbf497);
-        background-size: 400% 400%;
-        border: 1px solid transparent;
-        color: white;
-        -webkit-animation: gradient 3s ease infinite;
-        -moz-animation: gradient 3s ease infinite;
-        animation: gradient 3s ease infinite;
+.button {
+    &__primary {
+        width: 100px;
+        border-style: none;
+        border: 1px solid $color-gray;
+        background-color: $color-white;
+        padding: 5px 15px;
+        border-radius: 15px;
+        transition: all 0.2;
+        cursor: pointer;
+
+        &:hover {
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+            background: linear-gradient(50deg, $color-primary, #bbf497);
+            background-size: 400% 400%;
+            border: 1px solid transparent;
+            color: $color-white;
+            -webkit-animation: gradient 3s ease infinite;
+            -moz-animation: gradient 3s ease infinite;
+            animation: gradient 3s ease infinite;
+        }
     }
 }

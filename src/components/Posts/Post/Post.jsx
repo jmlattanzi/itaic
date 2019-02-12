@@ -32,8 +32,8 @@ class Post extends Component {
             <div>
                 {this.state.post.length ? (
                     <div>
-                        <div className='postContainer'>
-                            <div className='postContainer__info'>
+                        <div className='post'>
+                            <div className='post__info'>
                                 <img
                                     src={this.state.post[0].image_url}
                                     alt=''
@@ -47,7 +47,7 @@ class Post extends Component {
                         </div>
                     </div>
                 ) : (
-                    <div className='container__loading'>
+                    <div className='post__container_loading'>
                         <FontAwesomeIcon icon={faSpinner} spin size='8x' />
                     </div>
                 )}

@@ -1,4 +1,6 @@
-.loginPage {
+@import '../../style_util/variables';
+
+.login {
     border: 1px solid #ccc;
     box-sizing: border-box;
     width: 30%;
@@ -7,4 +9,40 @@
     padding: 50px 0;
     border-radius: 20px;
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.4);
+
+    &__modal {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        right: auto;
+        bottom: auto;
+        margin-right: -50%;
+        transform: translate(-50%, -50%);
+        height: auto;
+        width: 300px;
+        text-align: center;
+        background-color: #fff;
+        border: 1px solid #fff;
+        box-shadow: 0 3px 6px rgba($color-black, 0.4);
+        border-radius: 10px;
+        outline: none;
+        padding: 80px 10px;
+
+        &__header {
+            margin: 20px;
+        }
+
+        &__login {
+            display: flex;
+            flex-direction: column;
+            width: 250px;
+            margin: 0 auto;
+        }
+
+        &__input-field {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+    }
 }

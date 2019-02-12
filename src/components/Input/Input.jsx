@@ -4,7 +4,7 @@ import './Input.scss'
 const input = (props) => (
     <input
         required={props.required}
-        className={props.class}
+        className={`input__${props.class}`}
         type={props.type}
         value={props.value}
         placeholder={props.placeholder}

@@ -19,7 +19,6 @@ class Login extends Component {
 
         this.state = {
             modalIsOpen: false,
-            loggedIn: false,
             user: {
                 username: '',
                 password: '',
@@ -49,17 +48,17 @@ class Login extends Component {
 
     render() {
         return (
-            <div className='loginPage'>
+            <div className='login'>
                 <FontAwesomeIcon
                     icon={faAddressCard}
                     size='4x'
                     color='salmon'
                 />
-                <h1 className='modal__header'>Login</h1>
+                <h1 className='login__modal__header'>Login</h1>
                 <form
-                    className='modal__login'
+                    className='login__modal__login'
                     onSubmit={(e) => this.handleSubmit(e)}>
-                    <div className='modal__input-field'>
+                    <div className='login__modal__input-field'>
                         <FontAwesomeIcon
                             icon={faUser}
                             size='lg'
@@ -74,7 +73,7 @@ class Login extends Component {
                             change={this.handleChange}
                         />
                     </div>
-                    <div className='modal__input-field'>
+                    <div className='login__modal__input-field'>
                         <FontAwesomeIcon
                             icon={faKey}
                             size='lg'
@@ -89,7 +88,7 @@ class Login extends Component {
                             change={this.handleChange}
                         />
                     </div>
-                    <Input class='submitInput' type='submit' value='login' />
+                    <Input class='submit' type='submit' value='login' />
                 </form>
             </div>
         )
