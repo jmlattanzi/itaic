@@ -15,15 +15,18 @@ html {
         box-sizing: border-box;
         border-radius: 5px;
         cursor: pointer;
+        overflow: hidden;
+        transition: all 0.2s;
 
         &:hover {
-            box-shadow: 0 3px 6px rgba($color-black, 0.4);
+            box-shadow: 0 5px 9px rgba($color-black, 0.4);
+            transform: scale(1.02);
         }
 
         img {
             display: block;
-            max-height: 259px;
-            max-width: 262px;
+            max-height: 320px; //259px
+            max-width: 320px; // 262px
             height: auto;
             width: auto;
             object-fit: cover;
@@ -41,10 +44,10 @@ html {
         margin-right: -50%;
         transform: translate(-50%, -50%);
         height: 330px;
-        width: 82vw;
+        width: 80vw;
+        max-width: 800px;
         text-align: center;
         background-color: $color-white;
-        // border: 1px solid $color-white;
         box-shadow: 0 3px 6px rgba($color-black, 0.4);
         border-radius: 10px;
         outline: none;
@@ -59,9 +62,6 @@ html {
     }
 
     &__image {
-        // height: 100%;
-        // width: 80%;
-
         img {
             display: block;
             max-height: 400px;

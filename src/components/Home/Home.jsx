@@ -16,6 +16,7 @@ class Home extends Component {
     }
 
     render() {
+        console.log(this.props.pr.posts)
         return (
             <div className='home'>
                 <h2>

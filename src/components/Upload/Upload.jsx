@@ -45,7 +45,7 @@ class Upload extends Component {
             .then((res) => console.log('image uploaded', res.data))
             .catch((err) => console.log(err))
 
-        this.props.location.push('/')
+        this.props.location.pathname = '/'
     }
 
     render() {

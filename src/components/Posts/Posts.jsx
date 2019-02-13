@@ -43,6 +43,7 @@ class Posts extends Component {
                             <Comments
                                 id={this.props.id}
                                 caption={this.props.caption}
+                                username={this.props.username}
                             />
                         </div>
                     </div>

@@ -23,7 +23,6 @@ class Comments extends Component {
     componentDidMount() {
         this.props.getComments(this.props.id)
         this.props.getCurrentUser()
-        console.log('compdidmount', this.props)
     }
 
     componentDidUpdate(prevProps) {
@@ -67,6 +66,7 @@ class Comments extends Component {
             <div className='comments'>
                 <div className='comments__caption'>
                     <h3>{this.props.caption}</h3>
+                    <em>@{this.props.username}</em>
                 </div>
                 <div className='comments__list'>
                     {this.props.pr.comments

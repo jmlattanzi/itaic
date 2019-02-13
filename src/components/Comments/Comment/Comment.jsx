@@ -1,12 +1,15 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+import { Link } from 'react-router-dom'
 import './Comment.scss'
 
 const comment = (props) => (
     <div className='comment'>
         <div className='comment__container'>
-            {props.children.charAt(0) === '>' ? (
+            {props.children.match(/([#])\w+/g) ? (
+                <Link to='/'>{props.children}</Link>
+            ) : props.children.charAt(0) === '>' ? (
                 <div className='comment__content--green'>{props.children}</div>
             ) : (
                 <div className='comment__content'>{props.children}</div>

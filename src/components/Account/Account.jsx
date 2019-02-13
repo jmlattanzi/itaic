@@ -32,6 +32,7 @@ class Account extends Component {
                                     key={post.id}
                                     id={post.id}
                                     username={post.username}
+                                    userId={post.user_id}
                                     image={post.image_url}
                                     caption={post.caption}
                                 />
