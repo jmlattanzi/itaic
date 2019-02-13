@@ -192,7 +192,11 @@ class Header extends Component {
                     <p style={{ margin: '10px' }}>
                         <em>or</em>
                     </p>
-                    <Button class='primary' path='/register' link='true'>
+                    <Button
+                        class='primary'
+                        path='/register'
+                        link='true'
+                        click={this.closeModal}>
                         register
                     </Button>
                 </Modal>

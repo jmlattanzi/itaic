@@ -1,7 +1,27 @@
 @import '../../style_util/variables';
 
 .register {
-    border: 1px solid black;
-    width: 80%;
+    width: 50%;
     margin: 0 auto;
+    text-align: center;
+
+    &__form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-content: center;
+        width: 80%;
+        margin: 0 auto;
+    }
+
+    &__input-field {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin: 5px 0;
+
+        &--icon {
+            width: 25px;
+        }
+    }
 }

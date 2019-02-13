@@ -25,9 +25,13 @@
         border: 1px solid $color-gray;
         border-radius: 15px;
         padding: 5px 10px;
-        width: 90%;
+        width: 100%;
         background-color: $color-white;
         animation: fallIn 0.3s ease-out;
+
+        &:hover {
+            border: 1px solid $color-primary;
+        }
 
         // &[type='file'] {
         //     border: 0;

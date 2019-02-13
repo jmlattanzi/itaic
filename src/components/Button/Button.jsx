@@ -11,7 +11,10 @@ const button = (props) => (
                 <p>{props.children}</p>
             </button>
         ) : (
-            <Link className={`link__${props.class}`} to={props.path}>
+            <Link
+                className={`link__${props.class}`}
+                to={props.path}
+                onClick={() => props.click()}>
                 {props.children}
             </Link>
         )}

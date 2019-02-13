@@ -22,12 +22,11 @@ export const getAllPosts = () => {
 export const getUserPosts = (id) => {
     return {
         type: GET_USER_POSTS,
-        payload: axios.get(`/users/${id}`),
+        payload: axios.get(`http://localhost:3001/users/${id}`),
     }
 }
 
 export const getComments = (postId) => {
-    console.log('getComments')
     return {
         type: GET_COMMENTS_FOR_POST,
         payload: axios.get(`/posts/comments/${postId}`),
@@ -73,6 +72,7 @@ export default function reducer(state = initialState, action) {
             }
 
         case `${GET_USER_POSTS}_FULFILLED`:
+            console.log(action.payload.data)
             return {
                 ...state,
                 posts: action.payload.data,
@@ -87,19 +87,16 @@ export default function reducer(state = initialState, action) {
 
         // get comments
         case `${GET_COMMENTS_FOR_POST}_PENDING`:
-            console.log('getComments pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_COMMENTS_FOR_POST}_FULFILLED`:
-            console.log('getComments payload', action.payload.data)
             return {
                 ...state,
                 comments: action.payload.data,
             }
         case `${GET_COMMENTS_FOR_POST}_REJECTED`:
-            console.log('getComments rejected')
             return {
                 ...state,
                 loading: false,
