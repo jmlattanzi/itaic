@@ -46,9 +46,7 @@ module.exports = {
                         req.session.user.id,
                         data.Location,
                         req.body.caption,
-                        moment()
-                            .startOf('hour')
-                            .fromNow(),
+                        Date.now().toString(),
                     ])
                         .then((results) => res.status(200).json(results))
                         .catch((err) => console.log('err in upload', err))

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUser, faKey, faAddressCard } from '@fortawesome/free-solid-svg-icons'
 import axios from 'axios'
-import { Redirect } from 'react-router-dom'
 import Input from '../Input/Input'
 import './Register.scss'
 
@@ -28,7 +27,6 @@ class Register extends Component {
 
     handleSubmit(e) {
         e.preventDefault()
-        console.log(this.state)
 
         axios
             .post('/auth/register', this.state)

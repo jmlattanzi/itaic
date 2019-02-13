@@ -1,13 +1,48 @@
-.comment {
-    border: 1px solid #ccc;
-    padding: 10px 20px;
-    margin: 5px auto;
-    border-radius: 20px;
-    width: 100%;
-    text-align: left;
+@import '../../../style_util/variables';
 
-    &:hover {
-        // box-shadow: 0px 2px 9px rgba(0, 0, 0, 0.4);
-        border: 1px solid salmon;
+.comment {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    width: 320px;
+
+    &__container {
+        border: 1px solid $color-gray;
+        padding: 10px 20px;
+        margin: 5px 5px;
+        border-radius: 20px;
+        width: 100%;
+        text-align: left;
+
+        &:hover {
+            border: 1px solid #b3b3b3;
+        }
+    }
+
+    &__content {
+        font-size: 11px;
+
+        &--green {
+            // color: rgb(18, 168, 18);
+            color: $color-meme;
+            font-size: 11px;
+        }
+    }
+
+    &__like {
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
+    &__user {
+        text-align: right;
+        color: rgba($color-black, 0.4);
+        margin: 2px 0;
+    }
+
+    &__username {
+        margin: 0 3px;
     }
 }

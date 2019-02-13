@@ -1,19 +1,25 @@
 .post {
     display: flex;
     flex-direction: row;
-    border: 1px solid #ccc;
+    border: 1px solid #eee;
     border-radius: 10px;
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 
     &__info {
         height: 325px;
-        width: 100%;
-        margin: 10px auto;
+        // width: 100%;
+        // margin-right: 30px;
+        max-height: 400px;
+        max-width: 400px;
+        height: auto;
+        width: auto;
 
-        & > img {
-            height: 100%;
-            width: 100%;
+        img {
+            max-height: 400px;
+            max-width: 400px;
+            height: auto;
+            width: auto;
             object-fit: contain;
         }
     }

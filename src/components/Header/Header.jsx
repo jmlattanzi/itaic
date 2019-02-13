@@ -165,7 +165,7 @@ class Header extends Component {
                             />
                             <Input
                                 required='required'
-                                class='primary'
+                                class='primary--animated'
                                 type='text'
                                 placeholder='username'
                                 name='username'
@@ -180,7 +180,7 @@ class Header extends Component {
                             />
                             <Input
                                 required='required'
-                                class='primary'
+                                class='primary--animated'
                                 type='password'
                                 placeholder='password'
                                 name='password'

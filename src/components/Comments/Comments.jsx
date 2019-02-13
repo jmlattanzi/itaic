@@ -72,7 +72,7 @@ class Comments extends Component {
                     {this.props.pr.comments
                         .sort((x, y) => x.id > y.id)
                         .map((comment) => (
-                            <Comment key={comment.id}>
+                            <Comment key={comment.id} user={comment.username}>
                                 {comment.comment}
                             </Comment>
                         ))}
