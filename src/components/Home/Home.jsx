@@ -29,6 +29,7 @@ class Home extends Component {
                                 <Posts
                                     key={post.id}
                                     id={post.id}
+                                    user_id={post.user_id}
                                     username={post.username}
                                     image={post.image_url}
                                     caption={post.caption}

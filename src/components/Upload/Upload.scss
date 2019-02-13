@@ -1,0 +1,14 @@
+@import '../../style_util/variables';
+
+.upload {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &__form {
+        text-align: center;
+    }
+}

@@ -5,6 +5,7 @@
  */
 
 require('dotenv').config()
+const moment = require('moment')
 
 // MOVE AWS UPLOAD TO UTILITY FILE
 const aws = require('aws-sdk')
@@ -16,7 +17,7 @@ const s3Bucket = new aws.S3({
 
 module.exports = {
     create: (req, res) => {
-        console.log(req.file)
+        console.log('req.file: ', req.file)
 
         try {
             const db = req.app.get('db')
@@ -28,24 +29,29 @@ module.exports = {
                     Bucket: process.env.BUCKET,
                     Key: req.file.originalname,
                     Body: req.file.buffer,
+                    ContentType: req.file.mimetype,
                 }
 
                 // upload to S3 Bucket
                 s3Bucket.upload(params, (err, data) => {
                     if (err) {
-                        console.log('Error in callback')
-                        res.status(500).json({ err: err })
+                        console.log('Error in callback', err)
+                        res.status(500).json({ err: 'error in upload' })
                     }
+
+                    console.log('data from s3Bucket.upload: ', data)
 
                     // add the post to our posts table
                     db.add_post([
                         req.session.user.id,
                         data.Location,
                         req.body.caption,
-                        Date.now().toString(),
+                        moment()
+                            .startOf('hour')
+                            .fromNow(),
                     ])
                         .then((results) => res.status(200).json(results))
-                        .catch((err) => console.log(err))
+                        .catch((err) => console.log('err in upload', err))
 
                     console.log('Image has been uploaded successfully.')
                 })
@@ -98,13 +104,17 @@ module.exports = {
         const db = req.app.get('db')
 
         try {
-            db.add_comment([
-                req.body.post_id,
-                req.body.user_id,
-                req.body.comment,
-            ])
-                .then((data) => res.status(200).json(data))
-                .catch((err) => console.log(err))
+            if (req.session.user) {
+                db.add_comment([
+                    req.body.post_id,
+                    req.body.user_id,
+                    req.body.comment,
+                ])
+                    .then((data) => res.status(200).json(data))
+                    .catch((err) => console.log(err))
+            } else {
+                res.status(409).json('You must be logged in to add a comment')
+            }
         } catch (e) {
             res.status(500).json('Internal server error')
         }

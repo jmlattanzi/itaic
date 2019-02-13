@@ -4,11 +4,17 @@ import './Register.scss'
 class Register extends Component {
     constructor() {
         super()
+
+        this.state = {
+            username: '',
+            password: '',
+            email: ''
+        }
     }
 
     render() {
         return (
-            <div>
+            <div className='register'>
                 <h1>Register</h1>
             </div>
         )

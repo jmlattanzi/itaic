@@ -54,6 +54,8 @@ class Comments extends Component {
                 this.setState({
                     newComment: '',
                 })
+                console.log('comment uploaded')
+                console.log(this.props.pr.comments)
             } else {
                 console.log('Comment cant be empty')
             }
