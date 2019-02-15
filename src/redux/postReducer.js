@@ -37,7 +37,7 @@ export const getPost = (post_id) => {
 export const deletePost = (post_id) => {
     return {
         type: DELETE_POST,
-        payload: axios.delete(`/posts/delete/${post_id}`),
+        payload: axios.delete(`http://localhost:3001/posts/delete/${post_id}`),
     }
 }
 
@@ -69,7 +69,6 @@ export default function reducer(state = initialState, action) {
             }
 
         case `${GET_USER_POSTS}_FULFILLED`:
-            console.log('user posts: ', action.payload.data)
             return {
                 ...state,
                 userPosts: action.payload.data,
@@ -89,7 +88,6 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case `${GET_POST}_FULFILLED`:
-            console.log('>>> [GET POST PAYLOAD]:', action.payload.data)
             return {
                 ...state,
                 loading: false,
@@ -101,7 +99,6 @@ export default function reducer(state = initialState, action) {
                 },
             }
         case `${GET_POST}_REJECTED`:
-            console.log('GET_POST REJECTED')
             return {
                 ...state,
                 loading: false,
@@ -118,6 +115,7 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
+                posts: action.payload.data,
             }
         case `${DELETE_POST}_REJECTED`:
             return {

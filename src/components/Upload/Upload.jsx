@@ -50,7 +50,7 @@ class Upload extends Component {
         return (
             <div className='upload'>
                 <h1>upload</h1>
-                <form class='upload__form' onSubmit={(e) => this.upload(e)}>
+                <form className='upload__form' onSubmit={(e) => this.upload(e)}>
                     <label className='label'>choose file</label>
                     <Input
                         type='file'

@@ -55,7 +55,6 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case `${LOGIN}_FULFILLED`:
-            console.log('user reducer login payload', action.payload.data)
             return {
                 ...state,
                 loggedIn: true,
@@ -95,7 +94,6 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case `${GET_CURRENT_USER}_FULFILLED`:
-            console.log(action.payload.data)
             return {
                 ...state,
                 loading: false,
@@ -115,7 +113,6 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case `${GET_USER}_FULFILLED`:
-            console.log('>>> [GET_USER FULFILLED]', action.payload.data)
             return {
                 ...state,
                 loading: false,

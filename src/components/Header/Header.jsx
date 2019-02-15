@@ -43,8 +43,6 @@ class Header extends Component {
         this.props.getCurrentUser()
     }
 
-    componentDidUpdate() {}
-
     logout() {
         this.props.logout()
         window.location.reload()

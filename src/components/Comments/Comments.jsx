@@ -30,15 +30,6 @@ class Comments extends Component {
     componentDidMount() {
         this.props.getComments(this.props.post_id)
         this.props.getUser(this.props.post_id)
-
-        // if (this.props.ur.user.id === this.props.ur.op.user_id) {
-        //     console.log('OP is looking at their own post')
-        //     this.setState({
-        //         canDelete: true,
-        //     })
-        // } else {
-        //     this.setState({ canDelete: false })
-        // }
     }
 
     componentDidUpdate(prevProps) {
@@ -149,7 +140,6 @@ class Comments extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state)
     return state
 }
 

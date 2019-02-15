@@ -68,7 +68,6 @@ export default function reducer(state = initalState, action) {
                 loading: true,
             }
         case `${ADD_COMMENT}_FULFILLED`:
-            console.log('comment fulfilled: ', action.payload.data)
             return {
                 ...state,
                 comments: [...state.comments, action.payload.data[0]],

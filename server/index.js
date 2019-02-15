@@ -42,6 +42,7 @@ app.post('/auth/login', auth.login) // log a user in
 app.get('/posts/all', pc.get_all_posts) // get all posts
 app.get('/posts/:id', pc.get_single_post) // get a single post
 app.get('/posts/user/:id', pc.get_user_posts) // get all of a users posts
+app.delete('/posts/delete/:id', pc.delete_post)
 
 app.get('/comments/:id', cc.get_comments) // get comments
 
