@@ -32,21 +32,14 @@ module.exports = {
     },
 
     delete_comment: (req, res) => {
-        const db = req.app.get('db')
+        try {
+            const db = req.app.get('db')
 
-        if (req.session.user) {
-            db.delete_comments(req.params.id)
-                .then((data) => {
-                    db.delete_post(req.params.id)
-                        .then((data) => console.log(data))
-                        .catch((err) =>
-                            console.log('error in delete_post', err)
-                        )
-                    res.status(200).json(data)
-                })
-                .catch((err) => console.log('error in delete_comments', err))
-        } else {
-            res.status(500).json('You must be logged in to delete a post.')
+            db.delete_comment(req.params.id)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
+        } catch (e) {
+            res.status(500).json('Internal server error')
         }
     },
 }

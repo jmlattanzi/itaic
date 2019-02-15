@@ -32,7 +32,7 @@ export const addComment = (post_id, user_id, comment) => {
 export const deleteComment = (post_id) => {
     return {
         type: DELETE_COMMENT,
-        payload: axios.delete(`/comments/${post_id}`),
+        payload: axios.delete(`http://localhost:3001/comments/${post_id}`),
     }
 }
 
@@ -74,6 +74,22 @@ export default function reducer(state = initalState, action) {
                 comments: [...state.comments, action.payload.data[0]],
             }
         case `${ADD_COMMENT}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                err: true,
+            }
+        case `${DELETE_COMMENT}_PENDING`:
+            return {
+                ...state,
+                loading: true,
+            }
+        case `${DELETE_COMMENT}_FULFILLED`:
+            return {
+                ...state,
+                comments: action.payload.data,
+            }
+        case `${DELETE_COMMENT}_REJECTED`:
             return {
                 ...state,
                 loading: false,

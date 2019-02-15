@@ -1,5 +1,6 @@
 // implement this soon
 // email to confirm account
+// admin email: itaic_sign_up@yahoo.com
 // try {
 //     let account = await mail.createTestAccount()
 

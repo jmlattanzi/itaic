@@ -101,4 +101,23 @@ module.exports = {
     update: async (req, res) => {
         // edit a post caption or comment
     },
+
+    delete_post: (req, res) => {
+        const db = req.app.get('db')
+
+        if (req.session.user) {
+            db.delete_comments(req.params.id)
+                .then((data) => {
+                    db.delete_post(req.params.id)
+                        .then((data) => console.log(data))
+                        .catch((err) =>
+                            console.log('error in delete_post', err)
+                        )
+                    res.status(200).json(data)
+                })
+                .catch((err) => console.log('error in delete_comments', err))
+        } else {
+            res.status(500).json('You must be logged in to delete a post.')
+        }
+    },
 }

@@ -24,7 +24,7 @@ class Account extends Component {
                 </div>
                 <h3>{this.props.ur.op.username}</h3>
                 <div className='account__grid'>
-                    {/* this could really just be a filter, I bet it would be faster */}
+                    {/* this could really just be a filter, I bet it would even be faster */}
                     {this.props.pr.userPosts.length !== 0 ? (
                         this.props.pr.loading ? (
                             this.props.pr.userPosts

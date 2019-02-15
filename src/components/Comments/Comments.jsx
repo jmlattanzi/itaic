@@ -8,6 +8,7 @@ import {
     faPaperPlane,
     faHeart,
     faSpinner,
+    faTimes,
 } from '@fortawesome/free-solid-svg-icons'
 import Comment from './Comment/Comment'
 import Input from '../Input/Input'
@@ -19,6 +20,7 @@ class Comments extends Component {
 
         this.state = {
             newComment: '',
+            canDelete: false,
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -28,6 +30,15 @@ class Comments extends Component {
     componentDidMount() {
         this.props.getComments(this.props.post_id)
         this.props.getUser(this.props.post_id)
+
+        // if (this.props.ur.user.id === this.props.ur.op.user_id) {
+        //     console.log('OP is looking at their own post')
+        //     this.setState({
+        //         canDelete: true,
+        //     })
+        // } else {
+        //     this.setState({ canDelete: false })
+        // }
     }
 
     componentDidUpdate(prevProps) {
@@ -64,7 +75,6 @@ class Comments extends Component {
     }
 
     render() {
-        console.log('comments: ', this.props)
         return (
             <div>
                 {!this.props.cr.loading ? (
@@ -93,7 +103,10 @@ class Comments extends Component {
                                 .map((comment) => (
                                     <Comment
                                         key={comment.id}
-                                        user={comment.username}>
+                                        comment_id={comment.id}
+                                        user={comment.username}
+                                        current_user_id={this.props.ur.user.id}
+                                        op_id={this.props.ur.op.user_id}>
                                         {comment.comment}
                                     </Comment>
                                 ))}
