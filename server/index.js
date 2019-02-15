@@ -20,6 +20,7 @@ app.use(
         secret: process.env.SECRET,
         resave: false,
         saveUninitialized: false,
+        user: {},
         cookie: {
             maxAge: 1000 * 60 * 60 * 24 * 7,
         },
@@ -41,15 +42,26 @@ app.post('/auth/login', auth.login) // log a user in
 app.get('/posts/all', pc.get_all_posts) // get all posts
 app.get('/posts/:id', pc.get_single_post) // get a single post
 app.get('/posts/user/:id', pc.get_user_posts) // get all of a users posts
-app.post('/posts/upload', upload.single('image'), pc.upload_post) // upload a post
 
 app.get('/comments/:id', cc.get_comments) // get comments
-app.post('/comments/add', cc.add_comment) // add a comment
-app.delete('/comments/:id', cc.delete_comment) // delete a post and it's comments]
-app.put('/comments/:id', cc.update_comment) //edit a comment
 
 // user routes
 app.get('/user/:id', uc.get_user) // get info on the op
+
+// protected routes
+// app.use((req, res, next) => {
+//     console.log(req.session.authenticated)
+//     if (req.session.authenticated) {
+//         next()
+//     } else {
+//         res.json({ error: 'unauthorized' })
+//     }
+// })
+
+app.post('/comments/add', cc.add_comment) // add a comment
+app.delete('/comments/:id', cc.delete_comment) // delete a post and it's comments]
+app.put('/comments/:id', cc.update_comment) //edit a comment
+app.post('/posts/upload', upload.single('image'), pc.upload_post) // upload a post
 
 // start 'er up
 const port = process.env.PORT

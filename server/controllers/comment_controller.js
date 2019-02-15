@@ -13,19 +13,15 @@ module.exports = {
 
     add_comment: (req, res) => {
         const db = req.app.get('db')
-
+        console.log('user session: ', req.session.user)
         try {
-            if (req.session.user) {
-                db.add_comment([
-                    req.body.post_id,
-                    req.body.user_id,
-                    req.body.comment,
-                ])
-                    .then((data) => res.status(200).json(data))
-                    .catch((err) => console.log(err))
-            } else {
-                res.status(409).json('You must be logged in to add a comment')
-            }
+            db.add_comment([
+                req.body.post_id,
+                req.body.user_id,
+                req.body.comment,
+            ])
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
         } catch (e) {
             res.status(500).json('Internal server error')
         }

@@ -20,7 +20,6 @@ class Post extends Component {
 
     componentDidMount() {
         this.props.getPost(this.props.match.params.id)
-        this.props.getUser(this.props.pr.post.post_id)
     }
 
     render() {

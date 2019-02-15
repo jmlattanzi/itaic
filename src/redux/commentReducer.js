@@ -39,14 +39,13 @@ export const deleteComment = (post_id) => {
 export const updateComment = (post_id, comment) => {
     return {
         type: UPDATE_COMMENT,
-        payload: axios.put(`/comments/${id}`, comment),
+        payload: axios.put(`/comments/${post_id}`, comment),
     }
 }
 
 export default function reducer(state = initalState, action) {
     switch (action.type) {
         case `${GET_COMMENTS}_PENDING`:
-            console.log('[ GET COMMENTS PENDING ]')
             return {
                 ...state,
                 loading: true,
@@ -69,10 +68,10 @@ export default function reducer(state = initalState, action) {
                 loading: true,
             }
         case `${ADD_COMMENT}_FULFILLED`:
+            console.log('comment fulfilled: ', action.payload.data)
             return {
                 ...state,
-                loading: false,
-                comments: [...state.comments, action.payload.data],
+                comments: [...state.comments, action.payload.data[0]],
             }
         case `${ADD_COMMENT}_REJECTED`:
             return {

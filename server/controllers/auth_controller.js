@@ -63,6 +63,10 @@ module.exports = {
         try {
             const db = req.app.get('db')
 
+            console.log(
+                `username: ${req.body.username}\npassword: ${req.body.password}`
+            )
+
             let results = await db.get_user(req.body.username)
             let user = results[0]
 
@@ -71,16 +75,24 @@ module.exports = {
                     'User does not exist on this plane of mortality'
                 )
             } else {
-                let authorized = await bc.compare(req.body.password, user.hash)
-                if (authorized) {
+                let authorizedUser = await bc.compare(
+                    req.body.password,
+                    user.hash
+                )
+                if (authorizedUser) {
                     req.session.user = {
                         id: user.id,
                         username: user.username,
                         email: user.email,
                     }
 
+                    req.session.authenticated = true
+
+                    console.log(req.session.authenticated)
+
                     res.status(200).json(req.session.user)
                 } else {
+                    req.session.authenticated = false
                     res.status(409).json({ err: 'Invalid password. Moron.' })
                 }
             }
@@ -108,7 +120,7 @@ module.exports = {
     },
 
     // get current user on the session
-    get_current_user: async (req, res) => {
+    get_current_user: (req, res) => {
         try {
             if (req.session.user) {
                 res.json(req.session.user)

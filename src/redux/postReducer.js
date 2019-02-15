@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     err: false,
     posts: [],
+    userPosts: [],
     post: {},
 }
 
@@ -68,9 +69,10 @@ export default function reducer(state = initialState, action) {
             }
 
         case `${GET_USER_POSTS}_FULFILLED`:
+            console.log('user posts: ', action.payload.data)
             return {
                 ...state,
-                posts: action.payload.data,
+                userPosts: action.payload.data,
             }
 
         case `${GET_USER_POSTS}_REJECTED`:

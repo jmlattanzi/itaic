@@ -16,29 +16,41 @@ class Account extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className='account'>
                 <div>
                     <h1>account bio and stats</h1>
                 </div>
-                <h3>{this.props.ur.user.username}</h3>
+                <h3>{this.props.ur.op.username}</h3>
                 <div className='account__grid'>
-                    {this.props.pr.posts.length > 0 ? (
-                        this.props.pr.posts
-                            .sort((x, y) => x.id < y.id)
-                            .map((post) => (
-                                <Posts
-                                    key={post.id}
-                                    id={post.id}
-                                    username={post.username}
-                                    userId={post.user_id}
-                                    image={post.image_url}
-                                    caption={post.caption}
+                    {/* this could really just be a filter, I bet it would be faster */}
+                    {this.props.pr.userPosts.length !== 0 ? (
+                        this.props.pr.loading ? (
+                            this.props.pr.userPosts
+                                .sort((x, y) => x.id < y.id)
+                                .map((post) => (
+                                    <Posts
+                                        key={post.id}
+                                        post_id={post.id}
+                                        username={post.username}
+                                        user_id={post.user_id}
+                                        image={post.image_url}
+                                        caption={post.caption}
+                                    />
+                                ))
+                        ) : (
+                            <div className='account__loading'>
+                                <FontAwesomeIcon
+                                    icon={faSpinner}
+                                    spin
+                                    size='8x'
                                 />
-                            ))
+                            </div>
+                        )
                     ) : (
-                        <div className='account__loading'>
-                            <FontAwesomeIcon icon={faSpinner} spin size='8x' />
+                        <div>
+                            <h1>User has not posted yet!</h1>
                         </div>
                     )}
                 </div>

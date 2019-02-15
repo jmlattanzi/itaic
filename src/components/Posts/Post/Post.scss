@@ -1,23 +1,26 @@
 .post {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
     border: 1px solid #eee;
     border-radius: 10px;
     width: 90%;
     margin: 0 auto;
+    padding: 5px;
 
     &__info {
         height: 325px;
         // width: 100%;
-        // margin-right: 30px;
-        max-height: 400px;
-        max-width: 400px;
+        margin: 0 auto;
+        max-height: 500px;
+        max-width: 500px;
         height: auto;
         width: auto;
 
         img {
-            max-height: 400px;
-            max-width: 400px;
+            max-height: 500px;
+            max-width: 500px;
+            border-radius: 8px;
             height: auto;
             width: auto;
             object-fit: contain;
@@ -29,5 +32,6 @@
     .post {
         display: flex;
         flex-direction: column;
+        justify-content: center;
     }
 }

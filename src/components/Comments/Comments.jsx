@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getComments, addComment } from '../../redux/commentReducer'
-import { getCurrentUser } from '../../redux/userReducer'
+import { getCurrentUser, getUser } from '../../redux/userReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPaperPlane,
@@ -26,15 +26,15 @@ class Comments extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props.post_id)
         this.props.getComments(this.props.post_id)
+        this.props.getUser(this.props.post_id)
     }
 
-    // componentDidUpdate(prevProps) {
-    //     if (prevProps.cr.comments.length !== this.props.cr.comments.length) {
-    //         this.props.getComments(this.props.post_id)
-    //     }
-    // }
+    componentDidUpdate(prevProps) {
+        if (prevProps.cr.comments.length !== this.props.cr.comments.length) {
+            this.props.getComments(this.props.post_id)
+        }
+    }
 
     handleChange(e) {
         this.setState({
@@ -45,7 +45,7 @@ class Comments extends Component {
     handleSubmit(e) {
         e.preventDefault()
 
-        if (!this.props.ur.loggedIn) {
+        if (this.props.ur.user.username === undefined) {
             console.log('You must be logged in to do this')
         } else {
             if (this.state.newComment !== '') {
@@ -54,7 +54,6 @@ class Comments extends Component {
                     this.props.ur.user.id,
                     this.state.newComment
                 )
-                this.props.getComments(this.props.post_id)
                 this.setState({
                     newComment: '',
                 })
@@ -65,6 +64,7 @@ class Comments extends Component {
     }
 
     render() {
+        console.log('comments: ', this.props)
         return (
             <div>
                 {!this.props.cr.loading ? (
@@ -72,7 +72,10 @@ class Comments extends Component {
                         <div className='comments__header'>
                             <div className='comments__caption'>
                                 <h3>{this.props.caption}</h3>
-                                <em>@{this.props.ur.op.username}</em>
+                                <Link
+                                    to={`/account/${this.props.ur.op.user_id}`}>
+                                    <em>@{this.props.ur.op.username}</em>
+                                </Link>
                             </div>
                             <div className='comments__interaction'>
                                 <FontAwesomeIcon
@@ -139,5 +142,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { getComments, getCurrentUser, addComment }
+    { getComments, getCurrentUser, addComment, getUser }
 )(Comments)

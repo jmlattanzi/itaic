@@ -87,10 +87,12 @@ module.exports = {
     },
 
     get_user_posts: (req, res) => {
-        const db = require('db')
+        const db = req.app.get('db')
 
         try {
-            // get all user posts by id
+            db.get_user_posts(req.params.id)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
         } catch (e) {
             res.status(500).json('Internal server error in get_user_posts')
         }
