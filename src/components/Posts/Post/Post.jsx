@@ -1,4 +1,7 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { getAllPosts, getPost, deletePost } from '../../../redux/postReducer'
+import { getUser } from '../../../redux/userReducer'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
@@ -16,39 +19,37 @@ class Post extends Component {
     }
 
     componentDidMount() {
-        // get post info
-        axios
-            .get(`/posts/${this.props.match.params.id}`)
-            .then((res) =>
-                this.setState({
-                    post: res.data,
-                })
-            )
-            .catch((err) => console.log(err))
+        this.props.getPost(this.props.match.params.id)
+        this.props.getUser(this.props.pr.post.post_id)
     }
 
     render() {
         return (
             <div>
-                {this.state.post.length ? (
+                {!this.props.pr.loading ? (
                     <div>
                         <div className='post'>
                             <div className='post__info'>
                                 <img
-                                    src={this.state.post[0].image_url}
+                                    src={this.props.pr.post.image_url}
                                     alt=''
                                 />
                             </div>
                             <Comments
-                                id={this.state.post[0].id}
-                                user_id={this.state.post[0].user_id}
-                                caption={this.state.post[0].caption}
+                                post_id={this.props.pr.post.post_id}
+                                user_id={this.props.pr.post.user_id}
+                                caption={this.props.pr.post.caption}
                             />
                         </div>
                     </div>
                 ) : (
                     <div className='post__container_loading'>
-                        <FontAwesomeIcon icon={faSpinner} spin size='8x' />
+                        <FontAwesomeIcon
+                            icon={faSpinner}
+                            spin
+                            size='8x'
+                            color='salmon'
+                        />
                     </div>
                 )}
             </div>
@@ -56,4 +57,9 @@ class Post extends Component {
     }
 }
 
-export default Post
+const mapStateToProps = (state) => state
+
+export default connect(
+    mapStateToProps,
+    { getAllPosts, getPost, deletePost, getUser }
+)(Post)

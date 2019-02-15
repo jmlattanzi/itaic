@@ -1,0 +1,1 @@
+select * from posts order by posts.id asc;

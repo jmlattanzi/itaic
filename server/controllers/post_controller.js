@@ -16,7 +16,7 @@ const s3Bucket = new aws.S3({
 })
 
 module.exports = {
-    create: (req, res) => {
+    upload_post: (req, res) => {
         console.log('req.file: ', req.file)
 
         try {
@@ -62,11 +62,11 @@ module.exports = {
     },
 
     // get all posts
-    read: (req, res) => {
+    get_all_posts: (req, res) => {
         const db = req.app.get('db')
 
         try {
-            db.get_posts(req.query.n)
+            db.get_all_posts()
                 .then((data) => res.status(200).json(data))
                 .catch((err) => console.log(err))
         } catch (e) {
@@ -75,7 +75,7 @@ module.exports = {
     },
 
     // getPost and getComments shouldnt have to be separate
-    getPost: (req, res) => {
+    get_single_post: (req, res) => {
         const db = req.app.get('db')
         try {
             db.get_post(req.params.id)
@@ -86,51 +86,17 @@ module.exports = {
         }
     },
 
-    getComments: (req, res) => {
-        const db = req.app.get('db')
+    get_user_posts: (req, res) => {
+        const db = require('db')
 
         try {
-            db.get_comments(req.params.id)
-                .then((data) => res.status(200).json(data))
-                .catch((err) => console.log('error in getComments', err))
+            // get all user posts by id
         } catch (e) {
-            res.status(500).json('Internal server error')
-        }
-    },
-
-    addComment: (req, res) => {
-        const db = req.app.get('db')
-
-        try {
-            if (req.session.user) {
-                db.add_comment([
-                    req.body.post_id,
-                    req.body.user_id,
-                    req.body.comment,
-                ])
-                    .then((data) => res.status(200).json(data))
-                    .catch((err) => console.log(err))
-            } else {
-                res.status(409).json('You must be logged in to add a comment')
-            }
-        } catch (e) {
-            res.status(500).json('Internal server error')
+            res.status(500).json('Internal server error in get_user_posts')
         }
     },
 
     update: async (req, res) => {
         // edit a post caption or comment
-    },
-
-    // ...sounds like a next week thing to me
-    delete: (req, res) => {
-        const db = req.app.get('db')
-        if (req.session.user) {
-            db.delete_post(req.params.id)
-                .then((data) => res.status(200).json(data))
-                .catch((err) => res.status(500).json({ err: err }))
-        } else {
-            res.status(500).json('You must be logged in to delete a post.')
-        }
     },
 }

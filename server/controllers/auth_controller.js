@@ -85,7 +85,7 @@ module.exports = {
                 }
             }
         } catch (err) {
-            res.status(500).json({ err: 'Internal server error' })
+            res.status(500).json({ err: err })
         }
     },
 
@@ -108,7 +108,7 @@ module.exports = {
     },
 
     // get current user on the session
-    getCurrent: async (req, res) => {
+    get_current_user: async (req, res) => {
         try {
             if (req.session.user) {
                 res.json(req.session.user)

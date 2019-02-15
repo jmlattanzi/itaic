@@ -12,8 +12,7 @@ class Account extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
-        this.props.getUserPosts(this.props.ur.user.id)
+        this.props.getUserPosts(this.props.match.params.id)
     }
 
     render() {

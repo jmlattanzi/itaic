@@ -5,7 +5,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    width: 320px;
+    max-width: 320px;
+    width: auto;
 
     &__container {
         border: 1px solid $color-gray;
@@ -44,5 +45,11 @@
 
     &__username {
         margin: 0 3px;
+    }
+}
+
+@media (max-width: 923px) {
+    .comment {
+        max-width: 300px;
     }
 }

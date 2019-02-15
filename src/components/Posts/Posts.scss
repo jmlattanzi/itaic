@@ -4,7 +4,7 @@ html {
     position: relative;
 }
 
-.post {
+.posts {
     &__grid-item {
         max-height: 260px;
         max-width: 260px;
@@ -76,5 +76,22 @@ html {
 
     &__info {
         width: 100%;
+    }
+}
+
+@media (max-width: 923px) {
+    .posts {
+        &__modal {
+            height: 80vh;
+            width: 330px;
+            flex-direction: column;
+        }
+
+        &__image {
+            img {
+                max-height: 300px;
+                max-width: 300px;
+            }
+        }
     }
 }

@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCurrentUser } from '../../redux/userReducer'
 import axios from 'axios'
-import DropZone from 'react-file-drop'
-import s3Upload from 'react-s3-uploader'
 import Input from '../Input/Input'
 import './Upload.scss'
 

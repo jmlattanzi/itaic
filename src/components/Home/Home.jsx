@@ -16,7 +16,6 @@ class Home extends Component {
     }
 
     render() {
-        console.log(this.props.pr.posts)
         return (
             <div className='home'>
                 <h2>
@@ -29,8 +28,7 @@ class Home extends Component {
                             .map((post) => (
                                 <Posts
                                     key={post.id}
-                                    id={post.id}
-                                    user_id={post.user_id}
+                                    post_id={post.id}
                                     username={post.username}
                                     image={post.image_url}
                                     caption={post.caption}

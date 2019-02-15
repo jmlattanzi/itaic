@@ -4,13 +4,13 @@ const initialState = {
     loading: false,
     err: false,
     posts: [],
-    comments: [],
+    post: {},
 }
 
 const GET_ALL_POSTS = 'GET_ALL_POSTS'
 const GET_USER_POSTS = 'GET_USER_POSTS'
-const GET_COMMENTS_FOR_POST = 'GET_COMMENTS_FOR_POST'
-const ADD_COMMENT = 'ADD_COMMENT'
+const GET_POST = 'GET_POST'
+const DELETE_POST = 'DELETE_POST'
 
 export const getAllPosts = () => {
     return {
@@ -19,28 +19,24 @@ export const getAllPosts = () => {
     }
 }
 
-export const getUserPosts = (id) => {
+export const getUserPosts = (user_id) => {
     return {
         type: GET_USER_POSTS,
-        payload: axios.get(`http://localhost:3001/users/${id}`),
+        payload: axios.get(`http://localhost:3001/posts/user/${user_id}`),
     }
 }
 
-export const getComments = (postId) => {
+export const getPost = (post_id) => {
     return {
-        type: GET_COMMENTS_FOR_POST,
-        payload: axios.get(`/posts/comments/${postId}`),
+        type: GET_POST,
+        payload: axios.get(`http://localhost:3001/posts/${post_id}`),
     }
 }
 
-export const addComment = (postId, userId, comment) => {
+export const deletePost = (post_id) => {
     return {
-        type: ADD_COMMENT,
-        payload: axios.post('/posts/comments', {
-            post_id: postId,
-            user_id: userId,
-            comment: comment,
-        }),
+        type: DELETE_POST,
+        payload: axios.delete(`/posts/delete/${post_id}`),
     }
 }
 
@@ -72,7 +68,6 @@ export default function reducer(state = initialState, action) {
             }
 
         case `${GET_USER_POSTS}_FULFILLED`:
-            console.log(action.payload.data)
             return {
                 ...state,
                 posts: action.payload.data,
@@ -85,36 +80,44 @@ export default function reducer(state = initialState, action) {
                 err: true,
             }
 
-        // get comments
-        case `${GET_COMMENTS_FOR_POST}_PENDING`:
+        // get specific post
+        case `${GET_POST}_PENDING`:
             return {
                 ...state,
                 loading: true,
             }
-        case `${GET_COMMENTS_FOR_POST}_FULFILLED`:
+        case `${GET_POST}_FULFILLED`:
+            console.log('>>> [GET POST PAYLOAD]:', action.payload.data)
             return {
                 ...state,
-                comments: action.payload.data,
+                loading: false,
+                post: {
+                    post_id: action.payload.data[0].id,
+                    user_id: action.payload.data[0].user_id,
+                    image_url: action.payload.data[0].image_url,
+                    caption: action.payload.data[0].caption,
+                },
             }
-        case `${GET_COMMENTS_FOR_POST}_REJECTED`:
+        case `${GET_POST}_REJECTED`:
+            console.log('GET_POST REJECTED')
             return {
                 ...state,
                 loading: false,
                 err: true,
             }
 
-        // add a new comment
-        case `${ADD_COMMENT}_PENDING`:
+        // delete post
+        case `${DELETE_POST}_PENDING`:
             return {
                 ...state,
                 loading: true,
             }
-        case `${ADD_COMMENT}_FULFILLED`:
+        case `${DELETE_POST}_FULFILLED`:
             return {
                 ...state,
-                comments: action.payload.data,
+                loading: false,
             }
-        case `${ADD_COMMENT}_REJECTED`:
+        case `${DELETE_POST}_REJECTED`:
             return {
                 ...state,
                 loading: false,

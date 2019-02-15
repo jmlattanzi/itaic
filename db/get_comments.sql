@@ -3,4 +3,4 @@ select
 from comments 
 join users 
 on comments.user_id = users.id 
-where post_id = $1;
+where comments.post_id = $1;

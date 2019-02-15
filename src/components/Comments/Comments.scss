@@ -8,8 +8,22 @@
     display: flex;
     flex-direction: column;
 
+    &__header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
     &__caption {
         text-align: center;
+        width: 90%;
+    }
+
+    &__like {
+        &:hover {
+            color: $color-primary;
+        }
     }
 
     &__list {
@@ -31,5 +45,14 @@
         justify-content: space-between;
         align-items: center;
         width: 325px;
+    }
+}
+
+@media (max-width: 923px) {
+    .comments {
+        height: 260px;
+        &__form {
+            max-width: 300px;
+        }
     }
 }

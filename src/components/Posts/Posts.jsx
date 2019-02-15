@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import Modal from 'react-modal'
 import { isMobile } from 'react-device-detect'
 import Comments from '../Comments/Comments'
@@ -32,29 +33,30 @@ class Posts extends Component {
                 <Modal
                     isOpen={this.state.modalIsOpen}
                     onRequestClose={this.closeModal}
-                    className='post__modal'>
-                    <div className='post__image'>
-                        <Link to={`/post/${this.props.id}`}>
+                    className='posts__modal'>
+                    <div className='posts__image'>
+                        <Link to={`/post/${this.props.post_id}`}>
                             <img src={this.props.image} alt='' />
                         </Link>
                     </div>
-                    <div className='post__info'>
-                        <div className='post__modal__comments'>
+                    <div className='posts__info'>
+                        <div className='posts__modal__comments'>
                             <Comments
-                                id={this.props.id}
+                                post_id={this.props.post_id}
                                 caption={this.props.caption}
                                 username={this.props.username}
+                                image_url={this.props.image}
                             />
                         </div>
                     </div>
                 </Modal>
                 {!isMobile ? (
-                    <div className='post__grid-item' onClick={this.openModal}>
+                    <div className='posts__grid-item' onClick={this.openModal}>
                         <img src={this.props.image} alt='' />
                     </div>
                 ) : (
-                    <div className='post__grid-item'>
-                        <Link to={`/posts/${this.props.id}`}>
+                    <div className='posts__grid-item'>
+                        <Link to={`/posts/${this.props.post_id}`}>
                             <img src={this.props.image} alt='' />
                         </Link>
                     </div>
@@ -64,4 +66,6 @@ class Posts extends Component {
     }
 }
 
-export default Posts
+const mapStateToProps = (state) => state
+
+export default connect(mapStateToProps)(Posts)

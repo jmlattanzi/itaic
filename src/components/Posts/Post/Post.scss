@@ -24,3 +24,10 @@
         }
     }
 }
+
+@media (max-width: 923px) {
+    .post {
+        display: flex;
+        flex-direction: column;
+    }
+}
