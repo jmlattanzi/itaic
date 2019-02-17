@@ -34,7 +34,8 @@
         border-bottom: 1px solid $color-gray;
         // box-shadow: 0px -2px 2px rgba($color-black, 0.4) inset;
         padding: 5px;
-        width: 330px;
+        max-width: 330px;
+        width: 100%;
         margin: 0 auto;
     }
 

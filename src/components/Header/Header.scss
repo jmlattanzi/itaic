@@ -10,6 +10,13 @@
     align-items: center;
     letter-spacing: 1px;
 
+    &__bottom {
+        color: $color-gray;
+        opacity: 0.4;
+        width: 87%;
+        margin: 15px auto;
+    }
+
     &__account {
         display: flex;
         justify-content: space-around;

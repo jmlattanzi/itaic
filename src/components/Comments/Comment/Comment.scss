@@ -23,6 +23,7 @@
 
     &__content {
         font-size: 11px;
+        position: relative;
 
         &--green {
             // color: rgb(18, 168, 18);
@@ -31,7 +32,27 @@
         }
     }
 
+    &__badge {
+        width: 22px;
+        height: 22px;
+        border: 1px solid $color-gray;
+        border-radius: 50%;
+        position: relative;
+        top: -40%;
+        left: -10%;
+        background-color: $color-white;
+
+        &:hover {
+            color: $color-primary;
+        }
+    }
+
     &__like {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+
         &:hover {
             color: $color-primary;
         }

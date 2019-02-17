@@ -21,6 +21,14 @@ class Comment extends Component {
         return (
             <div className='comment'>
                 <div className='comment__container'>
+                    <div className='comment__badge'>
+                        <FontAwesomeIcon
+                            className='comment__like'
+                            icon={faHeart}
+                            color='#ccc'
+                            size='sm'
+                        />
+                    </div>
                     {this.props.children.charAt(0) === '>' ? (
                         <div className='comment__content--green'>
                             {this.props.children}
@@ -35,12 +43,6 @@ class Comment extends Component {
                     </div>
                 </div>
                 <div>
-                    <FontAwesomeIcon
-                        className='comment__like'
-                        icon={faHeart}
-                        color='#ccc'
-                        size='sm'
-                    />
                     {this.props.current_user_id === this.props.op_id ? (
                         <FontAwesomeIcon
                             className='comment__like'

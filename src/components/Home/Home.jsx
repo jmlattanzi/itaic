@@ -18,7 +18,7 @@ class Home extends Component {
     render() {
         return (
             <div className='home'>
-                <h2>
+                <h2 className='home__current_filter'>
                     <em>recent posts</em>
                 </h2>
                 <div className='home__grid'>

@@ -10,16 +10,16 @@ class Account extends Component {
     constructor(props) {
         super(props)
 
-        this.handleDelete = this.handleDelete.bind(this)
+        // this.handleDelete = this.handleDelete.bind(this)
     }
 
     componentDidMount() {
         this.props.getUserPosts(this.props.match.params.id)
     }
 
-    handleDelete(id) {
-        this.props.deletePost(id)
-    }
+    // handleDelete(id) {
+    //     this.props.deletePost(id)
+    // }
 
     render() {
         console.log(this.props)
@@ -50,9 +50,6 @@ class Account extends Component {
                                                 icon={faTimes}
                                                 size='2x'
                                                 color='#ccc'
-                                                onClick={() =>
-                                                    this.handleDelete(post.id)
-                                                }
                                             />
                                         ) : null}
                                     </div>

@@ -71,13 +71,6 @@ class Comments extends Component {
                 {!this.props.cr.loading ? (
                     <div className='comments'>
                         <div className='comments__header'>
-                            <div className='comments__caption'>
-                                <h3>{this.props.caption}</h3>
-                                <Link
-                                    to={`/account/${this.props.ur.op.user_id}`}>
-                                    <em>@{this.props.ur.op.username}</em>
-                                </Link>
-                            </div>
                             <div className='comments__interaction'>
                                 <FontAwesomeIcon
                                     className='comments__like'
@@ -86,6 +79,13 @@ class Comments extends Component {
                                     color='#ccc'
                                 />
                                 <div className='comments__likes'>0</div>
+                            </div>
+                            <div className='comments__caption'>
+                                <h3>{this.props.caption}</h3>
+                                <Link
+                                    to={`/account/${this.props.ur.op.user_id}`}>
+                                    <em>@{this.props.ur.op.username}</em>
+                                </Link>
                             </div>
                         </div>
                         <div className='comments__list'>

@@ -4,6 +4,11 @@
     text-align: center;
     position: relative;
 
+    &__current_filter {
+        text-align: left;
+        margin-left: 60px;
+    }
+
     &__loading {
         position: absolute;
         top: 50%;
