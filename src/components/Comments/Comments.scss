@@ -66,6 +66,15 @@
         width: 325px;
         margin: 0 auto;
     }
+
+    &__account-link {
+        text-decoration: none;
+        color: $color-primary;
+
+        &:hover {
+            color: $color-gray;
+        }
+    }
 }
 
 @media (max-width: 923px) {

@@ -10,4 +10,12 @@ module.exports = {
             res.status(500).json('Internal server error')
         }
     },
+
+    get_account: (req, res) => {
+        const db = req.app.get('db')
+
+        db.get_account(req.params.id)
+            .then((data) => res.status(200).json(data))
+            .catch((err) => res.status(500).json(err))
+    },
 }

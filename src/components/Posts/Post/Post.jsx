@@ -23,7 +23,6 @@ class Post extends Component {
     }
 
     render() {
-        console.log('post props ==>', this.props)
         return (
             <div>
                 {!this.props.pr.loading ? (

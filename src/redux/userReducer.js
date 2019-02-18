@@ -4,6 +4,7 @@ const initialState = {
     loading: false,
     err: false,
     loggedIn: false,
+    account: {},
     user: {},
     op: {},
 }
@@ -12,6 +13,7 @@ const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const GET_CURRENT_USER = 'GET_CURRENT_USER'
 const GET_USER = 'GET_USER'
+const GET_ACCOUNT = 'GET_ACCOUNT'
 const DELETE_USER = 'DELETE_USER'
 const UPDATE_USER = 'UPDATE_USER'
 
@@ -43,6 +45,13 @@ export const getUser = (post_id) => {
     return {
         type: GET_USER,
         payload: axios.get(`http://localhost:3001/user/${post_id}`),
+    }
+}
+
+export const getAccount = (user_id) => {
+    return {
+        type: GET_ACCOUNT,
+        payload: axios.get(`http://localhost:3001/user/account/${user_id}`),
     }
 }
 
@@ -119,9 +128,27 @@ export default function reducer(state = initialState, action) {
                 op: {
                     user_id: action.payload.data[0].id,
                     username: action.payload.data[0].username,
+                    avatar: action.payload.data[0].avatar_url,
                 },
             }
         case `${GET_USER}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                err: true,
+            }
+        case `${GET_ACCOUNT}_PENDING`:
+            return {
+                ...state,
+                loading: true,
+            }
+        case `${GET_ACCOUNT}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                account: action.payload.data[0],
+            }
+        case `${GET_ACCOUNT}_REJECTED`:
             return {
                 ...state,
                 loading: false,

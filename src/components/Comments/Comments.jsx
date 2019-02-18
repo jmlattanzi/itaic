@@ -52,7 +52,6 @@ class Comments extends Component {
         this.setState({
             [e.target.name]: e.target.value,
         })
-        console.log(this.state)
     }
 
     handleEdit() {
@@ -89,7 +88,6 @@ class Comments extends Component {
     }
 
     render() {
-        console.log(this.props.post_id)
         return (
             <div>
                 {!this.props.cr.loading ? (
@@ -135,6 +133,7 @@ class Comments extends Component {
                                     <h3>{this.props.caption}</h3>
                                 )}
                                 <Link
+                                    className='comments__account-link'
                                     to={`/account/${this.props.ur.op.user_id}`}>
                                     <em>@{this.props.ur.op.username}</em>
                                 </Link>

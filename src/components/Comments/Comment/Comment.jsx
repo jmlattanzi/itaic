@@ -43,7 +43,7 @@ class Comment extends Component {
                     </div>
                 </div>
                 <div>
-                    {this.props.current_user_id === this.props.op_id ? (
+                    {/* {this.props.current_user_id === this.props.ur.op.user_id ? (
                         <FontAwesomeIcon
                             className='comment__like'
                             icon={faTimes}
@@ -51,7 +51,7 @@ class Comment extends Component {
                             color='#ccc'
                             onClick={() => this.handleDelete()}
                         />
-                    ) : null}
+                    ) : null} */}
                 </div>
             </div>
         )

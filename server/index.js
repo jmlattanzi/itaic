@@ -49,6 +49,7 @@ app.get('/comments/:id', cc.get_comments) // get comments
 
 // user routes
 app.get('/user/:id', uc.get_user) // get info on the op
+app.get('/user/account/:id', uc.get_account)
 
 // protected routes
 // app.use((req, res, next) => {
