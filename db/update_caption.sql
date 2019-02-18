@@ -1,0 +1,1 @@
+update posts set caption = $2 where id = $1;

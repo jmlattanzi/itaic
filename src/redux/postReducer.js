@@ -12,11 +12,12 @@ const GET_ALL_POSTS = 'GET_ALL_POSTS'
 const GET_USER_POSTS = 'GET_USER_POSTS'
 const GET_POST = 'GET_POST'
 const DELETE_POST = 'DELETE_POST'
+const EDIT_POST = 'EDIT_POST'
 
 export const getAllPosts = () => {
     return {
         type: GET_ALL_POSTS,
-        payload: axios.get('/posts/all'),
+        payload: axios.get('http://localhost:3001/posts/all'),
     }
 }
 
@@ -96,6 +97,7 @@ export default function reducer(state = initialState, action) {
                     user_id: action.payload.data[0].user_id,
                     image_url: action.payload.data[0].image_url,
                     caption: action.payload.data[0].caption,
+                    likes: action.payload.data[0].likes,
                 },
             }
         case `${GET_POST}_REJECTED`:
@@ -115,9 +117,10 @@ export default function reducer(state = initialState, action) {
             return {
                 ...state,
                 loading: false,
-                posts: action.payload.data,
+                posts: state.posts,
             }
         case `${DELETE_POST}_REJECTED`:
+            console.log('delete rejected')
             return {
                 ...state,
                 loading: false,

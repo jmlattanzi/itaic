@@ -10,19 +10,19 @@ class Account extends Component {
     constructor(props) {
         super(props)
 
-        // this.handleDelete = this.handleDelete.bind(this)
+        this.handleDelete = this.handleDelete.bind(this)
     }
 
     componentDidMount() {
         this.props.getUserPosts(this.props.match.params.id)
     }
 
-    // handleDelete(id) {
-    //     this.props.deletePost(id)
-    // }
+    handleDelete(id) {
+        this.props.deletePost(id)
+    }
 
     render() {
-        console.log(this.props)
+        // console.log('Account props ==>', this.props)
         return (
             <div className='account'>
                 <div>
@@ -44,12 +44,15 @@ class Account extends Component {
                                             image={post.image_url}
                                             caption={post.caption}
                                         />
-                                        {this.props.ur.user.id ===
-                                        this.props.ur.op.user_id ? (
+                                        {this.props.ur.user.id ==
+                                        this.props.match.params.id ? (
                                             <FontAwesomeIcon
                                                 icon={faTimes}
                                                 size='2x'
                                                 color='#ccc'
+                                                onClick={(id) =>
+                                                    this.handleDelete(post.id)
+                                                }
                                             />
                                         ) : null}
                                     </div>
