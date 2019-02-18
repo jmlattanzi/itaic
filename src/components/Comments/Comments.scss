@@ -21,6 +21,20 @@
     &__caption {
         text-align: center;
         width: 90%;
+
+        // &--edit {
+        //     display: flex;
+        //     justify-content: space-between;
+        //     align-items: center;
+        // }
+    }
+
+    &__edit {
+        margin: 5px;
+        &:hover {
+            color: $color-primary;
+            cursor: pointer;
+        }
     }
 
     &__like {

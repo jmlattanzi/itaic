@@ -23,6 +23,7 @@ class Post extends Component {
     }
 
     render() {
+        console.log('post props ==>', this.props)
         return (
             <div>
                 {!this.props.pr.loading ? (
@@ -38,6 +39,12 @@ class Post extends Component {
                                 post_id={this.props.pr.post.post_id}
                                 user_id={this.props.pr.post.user_id}
                                 caption={this.props.pr.post.caption}
+                                edit={
+                                    this.props.ur.user.id ==
+                                    this.props.ur.op.user_id
+                                        ? true
+                                        : false
+                                }
                             />
                         </div>
                     </div>

@@ -42,6 +42,15 @@ export const deletePost = (post_id) => {
     }
 }
 
+export const editPost = (post_id, caption) => {
+    return {
+        type: EDIT_POST,
+        payload: axios.put(`http://localhost:3001/posts/update/${post_id}`, {
+            caption,
+        }),
+    }
+}
+
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         // get all posts
@@ -98,6 +107,7 @@ export default function reducer(state = initialState, action) {
                     image_url: action.payload.data[0].image_url,
                     caption: action.payload.data[0].caption,
                     likes: action.payload.data[0].likes,
+                    edited: action.payload.data[0].edited,
                 },
             }
         case `${GET_POST}_REJECTED`:
@@ -121,6 +131,23 @@ export default function reducer(state = initialState, action) {
             }
         case `${DELETE_POST}_REJECTED`:
             console.log('delete rejected')
+            return {
+                ...state,
+                loading: false,
+                err: true,
+            }
+        case `${EDIT_POST}_PENDING`:
+            return {
+                ...state,
+                loading: true,
+            }
+        case `${EDIT_POST}_FULFILLED`:
+            return {
+                ...state,
+                loading: false,
+                posts: state.posts,
+            }
+        case `${EDIT_POST}_REJECTED`:
             return {
                 ...state,
                 loading: false,
