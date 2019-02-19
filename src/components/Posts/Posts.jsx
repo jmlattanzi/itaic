@@ -46,6 +46,7 @@ class Posts extends Component {
                                 caption={this.props.caption}
                                 username={this.props.username}
                                 image_url={this.props.image}
+                                likes={this.props.likes}
                             />
                         </div>
                     </div>

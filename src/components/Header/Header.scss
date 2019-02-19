@@ -15,6 +15,7 @@
         opacity: 0.4;
         width: 87%;
         margin: 15px auto;
+        // border-style: none;
     }
 
     &__account {
@@ -40,12 +41,9 @@
         color: $color-black;
         margin: auto 10px;
         background: -webkit-linear-gradient($color-primary, #ff6666);
+        background-clip: text;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
-
-        &:hover {
-            color: $color-primary;
-        }
     }
 
     &__links {

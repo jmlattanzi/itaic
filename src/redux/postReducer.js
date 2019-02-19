@@ -13,6 +13,7 @@ const GET_USER_POSTS = 'GET_USER_POSTS'
 const GET_POST = 'GET_POST'
 const DELETE_POST = 'DELETE_POST'
 const EDIT_POST = 'EDIT_POST'
+const LIKE_POST = 'LIKE_POST'
 
 export const getAllPosts = () => {
     return {
@@ -48,6 +49,13 @@ export const editPost = (post_id, caption) => {
         payload: axios.put(`http://localhost:3001/posts/update/${post_id}`, {
             caption,
         }),
+    }
+}
+
+export const likePost = (post_id) => {
+    return {
+        type: LIKE_POST,
+        payload: axios.put(`http://localhost:3001/posts/like/${post_id}`),
     }
 }
 
@@ -106,7 +114,7 @@ export default function reducer(state = initialState, action) {
                     user_id: action.payload.data[0].user_id,
                     image_url: action.payload.data[0].image_url,
                     caption: action.payload.data[0].caption,
-                    likes: action.payload.data[0].likes,
+                    likes: action.payload.data[0].like_count,
                     edited: action.payload.data[0].edited,
                 },
             }
@@ -152,6 +160,24 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 loading: false,
                 err: true,
+            }
+        case `${LIKE_POST}_PENDING`:
+            console.log('pending')
+            return {
+                ...state,
+                loading: true,
+            }
+        case `${LIKE_POST}_FULFILLED`:
+            console.log('fulfilled')
+            return {
+                ...state,
+            }
+        case `${LIKE_POST}_REJECTED`:
+            console.log('rejected')
+            return {
+                ...state,
+                err: true,
+                loading: false,
             }
 
         default:

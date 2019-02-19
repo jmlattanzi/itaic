@@ -30,13 +30,9 @@ class Comment extends Component {
                         />
                     </div>
                     {this.props.children.charAt(0) === '>' ? (
-                        <div className='comment__content--green'>
-                            {this.props.children}
-                        </div>
+                        <div className='comment__content--green'>{this.props.children}</div>
                     ) : (
-                        <div className='comment__content'>
-                            {this.props.children}
-                        </div>
+                        <div className='comment__content'>{this.props.children}</div>
                     )}
                     <div className='comment__user'>
                         <em className='comment__username'>{this.props.user}</em>
@@ -45,7 +41,6 @@ class Comment extends Component {
                 <div>
                     {/* {this.props.current_user_id === this.props.ur.op.user_id ? (
                         <FontAwesomeIcon
-                            className='comment__like'
                             icon={faTimes}
                             size='1x'
                             color='#ccc'

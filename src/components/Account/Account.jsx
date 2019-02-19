@@ -5,6 +5,7 @@ import { getUserPosts, deletePost } from '../../redux/postReducer'
 import { getAccount } from '../../redux/userReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSpinner, faTimes, faEdit } from '@fortawesome/free-solid-svg-icons'
+import Button from '../Button/Button'
 import Posts from '../Posts/Posts'
 import './Account.scss'
 
@@ -39,6 +40,12 @@ class Account extends Component {
                         </div>
                     </div>
                     <div className='account__header__stats'>0 friends, lol</div>
+                    {this.props.ur.user.id ==
+                    this.props.match.params.id ? null : (
+                        <div className='account__follow'>
+                            <Button class='primary'>follow</Button>
+                        </div>
+                    )}
                 </div>
                 <div className='account__grid'>
                     {/* this could really just be a filter, I bet it would even be faster */}

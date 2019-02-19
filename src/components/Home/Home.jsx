@@ -32,6 +32,7 @@ class Home extends Component {
                                     username={post.username}
                                     image={post.image_url}
                                     caption={post.caption}
+                                    likes={post.like_count}
                                 />
                             ))
                     ) : (

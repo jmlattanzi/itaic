@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getComments, addComment } from '../../redux/commentReducer'
 import { getCurrentUser, getUser } from '../../redux/userReducer'
-import { editPost, getPost } from '../../redux/postReducer'
+import { editPost, getPost, likePost } from '../../redux/postReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPaperPlane,
@@ -30,10 +30,10 @@ class Comments extends Component {
         this.handleSubmit = this.handleSubmit.bind(this)
         this.handleEdit = this.handleEdit.bind(this)
         this.submitEdit = this.submitEdit.bind(this)
+        this.like = this.like.bind(this)
     }
 
     componentDidMount() {
-        // this.props.getPost(this.props.getPost(this.props.post_id))
         this.props.getComments(this.props.post_id)
         this.props.getUser(this.props.post_id)
     }
@@ -42,10 +42,6 @@ class Comments extends Component {
         if (prevProps.cr.comments.length !== this.props.cr.comments.length) {
             this.props.getComments(this.props.post_id)
         }
-
-        // if (this.props.pr.post.caption !== this.state.newCaption) {
-        //     this.props.getPost(this.props.post_id)
-        // }
     }
 
     handleChange(e) {
@@ -87,7 +83,16 @@ class Comments extends Component {
         this.props.editPost(this.props.post_id, this.state.newCaption)
     }
 
+    like(post_id) {
+        this.props.likePost(post_id)
+    }
+
     render() {
+        // find index of the post so we can get the likes
+        let index = this.props.pr.posts.findIndex(
+            (post) => post.id === this.props.post_id
+        )
+
         return (
             <div>
                 {!this.props.cr.loading ? (
@@ -144,8 +149,13 @@ class Comments extends Component {
                                     icon={faHeart}
                                     size='lg'
                                     color='#ccc'
+                                    onClick={() =>
+                                        this.like(this.props.post_id)
+                                    }
                                 />
-                                <div className='comments__likes'>0</div>
+                                <div className='comments__likes'>
+                                    {this.props.pr.posts[index].like_count}
+                                </div>
                             </div>
                         </div>
                         <div className='comments__list'>
@@ -206,5 +216,13 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { getComments, getCurrentUser, addComment, getUser, editPost, getPost }
+    {
+        getComments,
+        getCurrentUser,
+        addComment,
+        getUser,
+        editPost,
+        getPost,
+        likePost,
+    }
 )(Comments)
