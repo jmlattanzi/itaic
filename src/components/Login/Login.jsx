@@ -42,24 +42,14 @@ class Login extends Component {
     render() {
         return (
             <div className='login'>
-                <FontAwesomeIcon
-                    icon={faAddressCard}
-                    size='4x'
-                    color='salmon'
-                />
+                <FontAwesomeIcon icon={faAddressCard} size='4x' color='salmon' />
                 <h1 className='login__modal__header'>Login</h1>
-                <form
-                    className='login__modal__login'
-                    onSubmit={(e) => this.handleSubmit(e)}>
+                <form className='login__modal__login' onSubmit={(e) => this.handleSubmit(e)}>
                     <div className='login__modal__input-field'>
-                        <FontAwesomeIcon
-                            icon={faUser}
-                            size='lg'
-                            color='salmon'
-                        />
+                        <FontAwesomeIcon icon={faUser} size='lg' color='salmon' />
                         <Input
                             required='required'
-                            class='primaryInput'
+                            class='primary'
                             type='text'
                             placeholder='username'
                             name='username'
@@ -67,14 +57,10 @@ class Login extends Component {
                         />
                     </div>
                     <div className='login__modal__input-field'>
-                        <FontAwesomeIcon
-                            icon={faKey}
-                            size='lg'
-                            color='salmon'
-                        />
+                        <FontAwesomeIcon icon={faKey} size='lg' color='salmon' />
                         <Input
                             required='required'
-                            class='primaryInput'
+                            class='primary'
                             type='password'
                             placeholder='password'
                             name='password'

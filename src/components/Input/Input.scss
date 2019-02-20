@@ -91,3 +91,11 @@
         }
     }
 }
+
+@media (max-width: 375px) {
+    .input {
+        &__search {
+            display: none;
+        }
+    }
+}

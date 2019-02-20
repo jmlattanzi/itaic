@@ -75,6 +75,23 @@
             color: $color-gray;
         }
     }
+
+    &__modal {
+        height: 260px;
+        width: 300px;
+        background-color: $color-white;
+        color: $color-primary;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        outline: none;
+        box-shadow: 0 3px 6px rgba($color-black, 0.4);
+        box-sizing: border-box;
+        padding: 20px;
+        border-radius: 20px;
+        text-align: center;
+    }
 }
 
 @media (max-width: 923px) {

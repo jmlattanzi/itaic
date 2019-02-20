@@ -89,51 +89,33 @@ class Header extends Component {
                     {this.props.ur.user.username ? (
                         <div className='header__account'>
                             <FontAwesomeIcon
+                                className='header__search'
                                 icon={faSearch}
                                 size='lg'
                                 color='salmon'
                             />
-                            <Input
-                                class='search'
-                                type='text'
-                                placeholder='search'
-                            />
+                            <Input class='search' type='text' placeholder='search' />
                             <Link className='header__account_name' to='/upload'>
-                                <FontAwesomeIcon
-                                    icon={faArrowCircleUp}
-                                    size='2x'
-                                    color='salmon'
-                                />
+                                <FontAwesomeIcon icon={faArrowCircleUp} size='2x' color='salmon' />
                             </Link>
                             <Link
                                 className='header__account_name'
                                 to={`/account/${this.props.ur.user.id}`}>
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    size='2x'
-                                    color='salmon'
-                                />
+                                <FontAwesomeIcon icon={faUser} size='2x' color='salmon' />
                             </Link>
                             <Link className='header__account_name' to='/logout'>
-                                <FontAwesomeIcon
-                                    icon={faSignOutAlt}
-                                    size='2x'
-                                    color='salmon'
-                                />
+                                <FontAwesomeIcon icon={faSignOutAlt} size='2x' color='salmon' />
                             </Link>
                         </div>
                     ) : (
                         <div className='header__links'>
                             <FontAwesomeIcon
+                                className='header__search'
                                 icon={faSearch}
                                 size='lg'
                                 color='salmon'
                             />
-                            <Input
-                                class='search'
-                                type='text'
-                                placeholder='search'
-                            />
+                            <Input class='search' type='text' placeholder='search' />
                             {!isMobile ? (
                                 <Button class='primary' click={this.openModal}>
                                     login
@@ -149,21 +131,13 @@ class Header extends Component {
                         isOpen={this.state.modalIsOpen}
                         onRequestClose={this.closeModal}
                         className='header__modal'>
-                        <FontAwesomeIcon
-                            icon={faAddressCard}
-                            size='4x'
-                            color='salmon'
-                        />
+                        <FontAwesomeIcon icon={faAddressCard} size='4x' color='salmon' />
                         <h1 className='header__modal__header'>Login</h1>
                         <form
                             className='header__modal__login'
                             onSubmit={(e) => this.handleSubmit(e)}>
                             <div className='header__modal__input-field'>
-                                <FontAwesomeIcon
-                                    icon={faUser}
-                                    size='lg'
-                                    color='salmon'
-                                />
+                                <FontAwesomeIcon icon={faUser} size='lg' color='salmon' />
                                 <Input
                                     required='required'
                                     class='primary--animated'
@@ -174,11 +148,7 @@ class Header extends Component {
                                 />
                             </div>
                             <div className='header__modal__input-field'>
-                                <FontAwesomeIcon
-                                    icon={faKey}
-                                    size='lg'
-                                    color='salmon'
-                                />
+                                <FontAwesomeIcon icon={faKey} size='lg' color='salmon' />
                                 <Input
                                     required='required'
                                     class='primary--animated'

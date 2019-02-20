@@ -35,13 +35,10 @@ class Account extends Component {
                     </div>
                     <div className='account__header__user'>
                         <h3>{this.props.ur.account.username}</h3>
-                        <div className='account__header__bio'>
-                            {this.props.ur.account.bio}
-                        </div>
+                        <div className='account__header__bio'>{this.props.ur.account.bio}</div>
                     </div>
                     <div className='account__header__stats'>0 friends, lol</div>
-                    {this.props.ur.user.id ==
-                    this.props.match.params.id ? null : (
+                    {this.props.ur.user.id == this.props.match.params.id ? null : (
                         <div className='account__follow'>
                             <Button class='primary'>follow</Button>
                         </div>
@@ -54,9 +51,7 @@ class Account extends Component {
                             this.props.pr.userPosts
                                 .sort((x, y) => x.id < y.id)
                                 .map((post) => (
-                                    <div
-                                        className='account__grid-item'
-                                        key={post.id}>
+                                    <div className='account__grid-item' key={post.id}>
                                         <Posts
                                             post_id={post.id}
                                             username={post.username}
@@ -64,19 +59,14 @@ class Account extends Component {
                                             image={post.image_url}
                                             caption={post.caption}
                                         />
-                                        {this.props.ur.user.id ==
-                                        this.props.match.params.id ? (
+                                        {this.props.ur.user.id == this.props.match.params.id ? (
                                             <div className='account__user-actions'>
                                                 <FontAwesomeIcon
                                                     className='account__action'
                                                     icon={faTimes}
                                                     size='lg'
                                                     color='#ccc'
-                                                    onClick={(id) =>
-                                                        this.handleDelete(
-                                                            post.id
-                                                        )
-                                                    }
+                                                    onClick={(id) => this.handleDelete(post.id)}
                                                 />
                                                 <Link to={`/post/${post.id}`}>
                                                     <FontAwesomeIcon
@@ -92,11 +82,7 @@ class Account extends Component {
                                 ))
                         ) : (
                             <div className='account__loading'>
-                                <FontAwesomeIcon
-                                    icon={faSpinner}
-                                    spin
-                                    size='8x'
-                                />
+                                <FontAwesomeIcon icon={faSpinner} spin size='8x' />
                             </div>
                         )
                     ) : (

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { getComments, addComment } from '../../redux/commentReducer'
 import { getCurrentUser, getUser } from '../../redux/userReducer'
-import { editPost, getPost, likePost } from '../../redux/postReducer'
+import { editPost, getPost, likePost, getAllPosts } from '../../redux/postReducer'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
     faPaperPlane,
@@ -14,6 +14,8 @@ import {
 } from '@fortawesome/free-solid-svg-icons'
 import Comment from './Comment/Comment'
 import Input from '../Input/Input'
+import Alert from '../Alert/Alert'
+import Modal from 'react-modal'
 import './Comments.scss'
 
 class Comments extends Component {
@@ -21,6 +23,7 @@ class Comments extends Component {
         super(props)
 
         this.state = {
+            modalIsOpen: false,
             newComment: '',
             newCaption: '',
             editing: false,
@@ -31,6 +34,8 @@ class Comments extends Component {
         this.handleEdit = this.handleEdit.bind(this)
         this.submitEdit = this.submitEdit.bind(this)
         this.like = this.like.bind(this)
+        this.openModal = this.openModal.bind(this)
+        this.closeModal = this.closeModal.bind(this)
     }
 
     componentDidMount() {
@@ -61,7 +66,7 @@ class Comments extends Component {
         e.preventDefault()
 
         if (this.props.ur.user.username === undefined) {
-            console.log('You must be logged in to do this')
+            this.openModal()
         } else {
             if (this.state.newComment !== '') {
                 this.props.addComment(
@@ -83,15 +88,26 @@ class Comments extends Component {
         this.props.editPost(this.props.post_id, this.state.newCaption)
     }
 
-    like(post_id) {
-        this.props.likePost(post_id)
+    like(post_id, index) {
+        if (this.props.ur.user.username === undefined) {
+            this.openModal()
+        } else {
+            this.props.likePost(post_id)
+            console.log(this.props.pr.posts[index].like_count)
+        }
+    }
+
+    openModal() {
+        this.setState({ modalIsOpen: true })
+    }
+
+    closeModal() {
+        this.setState({ modalIsOpen: false })
     }
 
     render() {
         // find index of the post so we can get the likes
-        let index = this.props.pr.posts.findIndex(
-            (post) => post.id === this.props.post_id
-        )
+        let index = this.props.pr.posts.findIndex((post) => post.id === this.props.post_id)
 
         return (
             <div>
@@ -102,29 +118,17 @@ class Comments extends Component {
                                 {this.props.edit ? (
                                     <div className='comments__caption--edit'>
                                         {this.state.editing ? (
-                                            <form
-                                                onSubmit={(e) =>
-                                                    this.submitEdit(e)
-                                                }>
+                                            <form onSubmit={(e) => this.submitEdit(e)}>
                                                 <Input
                                                     class='primary'
-                                                    placeholder={
-                                                        this.props.pr.post
-                                                            .caption
-                                                    }
+                                                    placeholder={this.props.pr.post.caption}
                                                     name='newCaption'
                                                     change={this.handleChange}
                                                 />
-                                                <Input
-                                                    type='submit'
-                                                    class='submit'
-                                                    value='edit'
-                                                />
+                                                <Input type='submit' class='submit' value='edit' />
                                             </form>
                                         ) : (
-                                            <h3>
-                                                {this.props.pr.post.caption}
-                                            </h3>
+                                            <h3>{this.props.pr.post.caption}</h3>
                                         )}
                                         <FontAwesomeIcon
                                             className='comments__edit'
@@ -149,9 +153,7 @@ class Comments extends Component {
                                     icon={faHeart}
                                     size='lg'
                                     color='#ccc'
-                                    onClick={() =>
-                                        this.like(this.props.post_id)
-                                    }
+                                    onClick={() => this.like(this.props.post_id, index)}
                                 />
                                 <div className='comments__likes'>
                                     {this.props.pr.posts[index].like_count}
@@ -172,9 +174,7 @@ class Comments extends Component {
                                     </Comment>
                                 ))}
                         </div>
-                        <form
-                            className='comments__form'
-                            onSubmit={(e) => this.handleSubmit(e)}>
+                        <form className='comments__form' onSubmit={(e) => this.handleSubmit(e)}>
                             <Input
                                 type='text'
                                 placeholder='type comment here...'
@@ -187,24 +187,21 @@ class Comments extends Component {
                             <button
                                 className='comments__send'
                                 onClick={(e) => this.handleSubmit(e)}>
-                                <FontAwesomeIcon
-                                    icon={faPaperPlane}
-                                    size='lg'
-                                    color='salmon'
-                                />
+                                <FontAwesomeIcon icon={faPaperPlane} size='lg' color='salmon' />
                             </button>
                         </form>
                     </div>
                 ) : (
                     <div>
-                        <FontAwesomeIcon
-                            icon={faSpinner}
-                            spin
-                            size='4x'
-                            color='salmon'
-                        />
+                        <FontAwesomeIcon icon={faSpinner} spin size='4x' color='salmon' />
                     </div>
                 )}
+                <Modal
+                    className='comments__modal'
+                    isOpen={this.state.modalIsOpen}
+                    onRequestClose={this.closeModal}>
+                    <Alert message='auth' />
+                </Modal>
             </div>
         )
     }
@@ -224,5 +221,6 @@ export default connect(
         editPost,
         getPost,
         likePost,
+        getAllPosts,
     }
 )(Comments)

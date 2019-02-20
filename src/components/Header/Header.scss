@@ -92,5 +92,15 @@
     }
 }
 
-@media (max-width: 923px) {
+@media (max-width: 375px) {
+    .header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        &__search {
+            display: none;
+        }
+    }
 }

@@ -39,7 +39,7 @@ export const deleteComment = (post_id) => {
 export const updateComment = (post_id, comment) => {
     return {
         type: UPDATE_COMMENT,
-        payload: axios.put(`/comments/${post_id}`, comment),
+        payload: axios.put(`http://localhost:3001/comments/${post_id}`, comment),
     }
 }
 

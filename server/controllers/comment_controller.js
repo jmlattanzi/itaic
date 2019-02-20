@@ -15,11 +15,7 @@ module.exports = {
         const db = req.app.get('db')
         console.log('user session: ', req.session.user)
         try {
-            db.add_comment([
-                req.body.post_id,
-                req.body.user_id,
-                req.body.comment,
-            ])
+            db.add_comment([req.body.post_id, req.body.user_id, req.body.comment])
                 .then((data) => res.status(200).json(data))
                 .catch((err) => console.log(err))
         } catch (e) {
