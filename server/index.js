@@ -42,6 +42,7 @@ app.post('/auth/login', auth.login) // log a user in
 app.get('/posts/all', pc.get_all_posts) // get all posts
 app.get('/posts/:id', pc.get_single_post) // get a single post
 app.get('/posts/user/:id', pc.get_user_posts) // get all of a users posts
+app.get('/posts/like/:id', pc.get_likes)
 app.delete('/posts/delete/:id', pc.delete_post)
 app.put('/posts/update/:id', pc.update_post) // edit the caption of a post
 app.put('/posts/like/:id', pc.like_post) // like a post

@@ -2,31 +2,6 @@
 // email to confirm account
 // admin email: itaic_sign_up@yahoo.com
 // try {
-//     let account = await mail.createTestAccount()
-
-//     let transporter = mail.createTransport({
-//         host: 'smtp.ethereal.email',
-//         port: 587,
-//         secure: false,
-//         auth: {
-//             user: account.user,
-//             pass: account.pass,
-//         },
-//     })
-
-//     let mailOptions = {
-//         from: "'Admin' <admin@itaic.com>",
-//         to: "'jml' <jonathanlattanzi@gmail.com>",
-//         subject: 'Account creation',
-//         text: 'Account created',
-//         html: '<h1>haha yes</h1>',
-//     }
-
-//     let info = await transporter.sendMail(mailOptions)
-
-//     console.log('Message sent: ' + info.messageId)
-//     console.log('preview: ' + mail.getTestMessageUrl(info))
-//     res.status(200).json('message sent')
 // } catch (e) {
 //     res.status(500).json(e)
 // }
@@ -46,12 +21,34 @@ module.exports = {
                 res.status(409).json({ err: 'User already exists' })
             } else {
                 let hashpassword = await bc.hash(req.body.password, 12)
-                db.register_user([
-                    req.body.username,
-                    req.body.email,
-                    hashpassword,
-                ])
-                    .then((data) => res.send(data))
+                db.register_user([req.body.username, req.body.email, hashpassword])
+                    .then((data) => {
+                        // let account = await `mail.createTestAccount()`
+
+                        let transporter = mail.createTransport({
+                            service: 'yahoo',
+                            auth: {
+                                user: 'itaic_sign_up@yahoo.com',
+                                pass: process.env.DB_PASS,
+                            },
+                        })
+
+                        let mailOptions = {
+                            from: "itaic_sign_up@yahoo.com",
+                            to: req.body.email,
+                            subject: 'Account Created',
+                            text: 'Account Created',
+                        }
+
+                        transporter
+                            .sendMail(mailOptions)
+                            .then((info) => console.log('email sent', info))
+                            .catch((err) => console.log(err))
+
+                        // console.log('Message sent: ' + info.messageId)
+                        // console.log('preview: ' + mail.getTestMessageUrl(info))
+                        res.status(200).json(data)
+                    })
                     .catch((err) => console.log(err))
             }
         } catch (err) {
@@ -64,22 +61,15 @@ module.exports = {
         try {
             const db = req.app.get('db')
 
-            console.log(
-                `username: ${req.body.username}\npassword: ${req.body.password}`
-            )
+            console.log(`username: ${req.body.username}\npassword: ${req.body.password}`)
 
             let results = await db.get_user(req.body.username)
             let user = results[0]
 
             if (!user) {
-                res.status(401).json(
-                    'User does not exist on this plane of mortality'
-                )
+                res.status(401).json('User does not exist on this plane of mortality')
             } else {
-                let authorizedUser = await bc.compare(
-                    req.body.password,
-                    user.hash
-                )
+                let authorizedUser = await bc.compare(req.body.password, user.hash)
                 if (authorizedUser) {
                     req.session.user = {
                         id: user.id,

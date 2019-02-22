@@ -6,6 +6,7 @@ const initialState = {
     posts: [],
     userPosts: [],
     post: {},
+    post_likes: 0,
 }
 
 const GET_ALL_POSTS = 'GET_ALL_POSTS'
@@ -14,6 +15,7 @@ const GET_POST = 'GET_POST'
 const DELETE_POST = 'DELETE_POST'
 const EDIT_POST = 'EDIT_POST'
 const LIKE_POST = 'LIKE_POST'
+const GET_LIKES = 'GET_LIKES'
 
 export const getAllPosts = () => {
     return {
@@ -56,6 +58,13 @@ export const likePost = (post_id) => {
     return {
         type: LIKE_POST,
         payload: axios.put(`http://localhost:3001/posts/like/${post_id}`),
+    }
+}
+
+export const getLikes = (post_id) => {
+    return {
+        type: GET_LIKES,
+        payload: axios.get(`http://localhost:3001/posts/like/${post_id}`),
     }
 }
 
@@ -108,7 +117,7 @@ export default function reducer(state = initialState, action) {
         case `${GET_POST}_FULFILLED`:
             return {
                 ...state,
-                loading: false,
+                // loading: false,
                 post: {
                     post_id: action.payload.data[0].id,
                     user_id: action.payload.data[0].user_id,
@@ -178,6 +187,23 @@ export default function reducer(state = initialState, action) {
                 ...state,
                 err: true,
                 loading: false,
+            }
+        case `${GET_LIKES}_PENDING`:
+            console.log('get_likes pending')
+            return {
+                ...state,
+                loading: true,
+            }
+        case `${GET_LIKES}_FULFILLED`:
+            return {
+                ...state,
+                post_likes: action.payload.data[0].like_count,
+            }
+        case `${GET_LIKES}_REJECTED`:
+            return {
+                ...state,
+                loading: false,
+                err: true,
             }
 
         default:

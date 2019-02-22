@@ -37,6 +37,7 @@ class Login extends Component {
         e.preventDefault()
         const { username, password } = this.state.user
         this.props.login(username, password)
+        this.props.history.push('/')
     }
 
     render() {

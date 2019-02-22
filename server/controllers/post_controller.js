@@ -103,9 +103,7 @@ module.exports = {
 
         db.update_caption([req.params.id, req.body.caption])
             .then((data) => res.status(200).json(data))
-            .catch((err) =>
-                res.status(500).json('Error in update caption.', err)
-            )
+            .catch((err) => res.status(500).json('Error in update caption.', err))
     },
 
     delete_post: (req, res) => {
@@ -116,9 +114,7 @@ module.exports = {
                 .then((data) => {
                     db.delete_post(req.params.id)
                         .then((data) => res.status(200).json(data))
-                        .catch((err) =>
-                            console.log('error in delete_post', err)
-                        )
+                        .catch((err) => console.log('error in delete_post', err))
                 })
                 .catch((err) => console.log('error in delete_comments', err))
         } catch (err) {
@@ -135,6 +131,18 @@ module.exports = {
                 .catch((err) => console.log(err))
         } catch (err) {
             res.status(500).json('error in like_post', err)
+        }
+    },
+
+    get_likes: (req, res) => {
+        const db = req.app.get('db')
+
+        try {
+            db.get_likes(req.params.id)
+                .then((data) => res.status(200).json(data))
+                .catch((err) => console.log(err))
+        } catch (err) {
+            res.status(500).json('error in get_likes', err)
         }
     },
 }
