@@ -34,8 +34,8 @@ class Comments extends Component {
 
     componentDidMount() {
         this.props.getUser(this.props.post_id)
-        this.props.getComments(this.props.post_id)
         this.props.getLikes(this.props.post_id)
+        this.props.getComments(this.props.post_id)
     }
 
     componentDidUpdate(prevProps) {

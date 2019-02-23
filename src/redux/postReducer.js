@@ -184,7 +184,7 @@ export default function reducer(state = initialState, action) {
             console.log('fulfilled')
             return {
                 ...state,
-                loading: false,
+                // loading: false,
             }
         case `${LIKE_POST}_REJECTED`:
             console.log('rejected')

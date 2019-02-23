@@ -47,7 +47,7 @@ class Account extends Component {
                 <div className='account__grid'>
                     {/* this could really just be a filter, I bet it would even be faster */}
                     {this.props.pr.userPosts.length !== 0 ? (
-                        this.props.pr.loading ? (
+                        !this.props.pr.loading ? (
                             this.props.pr.userPosts
                                 .sort((x, y) => x.id < y.id)
                                 .map((post) => (
@@ -96,7 +96,10 @@ class Account extends Component {
     }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => {
+    console.log('account state', state)
+    return state
+}
 
 export default connect(
     mapStateToProps,

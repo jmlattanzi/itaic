@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getAllPosts, getPost, deletePost } from '../../../redux/postReducer'
+import { getAllPosts, getPost, deletePost, getLikes } from '../../../redux/postReducer'
 import { getUser } from '../../../redux/userReducer'
 import axios from 'axios'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,6 +20,7 @@ class Post extends Component {
 
     componentDidMount() {
         this.props.getPost(this.props.match.params.id)
+        this.props.getLikes(this.props.match.params.id)
     }
 
     render() {
@@ -58,5 +59,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
     mapStateToProps,
-    { getAllPosts, getPost, deletePost, getUser }
+    { getAllPosts, getPost, deletePost, getUser, getLikes }
 )(Post)
