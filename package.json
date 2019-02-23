@@ -5,7 +5,7 @@
     "scripts": {
         "test": "echo Error: no test specified && exit 1",
         "start": "webpack-dev-server --host 127.0.0.1 --port 3000 --config ./webpack.config.js --mode development",
-        "build": "webpack --config ./webpack.prod.js"
+        "build": "webpack --config ./webpack.prod.js --mode production"
     },
     "keywords": [],
     "author": "",
