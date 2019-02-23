@@ -25,36 +25,25 @@ class Post extends Component {
     render() {
         return (
             <div>
-                {!this.props.pr.loading ? (
+                {this.props.pr.post !== undefined || this.props.pr.post !== {} ? (
                     <div>
                         <div className='post'>
                             <div className='post__info'>
-                                <img
-                                    src={this.props.pr.post.image_url}
-                                    alt=''
-                                />
+                                <img src={this.props.pr.post.image_url} alt='' />
                             </div>
                             <Comments
                                 post_id={this.props.pr.post.post_id}
                                 user_id={this.props.pr.post.user_id}
                                 caption={this.props.pr.post.caption}
                                 edit={
-                                    this.props.ur.user.id ==
-                                    this.props.ur.op.user_id
-                                        ? true
-                                        : false
+                                    this.props.ur.user.id == this.props.ur.op.user_id ? true : false
                                 }
                             />
                         </div>
                     </div>
                 ) : (
                     <div className='post__container_loading'>
-                        <FontAwesomeIcon
-                            icon={faSpinner}
-                            spin
-                            size='8x'
-                            color='salmon'
-                        />
+                        <FontAwesomeIcon icon={faSpinner} spin size='8x' color='salmon' />
                     </div>
                 )}
             </div>
@@ -62,7 +51,10 @@ class Post extends Component {
     }
 }
 
-const mapStateToProps = (state) => state
+const mapStateToProps = (state) => {
+    console.log(state)
+    return state
+}
 
 export default connect(
     mapStateToProps,

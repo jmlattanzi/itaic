@@ -142,7 +142,7 @@ module.exports = {
                 .then((data) => res.status(200).json(data))
                 .catch((err) => console.log(err))
         } catch (err) {
-            res.status(500).json('error in get_likes', err)
+            res.status(500).json('error in get_likes')
         }
     },
 }

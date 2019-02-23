@@ -98,6 +98,7 @@ export default function reducer(state = initialState, action) {
         case `${GET_USER_POSTS}_FULFILLED`:
             return {
                 ...state,
+                loading: false,
                 userPosts: action.payload.data,
             }
 
@@ -110,14 +111,16 @@ export default function reducer(state = initialState, action) {
 
         // get specific post
         case `${GET_POST}_PENDING`:
+            console.log('get_post pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_POST}_FULFILLED`:
+            console.log('get_post fulfilled')
             return {
                 ...state,
-                // loading: false,
+                loading: false,
                 post: {
                     post_id: action.payload.data[0].id,
                     user_id: action.payload.data[0].user_id,
@@ -128,6 +131,7 @@ export default function reducer(state = initialState, action) {
                 },
             }
         case `${GET_POST}_REJECTED`:
+            console.log('get_post rejected')
             return {
                 ...state,
                 loading: false,
@@ -180,6 +184,7 @@ export default function reducer(state = initialState, action) {
             console.log('fulfilled')
             return {
                 ...state,
+                loading: false,
             }
         case `${LIKE_POST}_REJECTED`:
             console.log('rejected')
@@ -195,11 +200,14 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case `${GET_LIKES}_FULFILLED`:
+            console.log('get_likes fulfilled')
             return {
                 ...state,
+                // loading: false,
                 post_likes: action.payload.data[0].like_count,
             }
         case `${GET_LIKES}_REJECTED`:
+            console.log('get_likes rejected')
             return {
                 ...state,
                 loading: false,

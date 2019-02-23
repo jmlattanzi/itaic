@@ -117,11 +117,13 @@ export default function reducer(state = initialState, action) {
             }
 
         case `${GET_USER}_PENDING`:
+            console.log('get_user pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_USER}_FULFILLED`:
+            console.log('get_user fulfilled')
             return {
                 ...state,
                 loading: false,
@@ -132,6 +134,7 @@ export default function reducer(state = initialState, action) {
                 },
             }
         case `${GET_USER}_REJECTED`:
+            console.log('get_user rejected')
             return {
                 ...state,
                 loading: false,
