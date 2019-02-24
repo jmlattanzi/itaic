@@ -6,6 +6,7 @@ const massive = require('massive')
 const multer = require('multer')
 const cors = require('cors')
 const auth = require('./controllers/auth_controller')
+const path = require('path')
 const pc = require('./controllers/post_controller')
 const uc = require('./controllers/user_controller')
 const cc = require('./controllers/comment_controller')
@@ -13,6 +14,10 @@ const cc = require('./controllers/comment_controller')
 // setup middleware
 const app = express()
 const upload = multer()
+
+// production build
+// app.use('/dist', express.static('dist'))
+
 app.use(json())
 app.use(cors())
 app.use(
@@ -53,20 +58,15 @@ app.get('/comments/:id', cc.get_comments) // get comments
 app.get('/user/:id', uc.get_user) // get info on the op
 app.get('/user/account/:id', uc.get_account)
 
-// protected routes
-// app.use((req, res, next) => {
-//     console.log(req.session.authenticated)
-//     if (req.session.authenticated) {
-//         next()
-//     } else {
-//         res.json({ error: 'unauthorized' })
-//     }
-// })
-
 app.post('/comments/add', cc.add_comment) // add a comment
 app.delete('/comments/:id', cc.delete_comment) // delete a post and it's comments]
 app.put('/comments/:id', cc.update_comment) //edit a comment
 app.post('/posts/upload', upload.single('image'), pc.upload_post) // upload a post
+
+// production build
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'))
+})
 
 // start 'er up
 const port = process.env.PORT

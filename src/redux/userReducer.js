@@ -20,7 +20,7 @@ const UPDATE_USER = 'UPDATE_USER'
 export const login = (username, password) => {
     return {
         type: LOGIN,
-        payload: axios.post('/auth/login', {
+        payload: axios.post('http://localhost:3001/auth/login', {
             username: username,
             password: password,
         }),
@@ -30,14 +30,14 @@ export const login = (username, password) => {
 export const logout = () => {
     return {
         type: LOGOUT,
-        payload: axios.get('/auth/logout'),
+        payload: axios.get('http://localhost:3001/auth/logout'),
     }
 }
 
 export const getCurrentUser = () => {
     return {
         type: GET_CURRENT_USER,
-        payload: axios.get('/auth/current'),
+        payload: axios.get('http://localhost:3001/auth/current'),
     }
 }
 

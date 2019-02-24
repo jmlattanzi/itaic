@@ -42,16 +42,10 @@ class Register extends Component {
         return (
             <div className='register'>
                 <h1>Create an account</h1>
-                <form
-                    className='register__form'
-                    onSubmit={(e) => this.handleSubmit(e)}>
+                <form className='register__form' onSubmit={(e) => this.handleSubmit(e)}>
                     <div className='register__input-field'>
                         <div className='register__input-field--icon'>
-                            <FontAwesomeIcon
-                                icon={faUser}
-                                size='2x'
-                                color='salmon'
-                            />
+                            <FontAwesomeIcon icon={faUser} size='2x' color='salmon' />
                         </div>
                         <Input
                             class='primary'
@@ -64,11 +58,7 @@ class Register extends Component {
                     </div>
                     <div className='register__input-field'>
                         <div className='register__input-field--icon'>
-                            <FontAwesomeIcon
-                                icon={faAddressCard}
-                                size='2x'
-                                color='salmon'
-                            />
+                            <FontAwesomeIcon icon={faAddressCard} size='2x' color='salmon' />
                         </div>
                         <Input
                             class='primary'
@@ -81,11 +71,7 @@ class Register extends Component {
                     </div>
                     <div className='register__input-field'>
                         <div className='register__input-field--icon'>
-                            <FontAwesomeIcon
-                                icon={faKey}
-                                size='2x'
-                                color='salmon'
-                            />
+                            <FontAwesomeIcon icon={faKey} size='2x' color='salmon' />
                         </div>
                         <Input
                             class='primary'

@@ -38,12 +38,16 @@ class Upload extends Component {
         data.append('image', this.state.file)
         data.append('caption', this.state.caption)
 
-        axios
-            .post('/posts/upload', data)
-            .then((res) => console.log('image uploaded', res.data))
-            .catch((err) => console.log(err))
+        if (this.props.ur.user.username !== undefined) {
+            axios
+                .post('/posts/upload', data)
+                .then((res) => console.log('image uploaded', res.data))
+                .catch((err) => console.log(err))
 
-        this.props.location.pathname = '/'
+            this.props.location.pathname = '/'
+        } else {
+            console.log('You must be logged in to do this')
+        }
     }
 
     render() {
@@ -52,11 +56,7 @@ class Upload extends Component {
                 <h1>upload</h1>
                 <form className='upload__form' onSubmit={(e) => this.upload(e)}>
                     <label className='label'>choose file</label>
-                    <Input
-                        type='file'
-                        class='primary'
-                        change={this.handleFileChange}
-                    />
+                    <Input type='file' class='primary' change={this.handleFileChange} />
                     <Input
                         type='text'
                         class='primary'

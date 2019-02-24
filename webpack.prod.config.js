@@ -1,22 +1,27 @@
 const webpack = require('webpack')
 const getEnvironmentConstants = require('./getEnvironmentConstants')
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 
 module.exports = {
-    mode: 'development',
-    devtool: 'source-map',
-    entry: ['@babel/polyfill', './src/index.js'],
+    mode: 'production',
+    entry: ['./src/index.js'],
     output: {
         filename: '[name]-bundle.js',
-        publicPath: '/dist',
+        publicPath: '/dist/',
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin(),
         new webpack.DefinePlugin({ 'process.env': getEnvironmentConstants() }),
+        new MiniCssExtractPlugin({
+            filename: '[name].css',
+            chunkFilename: '[id].css',
+        }),
+        new OptimizeCSSAssetsPlugin({}),
     ],
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
@@ -25,9 +30,9 @@ module.exports = {
 
             // SCSS
             {
-                test: /\.(scss|css)$/,
+                test: /\.scss$/,
                 use: [
-                    'style-loader',
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
                         options: {
@@ -73,20 +78,5 @@ module.exports = {
                 use: ['file-loader'],
             },
         ],
-    },
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        proxy: {
-            '/auth': {
-                target: 'http://localhost:3001',
-                // changeOrigin: true,
-            },
-
-            '/posts': {
-                target: 'http://localhost:3001',
-                // changeOrigin: true,
-            },
-        },
     },
 }

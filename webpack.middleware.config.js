@@ -1,10 +1,14 @@
 const webpack = require('webpack')
-const getEnvironmentConstants = require('./getEnvironmentConstants')
+import getEnvironmentConstants from './getEnvironmentConstants'
 
 module.exports = {
     mode: 'development',
     devtool: 'source-map',
-    entry: ['@babel/polyfill', './src/index.js'],
+    entry: [
+        '@babel/polyfill',
+        'webpack-hot-middleware/client?path=/__webpack_hmr&timeout=20000',
+        './src/index.js',
+    ],
     output: {
         filename: '[name]-bundle.js',
         publicPath: '/dist',
@@ -16,16 +20,15 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.(js|jsx)$/,
+                test: /\.js$/,
                 exclude: /node_modules/,
                 use: {
                     loader: 'babel-loader',
                 },
             },
-
             // SCSS
             {
-                test: /\.(scss|css)$/,
+                test: /\.scss$/,
                 use: [
                     'style-loader',
                     {
@@ -33,7 +36,7 @@ module.exports = {
                         options: {
                             modules: true,
                             importLoaders: 2,
-                            localIdentName: '[local]',
+                            localIdentName: '[folder]-[local]',
                             sourceMap: true,
                         },
                     },
@@ -52,41 +55,6 @@ module.exports = {
                     },
                 ],
             },
-
-            // images
-            {
-                test: /\.(png|jp(e*)g|svg)$/,
-                use: [
-                    {
-                        loader: 'url-loader',
-                        options: {
-                            limit: 8000, // Convert images < 8kb to base64 strings
-                            name: 'images/[hash]-[name].[ext]',
-                        },
-                    },
-                ],
-            },
-
-            //file-loader(for fonts)
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: ['file-loader'],
-            },
         ],
-    },
-    devServer: {
-        historyApiFallback: true,
-        hot: true,
-        proxy: {
-            '/auth': {
-                target: 'http://localhost:3001',
-                // changeOrigin: true,
-            },
-
-            '/posts': {
-                target: 'http://localhost:3001',
-                // changeOrigin: true,
-            },
-        },
     },
 }
