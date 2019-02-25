@@ -11,6 +11,7 @@ import Input from '../Input/Input'
 import Alert from '../Alert/Alert'
 import Modal from 'react-modal'
 import './Comments.scss'
+import Axios from 'axios'
 
 class Comments extends Component {
     constructor(props) {
@@ -36,6 +37,11 @@ class Comments extends Component {
         this.props.getUser(this.props.post_id)
         this.props.getLikes(this.props.post_id)
         this.props.getComments(this.props.post_id)
+        // this.props.getCurrentUser()
+
+        Axios.get('http://localhost:3001/auth/current')
+            .then((res) => console.log('/auth/current result in comments: ', res))
+            .catch((err) => console.log('error fetching url', err))
     }
 
     componentDidUpdate(prevProps) {
@@ -105,7 +111,6 @@ class Comments extends Component {
     render() {
         // find index of the post so we can get the likes
         let index = this.props.pr.posts.findIndex((post) => post.id === this.props.post_id)
-        console.log('comments', this.props)
         return (
             <div>
                 {!this.props.cr.loading ? (

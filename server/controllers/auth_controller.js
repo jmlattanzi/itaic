@@ -1,11 +1,3 @@
-// implement this soon
-// email to confirm account
-// admin email: itaic_sign_up@yahoo.com
-// try {
-// } catch (e) {
-//     res.status(500).json(e)
-// }
-
 const bc = require('bcryptjs')
 const mail = require('nodemailer')
 
@@ -23,32 +15,27 @@ module.exports = {
                 let hashpassword = await bc.hash(req.body.password, 12)
                 db.register_user([req.body.username, req.body.email, hashpassword])
                     .then((data) => {
-                        // let account = await `mail.createTestAccount()`
-
-                        let transporter = mail.createTransport({
-                            service: 'yahoo',
-                            auth: {
-                                user: 'itaic_sign_up@yahoo.com',
-                                pass: process.env.DB_PASS,
-                            },
-                        })
-
-                        let mailOptions = {
-                            from: "itaic_sign_up@yahoo.com",
-                            to: req.body.email,
-                            subject: 'Account Created',
-                            text: 'Account Created',
-                        }
-
-                        transporter
-                            .sendMail(mailOptions)
-                            .then((info) => console.log('email sent', info))
-                            .catch((err) => console.log(err))
-
-                        // console.log('Message sent: ' + info.messageId)
-                        // console.log('preview: ' + mail.getTestMessageUrl(info))
                         res.status(200).json(data)
                     })
+                    .catch((err) => console.log(err))
+                let transporter = mail.createTransport({
+                    service: 'yahoo',
+                    auth: {
+                        user: 'itaic_sign_up@yahoo.com',
+                        pass: process.env.DB_PASS,
+                    },
+                })
+
+                let mailOptions = {
+                    from: 'itaic_sign_up@yahoo.com',
+                    to: req.body.email,
+                    subject: 'Account Created',
+                    text: 'Account Created',
+                }
+
+                transporter
+                    .sendMail(mailOptions)
+                    .then((info) => console.log('email sent', info))
                     .catch((err) => console.log(err))
             }
         } catch (err) {
@@ -61,35 +48,62 @@ module.exports = {
         try {
             const db = req.app.get('db')
 
-            console.log(`username: ${req.body.username}\npassword: ${req.body.password}`)
+            // let results = await db.get_user(req.body.username)
+            // let user = results[0]
 
-            let results = await db.get_user(req.body.username)
-            let user = results[0]
+            // if (!user) {
+            //     res.status(401).json('User does not exist on this plane of mortality')
+            // }
 
-            if (!user) {
-                res.status(401).json('User does not exist on this plane of mortality')
-            } else {
-                let authorizedUser = await bc.compare(req.body.password, user.hash)
-                if (authorizedUser) {
-                    req.session.user = {
-                        id: user.id,
-                        username: user.username,
-                        email: user.email,
+            // let authorizedUser = await bc.compare(req.body.password, user.hash)
+            // if (!authorizedUser) {
+            //     res.json('not authorized')
+            // }
+
+            // req.session.user = {
+            //     id: user.id,
+            //     username: user.username,
+            //     email: user.email,
+            // }
+            // req.session.save()
+
+            // console.log('login:', req.session.user)
+            // res.status(200).json(req.session.user)
+
+            console.log(req.session)
+            db.get_user(req.body.username)
+                .then((data) => {
+                    console.log('data in db.get_user', data)
+                    if (!data[0]) {
+                        res.status(401).json('user does not exist')
                     }
 
-                    req.session.authenticated = true
+                    bc.compare(req.body.password, data[0].hash)
+                        .then((auth) => {
+                            console.log('auth', auth)
+                            if (!auth) {
+                                res.json('not authorized')
+                            }
 
-                    console.log(req.session.authenticated)
+                            console.log('setting the user session')
+                            req.session.user = {
+                                id: data[0].id,
+                                username: data[0].username,
+                                email: data[0].email,
+                            }
+                            console.log('user session set', req.session.user)
 
-                    res.status(200).json(req.session.user)
-                } else {
-                    req.session.authenticated = false
-                    res.status(409).json({ err: 'Invalid password. Moron.' })
-                }
-            }
+                            res.status(200).json(req.session.user)
+                        })
+                        .catch((err) => console.log('error in bc.compare', err))
+                })
+                .catch((err) => console.log('error in db.get_user', err))
         } catch (err) {
+            console.log('error in login,', err)
             res.status(500).json({ err: err })
         }
+
+        console.log('req.session.user outside of try{}catch{}:', req.session.user)
     },
 
     // logout
@@ -112,14 +126,10 @@ module.exports = {
 
     // get current user on the session
     get_current_user: (req, res) => {
-        try {
-            if (req.session.user) {
-                res.json(req.session.user)
-            } else {
-                res.json('No user in the session')
-            }
-        } catch (e) {
-            res.status(500).json({ err: 'Internal server error' })
+        if (req.session.user) {
+            res.json(req.session.user)
+        } else {
+            res.json('No user in the session')
         }
     },
 }

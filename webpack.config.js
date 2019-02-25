@@ -76,11 +76,13 @@ module.exports = {
     },
     devServer: {
         historyApiFallback: true,
-        hot: true,
+        // hot: true,
+        port: 8080,
+        open: true,
         proxy: {
             '/auth': {
                 target: 'http://localhost:3001',
-                // changeOrigin: true,
+                changeOrigin: true,
             },
 
             '/posts': {

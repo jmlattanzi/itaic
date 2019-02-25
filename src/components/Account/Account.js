@@ -26,7 +26,6 @@ class Account extends Component {
     }
 
     render() {
-        console.log('Account', this.props)
         return (
             <div className='account'>
                 <div className='account__header'>

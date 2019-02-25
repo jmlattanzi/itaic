@@ -33,7 +33,7 @@ class Post extends Component {
                                 <img src={this.props.pr.post.image_url} alt='' />
                             </div>
                             <Comments
-                                post_id={this.props.pr.post.post_id}
+                                post_id={this.props.match.params.id}
                                 user_id={this.props.pr.post.user_id}
                                 caption={this.props.pr.post.caption}
                                 edit={

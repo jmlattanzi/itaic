@@ -18,6 +18,7 @@ const DELETE_USER = 'DELETE_USER'
 const UPDATE_USER = 'UPDATE_USER'
 
 export const login = (username, password) => {
+    console.log({ username, password })
     return {
         type: LOGIN,
         payload: axios.post('http://localhost:3001/auth/login', {
@@ -64,6 +65,7 @@ export default function reducer(state = initialState, action) {
                 loading: true,
             }
         case `${LOGIN}_FULFILLED`:
+            console.log('login payload', action.payload)
             return {
                 ...state,
                 loggedIn: true,
@@ -98,18 +100,22 @@ export default function reducer(state = initialState, action) {
 
         // get current user
         case `${GET_CURRENT_USER}_PENDING`:
+            console.log('>>>>>>>>>> get user pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_CURRENT_USER}_FULFILLED`:
+            console.log('get current user payload:', action.payload)
             return {
                 ...state,
                 loading: false,
                 loggedIn: true,
-                user: action.payload.data,
+                // user: action.payload.data,
             }
         case `${GET_CURRENT_USER}_REJECTED`:
+            console.log('>>>>>>>>> get user rejected')
+            console.log('payload:', action.payload)
             return {
                 ...state,
                 loading: false,
@@ -117,13 +123,11 @@ export default function reducer(state = initialState, action) {
             }
 
         case `${GET_USER}_PENDING`:
-            console.log('get_user pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_USER}_FULFILLED`:
-            console.log('get_user fulfilled')
             return {
                 ...state,
                 loading: false,
@@ -134,7 +138,6 @@ export default function reducer(state = initialState, action) {
                 },
             }
         case `${GET_USER}_REJECTED`:
-            console.log('get_user rejected')
             return {
                 ...state,
                 loading: false,

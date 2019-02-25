@@ -19,8 +19,11 @@ class Upload extends Component {
         this.upload = this.upload.bind(this)
     }
 
+    componentDidMount() {
+        this.props.getCurrentUser()
+    }
+
     handleFileChange(e) {
-        console.log(e.target.files[0])
         this.setState({
             file: e.target.files[0],
         })
@@ -37,7 +40,9 @@ class Upload extends Component {
         const data = new FormData(e.target)
         data.append('image', this.state.file)
         data.append('caption', this.state.caption)
+        data.append('user_id', this.props.ur.user.id)
 
+        console.log(this.props.ur.user.username)
         if (this.props.ur.user.username !== undefined) {
             axios
                 .post('/posts/upload', data)
@@ -51,6 +56,7 @@ class Upload extends Component {
     }
 
     render() {
+        console.log(this.props.ur.user.id)
         return (
             <div className='upload'>
                 <h1>upload</h1>

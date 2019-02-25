@@ -16,9 +16,12 @@ const s3Bucket = new aws.S3({
 })
 
 module.exports = {
+    test: (req, res) => {
+        res.json(req.session.user)
+    },
     upload_post: (req, res) => {
         console.log('req.file: ', req.file)
-
+        console.log('upload_post session', req.session.user)
         try {
             const db = req.app.get('db')
 
@@ -41,7 +44,7 @@ module.exports = {
 
                 // add the post to our posts table
                 db.add_post([
-                    req.session.user.id,
+                    req.body.user_id,
                     data.Location,
                     req.body.caption,
                     Date.now().toString(),
