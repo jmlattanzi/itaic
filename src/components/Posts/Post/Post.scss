@@ -35,3 +35,17 @@
         justify-content: center;
     }
 }
+
+@media (max-width: 414px) {
+    .post {
+        &__info {
+            width: 320px;
+            height: auto;
+            margin: 0 auto;
+
+            & > img {
+                width: 100%;
+            }
+        }
+    }
+}

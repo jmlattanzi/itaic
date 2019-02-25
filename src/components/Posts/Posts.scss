@@ -93,5 +93,17 @@ html {
                 max-width: 300px;
             }
         }
+
+        &__grid-item {
+            margin: 0 auto;
+        }
+    }
+}
+
+@media (max-width: 414px) {
+    .posts {
+        &__grid-item {
+            margin: 0 auto;
+        }
     }
 }

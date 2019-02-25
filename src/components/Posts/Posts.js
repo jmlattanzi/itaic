@@ -57,7 +57,7 @@ class Posts extends Component {
                     </div>
                 ) : (
                     <div className='posts__grid-item'>
-                        <Link to={`/posts/${this.props.post_id}`}>
+                        <Link to={`/post/${this.props.post_id}`}>
                             <img src={this.props.image} alt='' />
                         </Link>
                     </div>

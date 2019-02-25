@@ -29,8 +29,8 @@ module.exports = {
                 let mailOptions = {
                     from: 'itaic_sign_up@yahoo.com',
                     to: req.body.email,
-                    subject: 'Account Created',
-                    text: 'Account Created',
+                    subject: 'ITAIC Account Created',
+                    text: `Thank you for joining, ${req.body.username}!`,
                 }
 
                 transporter

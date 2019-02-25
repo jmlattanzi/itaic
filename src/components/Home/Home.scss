@@ -29,3 +29,19 @@
         box-sizing: border-box;
     }
 }
+
+@media (max-width: 585px) {
+    .home {
+        &__grid {
+            width: 100%;
+        }
+    }
+}
+
+@media (max-width: 414px) {
+    .home {
+        &__grid {
+            width: 100%;
+        }
+    }
+}

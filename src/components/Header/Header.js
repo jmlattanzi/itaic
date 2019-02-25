@@ -121,9 +121,9 @@ class Header extends Component {
                                     login
                                 </Button>
                             ) : (
-                                <Link className='header__login' to='/login'>
+                                <Button class='primary' link path='/login</div>'>
                                     login
-                                </Link>
+                                </Button>
                             )}
                         </div>
                     )}

@@ -82,6 +82,8 @@
             flex-direction: column;
             width: 250px;
             margin: 0 auto;
+            text-decoration: none;
+            color: $color-primary;
         }
 
         &__input-field {
@@ -101,6 +103,10 @@
 
         &__search {
             display: none;
+        }
+
+        &__links {
+            float: right;
         }
     }
 }
