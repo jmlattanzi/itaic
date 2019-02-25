@@ -16,7 +16,7 @@ const app = express()
 const upload = multer()
 
 // production build
-// app.use('/dist', express.static('dist'))
+app.use('/dist', express.static('dist'))
 
 app.use(json())
 app.use(cors())
