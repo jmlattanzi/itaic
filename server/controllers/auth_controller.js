@@ -30,7 +30,14 @@ module.exports = {
                     from: 'itaic_sign_up@yahoo.com',
                     to: req.body.email,
                     subject: 'ITAIC Account Created',
-                    text: `Thank you for joining, ${req.body.username}!`,
+                    html: `<div style='margin: 0 auto;'>
+                    <h1 style='color: salmon'><em>ITAIC</em></h1>
+                    <h3 style='text-align: center;'>Thank you for signing up ${
+                        req.body.username
+                    }!</h3>
+                    <p style='color: black; text-align: center;'>If you have any questions or concerns please email an administrator at admin@itaic.co</p>
+                    <footer><a href="http://itaic.co" style='text-decoration: none; color: salmon'>itaic</a></footer>
+                </div>`,
                 }
 
                 transporter

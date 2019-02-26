@@ -111,13 +111,11 @@ export default function reducer(state = initialState, action) {
 
         // get specific post
         case `${GET_POST}_PENDING`:
-            console.log('get_post pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_POST}_FULFILLED`:
-            console.log('get_post fulfilled')
             return {
                 ...state,
                 loading: false,
@@ -131,7 +129,6 @@ export default function reducer(state = initialState, action) {
                 },
             }
         case `${GET_POST}_REJECTED`:
-            console.log('get_post rejected')
             return {
                 ...state,
                 loading: false,
@@ -151,7 +148,6 @@ export default function reducer(state = initialState, action) {
                 posts: state.posts,
             }
         case `${DELETE_POST}_REJECTED`:
-            console.log('delete rejected')
             return {
                 ...state,
                 loading: false,
@@ -175,39 +171,33 @@ export default function reducer(state = initialState, action) {
                 err: true,
             }
         case `${LIKE_POST}_PENDING`:
-            console.log('pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${LIKE_POST}_FULFILLED`:
-            console.log('fulfilled')
             return {
                 ...state,
                 // loading: false,
             }
         case `${LIKE_POST}_REJECTED`:
-            console.log('rejected')
             return {
                 ...state,
                 err: true,
                 loading: false,
             }
         case `${GET_LIKES}_PENDING`:
-            console.log('get_likes pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_LIKES}_FULFILLED`:
-            console.log('get_likes fulfilled')
             return {
                 ...state,
                 // loading: false,
                 post_likes: action.payload.data[0].like_count,
             }
         case `${GET_LIKES}_REJECTED`:
-            console.log('get_likes rejected')
             return {
                 ...state,
                 loading: false,

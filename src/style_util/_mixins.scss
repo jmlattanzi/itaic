@@ -1,0 +1,10 @@
+@mixin animated_gradient() {
+    box-shadow: 0 3px 6px rgba($color-black, 0.4);
+    background: linear-gradient(50deg, $color-primary, #bbf497);
+    background-size: 400% 400%;
+    border: 1px solid transparent;
+    color: $color-white;
+    -webkit-animation: gradient 3s ease infinite;
+    -moz-animation: gradient 3s ease infinite;
+    animation: gradient 3s ease infinite;
+}

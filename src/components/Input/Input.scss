@@ -92,10 +92,11 @@
     }
 }
 
-@media (max-width: 375px) {
+@media (max-width: 638px) {
     .input {
         &__search {
             display: none;
+            width: 0;
         }
     }
 }

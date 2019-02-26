@@ -94,6 +94,23 @@
     }
 }
 
+@media (max-width: 600px) {
+    .header {
+        &__links {
+            justify-content: right;
+        }
+
+        &__search {
+            display: none;
+            width: 0;
+        }
+
+        &__account {
+            border: 1px solid black;
+        }
+    }
+}
+
 @media (max-width: 375px) {
     .header {
         display: flex;

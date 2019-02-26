@@ -121,7 +121,7 @@ class Header extends Component {
                                     login
                                 </Button>
                             ) : (
-                                <Button class='primary' link path='/login</div>'>
+                                <Button class='primary' link path='/login'>
                                     login
                                 </Button>
                             )}

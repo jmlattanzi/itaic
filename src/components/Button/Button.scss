@@ -1,52 +1,36 @@
 @import '../../style_util/variables';
 @import '../../style_util/animations';
+@import '../../style_util/mixins';
+
+%shared {
+    width: 100px;
+    border-style: none;
+    border-radius: 15px;
+    border: 1px solid $color-gray;
+    background-color: $color-white;
+    padding: 5px 15px;
+    transition: all 0.2;
+    cursor: pointer;
+}
 
 .button {
     &__primary {
-        width: 100px;
-        border-style: none;
-        border: 1px solid $color-gray;
-        background-color: $color-white;
-        padding: 5px 15px;
-        border-radius: 15px;
-        transition: all 0.2;
-        cursor: pointer;
+        @extend %shared;
 
         &:hover {
-            box-shadow: 0 3px 6px rgba($color-black, 0.4);
-            background: linear-gradient(50deg, $color-primary, #bbf497);
-            background-size: 400% 400%;
-            border: 1px solid transparent;
-            color: $color-white;
-            -webkit-animation: gradient 3s ease infinite;
-            -moz-animation: gradient 3s ease infinite;
-            animation: gradient 3s ease infinite;
+            @include animated_gradient();
         }
     }
 }
 
 .link {
     &__primary {
-        width: 100px;
-        border-style: none;
-        border: 1px solid $color-gray;
-        background-color: $color-white;
-        padding: 5px 15px;
-        border-radius: 15px;
-        transition: all 0.2;
-        cursor: pointer;
+        @extend %shared;
         text-decoration: none;
         color: $color-black;
 
         &:hover {
-            box-shadow: 0 3px 6px rgba($color-black, 0.4);
-            background: linear-gradient(50deg, $color-primary, #bbf497);
-            background-size: 400% 400%;
-            border: 1px solid transparent;
-            color: $color-white;
-            -webkit-animation: gradient 3s ease infinite;
-            -moz-animation: gradient 3s ease infinite;
-            animation: gradient 3s ease infinite;
+            @include animated_gradient();
         }
     }
 }

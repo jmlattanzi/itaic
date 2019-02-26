@@ -46,20 +46,17 @@ export const updateComment = (post_id, comment) => {
 export default function reducer(state = initalState, action) {
     switch (action.type) {
         case `${GET_COMMENTS}_PENDING`:
-            console.log('get_comments pending')
             return {
                 ...state,
                 loading: true,
             }
         case `${GET_COMMENTS}_FULFILLED`:
-            console.log('get_comments fulfilled')
             return {
                 ...state,
                 loading: false,
                 comments: action.payload.data,
             }
         case `${GET_COMMENTS}_REJECTED`:
-            console.log('get_comments rejected')
             return {
                 ...state,
                 loading: false,
