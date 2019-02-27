@@ -107,22 +107,24 @@ class Account extends Component {
                     </form>
                 </Modal>
                 <div className='account__header'>
-                    {/* {this.props.ur.user.id == this.props.match.params.id && !isMobile ? (
-                        <FontAwesomeIcon
-                            className='account__action'
-                            icon={faEdit}
-                            size='lg'
-                            color='#ccc'
-                            onClick={() => this.openModal()}
-                        />
-                    ) : null} */}
-                    <div className='account__header__avatar' onClick={this.openModal}>
-                        {this.props.ur.account.avatar_url !== null ? (
-                            <img src={this.props.ur.account.avatar_url} alt='pfp' />
-                        ) : (
-                            <img src='https://via.placeholder.com/150' alt='pfp' />
-                        )}
-                    </div>
+                    {this.props.ur.user.id == this.props.match.params.id && !isMobile ? (
+                        <div className='account__header__avatar' onClick={this.openModal}>
+                            {this.props.ur.account.avatar_url !== null ? (
+                                <img src={this.props.ur.account.avatar_url} alt='pfp' />
+                            ) : (
+                                <img src='https://via.placeholder.com/150' alt='pfp' />
+                            )}
+                        </div>
+                    ) : (
+                        <div className='account__header__avatar'>
+                            {this.props.ur.account.avatar_url !== null ? (
+                                <img src={this.props.ur.account.avatar_url} alt='pfp' />
+                            ) : (
+                                <img src='https://via.placeholder.com/150' alt='pfp' />
+                            )}
+                        </div>
+                    )}
+
                     <div className='account__header__user'>
                         <h3>{this.props.ur.account.username}</h3>
                         <div className='account__header__bio'>
