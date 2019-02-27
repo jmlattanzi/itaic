@@ -42,11 +42,10 @@ class Upload extends Component {
         data.append('caption', this.state.caption)
         data.append('user_id', this.props.ur.user.id)
 
-        console.log(this.props.ur.user.username)
         if (this.props.ur.user.username !== undefined) {
             axios
                 .post('/posts/upload', data)
-                .then((res) => console.log('image uploaded', res.data))
+                .then((res) => window.alert('Image uploaded!'))
                 .catch((err) => console.log(err))
 
             this.props.location.pathname = '/'

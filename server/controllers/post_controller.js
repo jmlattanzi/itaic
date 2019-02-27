@@ -59,6 +59,40 @@ module.exports = {
         }
     },
 
+    // change user profile picture
+    upload_avatar: (req, res) => {
+        try {
+            const db = req.app.get('db')
+
+            // setup S3 params
+            const params = {
+                Bucket: process.env.BUCKET,
+                Key: req.file.originalname,
+                Body: req.file.buffer,
+                ContentType: req.file.mimetype,
+            }
+
+            // upload to S3 Bucket
+            s3Bucket.upload(params, (err, data) => {
+                if (err) {
+                    console.log('Error in callback', err)
+                    res.status(500).json({ err: 'error in upload' })
+                }
+
+                console.log('data from s3Bucket.upload: ', data)
+
+                // add the post to our posts table
+                db.add_avatar([req.body.user_id, data.Location])
+                    .then((results) => res.status(200).json(results))
+                    .catch((err) => console.log('err in upload', err))
+
+                console.log('Image has been uploaded successfully.')
+            })
+        } catch (err) {
+            res.status(500).json('Internal server error')
+        }
+    },
+
     // get all posts
     get_all_posts: (req, res) => {
         const db = req.app.get('db')

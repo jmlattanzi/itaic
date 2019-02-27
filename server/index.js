@@ -56,8 +56,8 @@ app.get('/posts/like/:id', pc.get_likes)
 app.put('/posts/update/:id', pc.update_post) // edit the caption of a post
 app.put('/posts/like/:id', pc.like_post) // like a post
 app.post('/posts/upload', upload.single('image'), pc.upload_post) // upload a post
+app.post('/posts/avatar', upload.single('image'), pc.upload_avatar) // change a users avatar
 app.delete('/posts/delete/:id', pc.delete_post)
-app.get('/test', pc.test)
 
 app.get('/comments/:id', cc.get_comments) // get comments
 app.post('/comments/add', cc.add_comment) // add a comment
@@ -67,6 +67,7 @@ app.put('/comments/:id', cc.update_comment) //edit a comment
 // user routes
 app.get('/user/:id', uc.get_user) // get info on the op
 app.get('/user/account/:id', uc.get_account)
+app.put('/users/bio/:id', uc.change_bio)
 
 // production build
 // app.get('*', (req, res) => {

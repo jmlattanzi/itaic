@@ -1,1 +1,1 @@
-insert into posts(user_id, image_url, caption, time) values($1, $2, $3, $4);
+insert into posts(user_id, image_url, caption, time, like_count) values($1, $2, $3, $4, 0);

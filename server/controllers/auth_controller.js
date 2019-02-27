@@ -58,7 +58,7 @@ module.exports = {
             // let results = await db.get_user(req.body.username)
             // let user = results[0]
 
-            // if (!user) {
+            // if (!userx) {
             //     res.status(401).json('User does not exist on this plane of mortality')
             // }
 

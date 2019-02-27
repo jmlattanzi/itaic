@@ -22,4 +22,16 @@ module.exports = {
             .then((data) => res.status(200).json(data))
             .catch((err) => res.status(500).json(err))
     },
+
+    change_bio: (req, res) => {
+        try {
+            const db = req.app.get('db')
+
+            db.change_bio([req.params.id, req.body.bio])
+                .then((data) => res.status(200).json(data))
+                .catch((err) => res.status(500).json(err))
+        } catch (err) {
+            res.satus(500).json('Internal server error')
+        }
+    },
 }
