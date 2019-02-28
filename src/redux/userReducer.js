@@ -9,6 +9,8 @@ const initialState = {
     op: {},
 }
 
+const baseUrl = 'http://itaic.co'
+
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'
 const GET_CURRENT_USER = 'GET_CURRENT_USER'
@@ -20,7 +22,7 @@ const UPDATE_USER = 'UPDATE_USER'
 export const login = (username, password) => {
     return {
         type: LOGIN,
-        payload: axios.post('http://localhost:3001/auth/login', {
+        payload: axios.post(`${baseUrl}/auth/login`, {
             username: username,
             password: password,
         }),
@@ -30,28 +32,28 @@ export const login = (username, password) => {
 export const logout = () => {
     return {
         type: LOGOUT,
-        payload: axios.get('http://localhost:3001/auth/logout'),
+        payload: axios.get(`${baseUrl}/auth/logout`),
     }
 }
 
 export const getCurrentUser = () => {
     return {
         type: GET_CURRENT_USER,
-        payload: axios.get('http://localhost:3001/auth/current'),
+        payload: axios.get(`${baseUrl}/auth/current`),
     }
 }
 
 export const getUser = (post_id) => {
     return {
         type: GET_USER,
-        payload: axios.get(`http://localhost:3001/user/${post_id}`),
+        payload: axios.get(`${baseUrl}/user/${post_id}`),
     }
 }
 
 export const getAccount = (user_id) => {
     return {
         type: GET_ACCOUNT,
-        payload: axios.get(`http://localhost:3001/user/account/${user_id}`),
+        payload: axios.get(`${baseUrl}/user/account/${user_id}`),
     }
 }
 

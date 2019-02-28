@@ -1,4 +1,3 @@
-import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { getCurrentUser } from '../../redux/userReducer'
 import axios from 'axios'
@@ -44,7 +43,7 @@ class Upload extends Component {
 
         if (this.props.ur.user.username !== undefined) {
             axios
-                .post('/posts/upload', data)
+                .post(`${process.env.BASE_URL}/posts/upload`, data)
                 .then((res) => window.alert('Image uploaded!'))
                 .catch((err) => console.log(err))
 

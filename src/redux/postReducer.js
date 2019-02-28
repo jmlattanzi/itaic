@@ -9,6 +9,8 @@ const initialState = {
     post_likes: 0,
 }
 
+const baseUrl = 'http://itaic.co'
+
 const GET_ALL_POSTS = 'GET_ALL_POSTS'
 const GET_USER_POSTS = 'GET_USER_POSTS'
 const GET_POST = 'GET_POST'
@@ -20,35 +22,35 @@ const GET_LIKES = 'GET_LIKES'
 export const getAllPosts = () => {
     return {
         type: GET_ALL_POSTS,
-        payload: axios.get('http://localhost:3001/posts/all'),
+        payload: axios.get(`${baseUrl}/posts/all`),
     }
 }
 
 export const getUserPosts = (user_id) => {
     return {
         type: GET_USER_POSTS,
-        payload: axios.get(`http://localhost:3001/posts/user/${user_id}`),
+        payload: axios.get(`${baseUrl}/posts/user/${user_id}`),
     }
 }
 
 export const getPost = (post_id) => {
     return {
         type: GET_POST,
-        payload: axios.get(`http://localhost:3001/posts/${post_id}`),
+        payload: axios.get(`${baseUrl}/posts/${post_id}`),
     }
 }
 
 export const deletePost = (post_id) => {
     return {
         type: DELETE_POST,
-        payload: axios.delete(`http://localhost:3001/posts/delete/${post_id}`),
+        payload: axios.delete(`${baseUrl}/posts/delete/${post_id}`),
     }
 }
 
 export const editPost = (post_id, caption) => {
     return {
         type: EDIT_POST,
-        payload: axios.put(`http://localhost:3001/posts/update/${post_id}`, {
+        payload: axios.put(`${baseUrl}/posts/update/${post_id}`, {
             caption,
         }),
     }
@@ -57,14 +59,14 @@ export const editPost = (post_id, caption) => {
 export const likePost = (post_id) => {
     return {
         type: LIKE_POST,
-        payload: axios.put(`http://localhost:3001/posts/like/${post_id}`),
+        payload: axios.put(`${baseUrl}/posts/like/${post_id}`),
     }
 }
 
 export const getLikes = (post_id) => {
     return {
         type: GET_LIKES,
-        payload: axios.get(`http://localhost:3001/posts/like/${post_id}`),
+        payload: axios.get(`${baseUrl}/posts/like/${post_id}`),
     }
 }
 
