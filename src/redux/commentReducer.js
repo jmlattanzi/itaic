@@ -6,7 +6,7 @@ const initalState = {
     comments: [],
 }
 
-const baseUrl = 'http://itaic.co'
+const baseUrl = 'https://itaic.co'
 
 const GET_COMMENTS = 'GET_COMMENTS'
 const ADD_COMMENT = 'ADD_COMMENT'

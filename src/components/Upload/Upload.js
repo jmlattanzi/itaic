@@ -44,7 +44,7 @@ class Upload extends Component {
 
         if (this.props.ur.user.username !== undefined) {
             axios
-                .post(`${process.env.BASE_URL}/posts/upload`, data)
+                .post(`https://itaic.co/posts/upload`, data)
                 .then((res) => window.alert('Image uploaded!'))
                 .catch((err) => console.log(err))
 

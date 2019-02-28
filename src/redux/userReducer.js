@@ -9,7 +9,7 @@ const initialState = {
     op: {},
 }
 
-const baseUrl = 'http://itaic.co'
+const baseUrl = 'https://itaic.co'
 
 const LOGIN = 'LOGIN'
 const LOGOUT = 'LOGOUT'

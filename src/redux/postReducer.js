@@ -9,7 +9,7 @@ const initialState = {
     post_likes: 0,
 }
 
-const baseUrl = 'http://itaic.co'
+const baseUrl = 'https://itaic.co'
 
 const GET_ALL_POSTS = 'GET_ALL_POSTS'
 const GET_USER_POSTS = 'GET_USER_POSTS'
