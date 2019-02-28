@@ -29,7 +29,7 @@ class Register extends Component {
         e.preventDefault()
 
         axios
-            .post('/auth/register', this.state)
+            .post('http://itaic.co/auth/register', this.state)
             .then((res) => {
                 console.log(res.data)
                 this.props.history.push('/')
