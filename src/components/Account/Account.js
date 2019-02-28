@@ -73,7 +73,7 @@ class Account extends Component {
         e.preventDefault
 
         axios
-            .put(`http://localhost:3001/users/bio/${this.props.match.params.id}`, {
+            .put(`https://itaic.co/users/bio/${this.props.match.params.id}`, {
                 bio: this.state.newBio,
             })
             .then((res) => this.setState({ newBio: '', edit: false }))
@@ -88,7 +88,7 @@ class Account extends Component {
 
         if (this.props.ur.user.username !== undefined) {
             axios
-                .post('/posts/avatar', data)
+                .post('https://itaic.co/posts/avatar', data)
                 .then((res) => window.alert('Profile successfully changed!'))
                 .catch((err) => console.log(err))
         } else {
