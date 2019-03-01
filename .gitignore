@@ -2,3 +2,4 @@ node_modules
 mvp-desc.txt
 .env
 .DS_Store
+access.log
