@@ -7,18 +7,18 @@ import Header from './components/Header/Header'
 import './App.scss'
 
 class App extends Component {
-    render() {
-        return (
-            <Provider store={store}>
-                <HashRouter>
-                    <div>
-                        <Header />
-                        {routes}
-                    </div>
-                </HashRouter>
-            </Provider>
-        )
-    }
+	render() {
+		return (
+			<Provider store={store}>
+				<HashRouter>
+					<div>
+						<Header />
+						{routes}
+					</div>
+				</HashRouter>
+			</Provider>
+		)
+	}
 }
 
 export default App

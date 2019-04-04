@@ -1,0 +1,217 @@
+{
+	"info": {
+		"_postman_id": "af7aff55-06a2-49a5-8b78-4e62b079c805",
+		"name": "itaic tests",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3001/posts/all",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3b9d9324-e2d1-4369-9f69-2ed13c795925",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"post_id\": \"42\",\n\t\"user_id\": 68,\n\t\"comment\": \"test comment route\",\n\t\"likes\": 0\n}"
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts/user/68",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						"user",
+						"68"
+					]
+				},
+				"description": "GET all posts"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3001/posts/user/42",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb7c4001-dd8e-48fb-ae52-b25f9f8dbb26",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/posts/user/42",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"posts",
+						"user",
+						"42"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3001/user/account/52",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "18cc9f72-4085-4f9b-b90c-b0319feb4b6e",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/user/account/52",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"user",
+						"account",
+						"52"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3001/comments/58",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f82c01f6-5fe4-4cee-96aa-8ac15bf78833",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments/58",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						"58"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3001/comments/58",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed8bcf07-dce2-4d82-b13d-64e39ca31069",
+						"exec": [
+							"pm.test(\"response is ok\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://localhost:3001/comments/58",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"comments",
+						"58"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
